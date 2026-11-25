@@ -1,0 +1,203 @@
+---
+title: 'software of care'
+label: 'Chapter 1'
+---
+
+As soon as you use a phone, software that cares is waiting to greet you.
+
+If you are in an emergency, you call 911 to be immediately connected with a dispatcher, who sends emergency services to your location. When a friend you love gets into a bad relationship or an eviction notice, they can call or text 211 to find local programs near them.
+
+On a family drive, you may get into a car accident. Some iPhone models can automatically detect a crash, or your car may use the OnStar system built into the dashboard to reach private dispatchers.
+
+When someone you love experiences mental health issues, they can find hundreds (if not thousands) of apps aiming at reducing symptoms across any device. If they decide to get sober, they can video call into an AA meeting from the comfort of their home without worrying about the logistics of getting there.
+
+When you see your kid off to college and worry about them, there are security system apps you can download on your phone that can automatically alert you if they are in harm. On the other side of safety, an Apple Watch on an elderly parent can detect a fall and check if they’re ok.
+
+Under the hood, often invisibly to most of us, there are many tendrils of code that keep us alive, healthy, and stable. This is software of care.
+
+Software of care is public facing software that can measurably improve or save someone’s life in the name of achieving social good. It is a way of encoding care from an entity, like a government, a non-profit, or a developer who just wants to help. Public facing means that it is available and meant to be used by the general public in some way or form. It should be advertised and able to be found or bought with ease.
+
+Public software for social good has been a niche field, and mostly limited to major non-profits, government programs, and some for-profit startups. Some examples you may know are AMBER alerts, Khan Academy, Crisis Text Line, AAC (Augmentative and Alternative Communication) apps for those with speech difficulties, PTSD management apps, and more. Software of care is compassionately built software that focuses on care as its’ core tenant - not as a marketing label or as a fad, but the primary consideration from which everything else in the system is defined and determined.
+
+Although software is formed by many desires, one of the most imperative that shapes ideas for it is a desire for software to do something for humanity. We see the amount of impact and degrees of freedom technology can enable, and our aspirations for software can be optimistic and philanthropic in many ways. Although the aspiration for building software that tangibly helps people and humanity is high, there is not a lot of guidance on how to actually make that happen.
+
+Most public material about the field has been inaccessible for those who wish to approach it in an operational manner as an outsider. Discussions about ethical and helpful tech can be theoretical knowledge instead of applied processes, based on postmortems from previously failed products, or deeply embedded into institutional knowledge or textbooks.
+
+Additionally, lots of the knowledge about managing systems of safety at scale have been owned by trust and safety teams within larger tech companies who do not operate as a ‘social good product’. Trust and safety teams in bigger tech products work as a team working to engage law enforcement, remain legally compliant, and protect shareholder value. Their practices, for good reason, are not often publicized nor greatly applicable to social good software.
+
+Software that helps people sounds simple in practice. To an extent, it is - but it is less simple to execute and scale. Making software that helps thoroughly, sustainably, effectively, and consistently is nuanced, and can be fraught. My goal for you is to shed light on this landscape for you to effectively clear it. It’s not about following this book exactly as written, but being able to pick up the patterns and the mindset the book outlines.
+
+So, how do you take on the proposition of building software of care? Building software of care is about encoding consideration for users that optimizes a product to be a net-positive impact on them. It starts from the beginning of the system design, all the way from the beginning of product development, through determining succession.
+
+Although software of care is a nubile field, it’s built off of the components of two foundational fields. The first is the creation of social good and human service programs. The second is the development of safety critical software. The history of how humans have historically built social service programs will teach us how to actually solve the problems that we wish to solve. After finding our solution, we need to create a product that meets the depth of the problem. This is where knowledge from safety-critical systems comes into play, enabling us to build software that is safe for our users.
+
+## Designing a social good mechanism.
+
+Social program design is the process of designing a program that accomplishes a form of social good. Building a strong social good program means doing intensive research on the problem, working with those who face the problem to come to a solution, and then de-risking and priming the solution for high adoption.
+
+Some general principles of social program design are:
+
+- **Write a theory of change first**. Every established framework requests the same discipline: state the causal chain from activity to outcome explicitly, so each link can be checked and debunked. Most failed social good programs have a broken link that no one checked, or failed to pressure test.
+- **Assess needs before designing anything**. A formal needs assessment is the step one. It’s important to establish prevalence of the issue, existing services, historical solutions, and gaps with data. Programs and products are often built for problems that are adjacent to the real one. Even beyond formal needs, great products and programs take into account the aspirations of the people facing a problem. It’s not just about stopping harm, but enabling people to get to a place they truly want to be.
+- **Design for take-up, and not just efficacy.** Often, administrative burden research (Herd & Moynihan) shows that programs fail at enrollment more than at delivery. SNAP (Supplemental Nutrition Assistance / Food Stamps) and EITC (Earned Income Tax Credit) leave large eligible populations unenrolled because of the amount of barriers to receiving care. Defaults, auto-enrollment, and simplification have larger measured effects than most program improvements.
+- **Implementation quality matters as much as design**. One of implementation science's core finding is that the same program produces different outcomes depending on delivery fidelity, staffing, and frequency. This is even the case for software, and especially can be a problem when a product is developed without the infrastructure to set it up for success.
+- **Adapt, but know what's load-bearing.** Evidence-based programs work to distinguish core components from what’s an adaptable surface. In this way, cultural adaptation improves outcomes when the core mechanism stays intact.
+- **Build evaluation in from day one**, and predetermine what failure looks like. Retrofitted evaluation often cannot separate the program's effect from selection.
+
+## Creating safe software.
+
+Safety-critical software is a development methodology and set of standards that teach you how to build software that could seriously harm or kill someone if it fails. This kind of software is often used in embedded systems in the aviation, automotive, or other industries that create high-scale, high-use software.
+
+Although most social good software does not need to operate at the same level of integrity as a commercial jet’s autopilot, it provides a rough framework for the safe development of software that can be adopted as needed. Adopting the spirit of safe software provides a starting framework for how to manage the challenges of social good software.
+
+Building high-integrity software can look like:
+
+- **Decide how dangerous each part is before building it**. Safety-critical fields assign criticality levels first and scale their rigor to match, and the system is protected from the harm ranking assigned early on.
+- **Make the failure safe, before it happens.** This can look like writing down how each component fails, and make the failure state the safe state. A crashed system should leave the user with a phone number, not a blank screen.
+- **Trace requirements**, from code, to tests. Everything in the system exists for a reason someone can point to, and everything important has a test proving it works.
+- **Keep the code boring**. These industries restrict what developers are allowed to write because clever code can't be fully analyzed, and simplicity in software is a safety feature.
+- **Checks and balances throughout the SDLC**. The developer’s confidence is not verification, and other people are
+- **Know exactly what's running**. Every change is tracked, every deploy is reproducible, and rollback is always possible.
+- **Design for the user's worst day**. Aviation designs cockpits for emergencies, not cruising; interfaces should assume panic, distraction, and stress.
+
+## Delineating software of care.
+
+Software of care brings the design of social programs, and the frameworks of safety critical software to meet the lived reality of creating a product and building a business around it in today’s world.
+
+As such, software of care is a bit of a hodgepodge of startup and non-profit knowledge, combined with social good program development, and build through the framework of safety critical software. It’s a unique niche, and one that is often deeply contradictory. These contradictions make it especially hard to pull off and to sustain long-term, while retaining your mind.
+
+Just because they are all necessary does not mean that all of these pieces come together neatly, or concretely: in fact, the constraints of safety-critical software and the amount of time it takes to measure change from a social good program can be entirely antithetical to how new startups are told to form and operate - which is by failing fast and cutting corners to do it. On the other side, the development of safety critical software and the approach of product development in general can be a fatal mirage for non-profits who don’t know always how to build a product that succeeds in today’s digital world.
+
+Navigating the pressures of all of these systems in conjunction is the goal of the book, and will also be a duty that the inventor and entity will come to undertake throughout the lifecycle of the product. Later on in the book, we will elaborate more on developing a social good program and what building safety-critical software looks like in practice for consumer products.
+
+For now, let’s focus on what these seemingly contradictory principles can look like in action.
+
+The general pathway of inventing software of care and bringing it to market follow clear milestones. The first is building care, where an inventor comes up with an idea and works to tailor it into an effective solution that truly meets the problem where it sits.
+
+The second is earning adoption, which is bringing the product to market and establishing connections and trust with users.
+
+The last is enabling longevity, which is creating the infrastructure that enables the product to live in the world, long term. Moving forward, I’ll refer to the person who creates and comes up with the software as inventor, and the organization or company that can come from it as the entity.
+
+### Building the care
+
+For a product that is aiming to be software of care, the first place to through developing is by building a system that encodes a form of care that the product is going to offer to it’s user. This is called the ‘care methodology’, or the way that someone thinks their product will provide care and do good. It’s not meant to be the product itself, but the process that a product facilitates.
+
+An example of care methodology would be a therapeutic modality, like Cognitive Behavioral Therapy (CBT) or Eye Movement Desensitization Regulation (EMDR), and a mental health product that encodes it would have self-directed flows that walk users through the process of undergoing CBT.
+
+When building out the product and defining what a care methodology looks like, a product that’s effective will be:
+
+#### 1. Driven by ongoing evidence.
+
+Care that is offered to a user should have an empirical basis. Relief can look like reducing stress, removing burden, enabling access, continuing to enable other forms of pre-existing care, educating others about how to give and receive care, and more. The product should start from a strong hypothesis, and should include systems that track the effectiveness of the product to its’ stated goal over time. Although the product may start from a strong basis of evidence, it needs to track its’ own impact to make sure the product format is enabling the care methodology correctly and maintaining the effectiveness it’s aiming for.
+
+#### 2. Endorsed by the user
+
+Software that is used is software that is influential. The care offered should be something that the user not only accepts, but strongly benefits from, and is open to receiving. Offering and accepting care is an inherently vulnerable endeavor, and the value proposition for the user needs to be stronger than whatever the default they are engaging with is. If the care a piece of software wishes to give is not adopted at scale because it doesn’t have a clear value proposition, it has failed to meet its fullest possible impact. Not only does it need to benefit the user, it needs to be easy. Going back to the SNAP and EITC example above, just because a program is available does not mean it will be utilized. Products often need to be well-advertised, spread through word of mouth, and have a supernaturally easy onboarding process and unique value proposition.
+
+#### 3. Viable for the entity creating it
+
+Care is best given when it can be continued. The possibility for strong impact becomes more likely over the course of a relationship with a user. Truly providing care in someone’s life or on a situation they are in will not happen over the first introduction, or launch of an application. Trust deepens as the user engages more often, and as they decide for themselves that the product is acting in and for their best interest.
+
+The trust should either deepen by repeated interaction with the application, or should be delegated by a pre-existing entity or person that has built trusted products in the past. For example, you may trust Apple to build a product that detects crashes or falls based on their previous reputation. If your neighbor, Steve, who has never seen an IDE in his life and regularly sends you flat-earth videos tried to build and advertise that same product, the context of the inventor may rightfully give you pause.
+
+The product also needs to be financially, emotionally, and logistically sustainable for the entity that operates it until it is able to be self-sustaining. Survival of the product, of the user, of the team, and the operating entity means care, prolonged. If you, your team, or your infrastructure is constantly on fire and never seeing resolution, that directly will impact your software product in its’ infancy and adoption.
+
+#### 4. Is testable
+
+The care offered to users should be easily measurable, and able to be tested for efficacy. A product should track usage, outcomes, and the real-world result of its’ implementation in the lives of its’ users. The care methodology that a product has should track evidence of it’s efficacy, and the product itself should track impact, both positive and negative. This is where you find if a product serves users, or if it’s a phantom tool that acts with care, but fails to materialize it.
+
+This impact will drive the basis of measuring the effectiveness of a system. If the entity cannot measure if care has been effectively provided, they are at an extreme disadvantage in determining if their product has the end impact they want it to have.
+
+The operating entity (company, nonprofit, startup, etc) will also have a harder time gauging change in the market, and fluctuations in user behavior that should signal them to initiate major strategic moves. Proving the care that they offer is effective will be one of the best advantages that the inventor can give to their product, users, team, and the entity that owns the software product.
+
+### Earning adoption
+
+After the care methodology of the software product is built, it needs to find users in the world, gain momentum, and achieve a reputation for completing the outcome it’s designed to create. Adoption is crucial, as a piece of software that is not adopted by the end user fails to meet the impact it’s built to get. This shouldn’t be seen as a go-to-market manual, but instead as the foundational pre-requisites that allow adoption to succeed instead of stymied.
+
+It is not enough simply to build a product that solves a need - it also needs to fit into the world which it aims to serve. Especially in vulnerable communities or products that aim to produce social good, there is a complex network of history, fear, betrayal, and giving that has often been long at play prior to your product existing. Making a product embraceable and adopted at scale relies on correctly being able to navigate that web of history and context in which its’ trying to entangle itself, and doing the work to gain the trust of the people you want to adopt it.
+
+To maximize adoption, the software product should:
+
+#### 1. Meet the user where (and as) they are.
+
+The software should meet the user at their current circumstance, and lived reality. It should be as easy as possible for the user to adopt the tool, so much so that those who do adopt it have an unfair advantage in some form. Every aspect of the product, from the care methodology to the operating principles, should be cultivated from coming to know its’ user and their problems deeply.
+
+#### 2. Know trust is a requirement.
+
+Software that wants to provide care inherently has to be software that can be trusted, sustainably. Gaining that trust is multi-pronged, and preserving it requires consistent attention and maintenance over time.
+
+Developing trust in a product starts with stating benefits and limitations clearly, and meeting the minimum of what it states as its’ functionality. It continues with doing research and putting in effort to ensure the efficacy of the solution presented.
+
+To be trusted, the product needs to be discrete, transparent, predictable, and consistent. Users should be able to predict the product’s behavior in positive and negative situations. They should see updates happening, and know that what you promise about the product is honest. When the product fails, it should be clear and communicated.
+
+#### 3. Construct ease for the user.
+
+The software has to take a problem that has been affecting the user and ease the burden of it. The prospect of receiving care should be worth the initial jump of trust, and should make continued disclosure from the user worth their time. Care (and the change that results from it) is often hard, and disincentivized. Asking a user to use the software should clearly improve something in their life, and should make it as easy as possible to do so.
+
+#### 4. Know the weight of what it asks.
+
+The software should understand societally, culturally, and individually the implications of what it is asking of the user, and handle it with the appropriate weight and care accordingly. It should understand the responsibility and amount of trust that may come from a user, and it should handle these obligations with weight, and discretion. The software should act with impartiality and clarity.
+
+For example, if you are building a map to find abortion services locally: the software should acknowledge that it may ask users about a potential pregnancy. For many people, there is cultural stigma and shame, even legal consequences, towards using that software. In that way, the creator should obviously not store this information in an insecure way (or even store it at all!), associate it with someone’s name and location, sell it to a data broker, or send alerts to the user that could inform others who have access to their devices that this is product they have used.
+
+Discretion, trust, and being additive to your user instead of subtractive are strong requirements of software of care.
+
+#### 5. Sees obligations through.
+
+The software should meet and fulfill its obligations it promises the user in the form as stated, exactly as stated. It should not contain negative surprises, or dead ends when feasible.
+
+It should operate correctly as intended, when intended, and be ready to continue to meet the promises it makes to the user. If the software product is unable to meet its’ stated obligations for whatever reason, it should clearly inform the user of that and work to correct it in the way it can. A good piece of software meets the spirit of it’s obligations.
+
+For example, if you claim that your mental health app serves 15 separate mental illnesses, yet you only have 5 visible when someone downloads the application, that isn’t exactly meeting the obligation as stated. If someone claims their child welfare platform has the highest level of security, yet it has never had an external penetration test, it is is not meeting the spirit of its’ obligations.
+
+Especially when it comes to vulnerable communities, or those in hard situations, it is more imperative than other kinds of software to ensure that your product works to underpromise and overdeliver. Many people have the shame of being disappointed, stood up, or otherwise hurt by others and institutions. To replicate that into software that can reach scale is to scale falsehoods that can undermine your user’s entire trust in your applications, your entity, and potentially all others.
+
+### Enabling longevity.
+
+Once you have built the core product and started to gather traction of adoption, the last pillar is building or finding an operating entity (like a startup, non-profit, open source project) that will own, maintain, grow, and care for the software product over its’ partial or total lifetime.
+
+Unfortunately, building and releasing a software product is the easier part. Developing software that is able to sustain itself and integrate clearly into the world is another hurdle of scale. Longevity is the hardest thing to obtain, and often the most valuable for a product in this space. The longer the product exists, the more it compounds in its’ momentum, and the more people it is able to help.
+
+#### 1. Aim for long-term survival.
+
+A product should be boring, stable, predictable, sustainable, and ready to face the conditions of the world. Hopefully surrounding it are realistic processes that are suited to the user, market landscape, and political/cultural contexts that it will come across.
+
+Software that wins is the one that meets the demands that the world has of it, not the demands of the inventor or entity. Strong convictions can build strong products, as long as those convictions are aligned with the lived reality of the user and market.
+
+The convictions an inventor builds around their product and company must prepare the product for the ecosystem that will adopt and diffuse it.
+
+#### 2. Form alliances where you can.
+
+The software should make sure it not only fits the needs of the users, but the people and worlds adjacent to them. The product should fit neatly into the user’s life, and the lives of those who may be impacted by what the user is facing. When you build not only for your user, but those around them, you inherently grow the group of people who are impacted by a product. The more stakeholders who benefit from the adoption of the solution, the more likely it is that incentives will continue to drive usage to your product. When done well, more users receive the positive impact resulting from it, and the more impact you will have.
+
+The programs that make the most impact long-term are those that are able to align all stakeholders in a clear way. Software products that align everyone, and provide separate value propositions for the different parties in an affected user’s life, are the ones that are most likely to reach their full potential and survive in the real world. The software needs to make sure it properly aligns the incentives of the users to ensure sustainable usage.
+
+This is partially why Khan Academy has such big adoption and has reached proportions that many other tech for good products have not. Khan Academy is built for students, but often has videos shown in schools as an additional part of the curriculum. It also acts as a resource for parents. This cross-hatched access reinforces it, and aligns everyone on the goal of educating a student well.
+
+If you are building an application to help kids with learning disabilities, it may be advantageous to create parent and school focused reports so that other support systems in the child’s life are able to understand where they sit, contextually. In this way, you’re providing content to the child to help facilitate a more accessible education product, and also working with stakeholders in the kid’s life who can positively reinforce and make further changes in their life to support them.
+
+#### 3. Know what you can, and cannot do.
+
+Many systemic barriers can prevent software products from reaching their full impact, or can dilute the eventual vision a product is able to deliver. In this way, knowing these barriers as well as you can prior to and during development will help to create a more balanced vision of the product with better expectations, which will down the line conserve resources and increase effectiveness. A product should know where it stands, what it is good at, and what parts of the ecosystem it can and cannot affect.
+
+A homeless shelter directory application will only be usable as long as there are a number of shelters in the area, and those shelters have capacity. The downstream programs, non-profits, and methodologies you want to leverage today may become a limiting factor over time. The reputation and problems they have will innately become problems of your product, and things that you will need to have a situational awareness of.
+
+It’s important to face those limitations before they become the limitations of your own software product, as well. Knowing what parts of the lever you can pull will keep you from visiting the waterpark and trying to turn it into the ocean.
+
+#### 4. Remember care is not stagnant.
+
+What people consider to be an appropriate form of care for any problem will inevitably change over time. It may also shift as public perceptions grow, and new information comes out. For example, Applied Behavior Analysis (ABA) therapy for treating autism has come under fire in the last few years. A growing number of autistic people believe it to be inhumane, comparing it to conversion therapy for the LGBTQ+ community.
+
+There’s also a number of relatively young therapeutic modalities, like Eye Movement Desensitization Regulation [EMDR] or Internal Family Systems [IFS], that are still being proven effective, and growing towards a defined clinical foundation. There also may be new techniques, modalities, or information that comes out and renders previous assumptions incorrect.
+
+All of this to say - whatever care is provided now may not be the most effective care in the future. A product should always be pushing and working to prove and become the most effective at any given time, instead of waiting for others to out-innovate it.
+
+The rest of the book goes through how you turn each of these considerations into the reality for your software product, and how these go from ideals to built processes and shipped code.
+
+<Callout type="note">
+
+**This book will only touch on certain things that have direct relation to social good software, and implications on it. It assumes a mild and basic level of understanding about creating a product, system design, and programming.** I will aim to add resources that are comprehensive for beginners at the end, but I would recommend reading this book in conjunction with others that focus on the basics of programming, design, ideation, market validation, and the financial operations of releasing a product.
+
+</Callout>
+
+Software of care is consideration. What kind of suicide hotline would you want your sister to call into? What kind of cancer care management application would you want your father to download and interact with? Software is not divergent from humans, it’s an amplified reflection of us. We are building tools that can meet people at moments of their lives that potentially are etched into them forever. How we build that software and treat that user makes all of the difference.

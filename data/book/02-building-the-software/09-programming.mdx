@@ -1,0 +1,282 @@
+---
+title: 'programming'
+label: 'Chapter 9'
+---
+
+THERAC-25, a medical device meant to treat patient’s cancer dosed them with 100x’s to 1000x’s amount of radiation they were suppose to receive. Between 1985 and 1987, it massively overdosed 6 people. Some of whom died.
+
+It wasn’t a new product. It was a new version of a device that existed for years, as a medical linear accelerator. It is a device that creates high energy beams from accelerated electrons to destroy tumors.
+
+When it was announced, THERAC-25 was an innovation in its’ field. It created a new ‘double pass’ concept that needed less space to more effectively accelerate electrons, making the innovation more economical. Even more, it was able to apply two treatment modalities on one machine: one using photons and the other using electrons.
+
+Although THERAC-25 had more responsibility through this double pass concept, it re-used the same software as previous versions. Those version had hardware-level fixes that prevented issues, whereas THERAC-25 relied solely on software as the safety mechanisms.
+
+Katie Yarbourough was receiving preventative treatment after surviving breast cancer. On her 12th treatment, THERAC-25 turned on and hit her with an estimated 15,000 - 20,000 rads on a dime-spaced spot on the left side of her chest. The standard treatment was supposed to deliver 200 rads. She reported the pain to the operator, who talked to the manufacturer, AECL. AECL said her burn was impossible. Weeks later, the spot turned into what journalist Barbara Wade Rose described as a ‘slow motion gunshot’. A hole began to tunnel into her chest, and her left arm became paralyzed. Katie was the first of the THERAC-25 incidents, but not the last.
+
+Despite the growing number of incidents, AECL continued to defend the machine, going as far as to send back “After careful consideration, we are of the consideration that this damage could not have been produced by a malfunction of the Therac-25 or by any operator error”.
+
+One error on the machine that contributed to the overdoses was found to have happened because of a race condition: when the instructions were changed fast, the machine would send the old incorrect information and configuration, meaning patients were given a stronger X-ray dose instead of a electron dose. There was no system that checked to make sure various parts of the prescription data matched.
+
+But that was not the only software bug. Another bug checked the position of the turntable that controlled an X-Ray filter within the machine. This counter only had allocations for 0-255. 0 meant it was correct, and any other position meant it wasn’t - but only up to 255. If the true counter for the position was 256, the counter would roll over to 0 within the software program and hit the patient with a raw beam.
+
+This turn table was important because it changed the modes of operation. Therefore, a turntable incorrectly oriented would not have a correct X-Ray target between the beam and the person receiving it. It resulted in a similar problem to the first software bug, where an overdosed beam with no safeguards reached a patient. The problems with the THERAC-25 were eventually resolved with installation of a hardware component, but not before it became something that injured, paralyzed, and killed the people it was meant to heal.
+
+It’s worth highlighting THERAC-25, not just because it’s an infamous example in software safety, but because it started as what we are all trying to build: an innovation that pushes more economical adoption of a technology that could help.
+
+—-
+
+Ironically enough, programming a codebase can be the easiest part of creating a product that is software of care. Many programming principles lead themselves to building sustainable, changeable, and understandable projects. Similar to system design, good software of care is often good development practices, just amplified in the severity and intensity of it. It’s ensuring those principles are maintained, while navigating the realities of pressure to ship and grow, that can get squirrelly.
+
+Because programming and what codebases look like at different entities can vary so much, this will be a chapter more focused on general approaches and mindset instead of specific procedural recommendations.
+
+## The interplay of software and safety.
+
+Software has a complicated relationship with safety, especially in high-change and turnover environments. This is for many reasons:
+
+- Any one minor change to a piece of software can have knock-on changes
+- Software reliability can be confused with safety. A system can be reliable without being safe.
+- Software is hard to predict, even with testing and different environments.
+- Software’s failure can lie dormant for years, and can never be guaranteed.
+- Software is written, overviewed, and deployed by humans who have the capacity to fail. Even AI tools are trained on human code, and perhaps more prone to failure.
+
+[ADD CONTENT ABOUT WHY THIS ALL MATTERS AND TIE TOGETHER]
+
+Software, even further, is programmed by living people and paid for by living entities. Of course, they are going to be subject to human pressure and frivolity that stops many of these practices from happening. Additionally, the people who write and overview code are human. The systems they build are gilded in the pressures they face.
+
+The idea is not to build perfect software that can never fail, but to build software that can fail safely and sustainably. It is not that developers do not know how to write and share good code, or that the secrets of engineering are locked within a dark room. It is just often that writing good, safe code that meets the flexibility required to start a product with a tight budget is hard.
+
+## Actuating software.
+
+**Does what it's expected to do.**
+
+The baseline property, and the one THERAC-25 failed: the software's actual behavior matches its specified behavior, in every mode, not just the common one. The gap between "works when used normally" and "does what it's expected to do" is where the race condition lived — the machine worked, unless the operator typed fast. Expected behavior only exists if it's written down somewhere; software with no specification can't be wrong, which means it also can't be verified right.
+
+**Is testable.**
+
+The software is structured so its behavior can be checked mechanically. Testability is mostly an architecture property: logic separated from interface, dependencies that can be swapped for fakes, functions that return results instead of quietly changing distant state. Code that can only be verified by clicking through the app by hand is code whose correctness is being taken on faith, and faith degrades with every release.
+
+**Has checks and balances.**
+
+No single component's word is trusted for anything that matters. Inputs get validated, outputs on critical paths get sanity-checked, and independent mechanisms confirm what the primary one claims — the prescription-matching check THERAC-25 didn't have. The earlier versions of the machine had this property through hardware interlocks; removing them made the software the only voice in the room, and it lied.
+
+**Is fortified where it needs to be.**
+
+Rigor follows the harm ranking. Critical paths get the redundancy, the failure-path tests, the strictest review; the rest is allowed to be ordinary. Fortifying everything equally is how small teams drown, and fortifying by instinct instead of by ranking is how the settings page ends up better defended than the crisis flow.
+
+**Is understandable.**
+
+A competent developer who didn't write it can read it and predict what it does. Understandability is a safety property, not an aesthetic one: incidents are diagnosed, hotfixes reviewed, and successors onboarded at the speed at which the code can be read. Clever code that only its author can follow concentrates the whole system's safety in one person's memory.
+
+**Is modifiable.**
+
+The software can be changed without fear, because tests catch what the change breaks and the structure keeps changes local. This is the property that preserves all the others over time — care software that can't be safely modified stops being iterated, then stops being maintained, then quietly stops being safe while still running.
+
+## Writing code
+
+### Manufacturing solid code.
+
+Choose things that will last: not new cloud providers, or early VC funded companies who will jack up prices over time. Your code should be relatively boring all things considered, unless a specific tech stack gives you an undeniable advantage that is worth the risk of going forward with it.
+
+Codebase architecture will be tough to have a conversation about without knowing the greater context of your entity and goals with it. Most early projects are going to be more than set with a monolithic codebase with good practices embedded throughout. The most important thing about the specific architecture that you are choosing for the codebase, is that it should be short, medium, and long-term sustainable.
+
+Often, when I’m faced with decisions about code, I make ‘breakpoint’ decisions. These are points where the assumptions I made are no longer true, and therefore require re-visiting and an additional glance. In a startup environment, you are often pushed to do the minimum to get things off the ground and to come back to them when they become troublesome. In this case, a breakpoint document that you keep might help serve you to remind you (or anyone else on the development team),
+
+### Erecting layers of testing.
+
+Software of care, especially components that are critical or safety-critical paths, require approaches to testing that can be more thorough and developed earlier on than other companies at your stage within your software. It is easy to set up tests earlier and to build the muscle memory to develop them over time, and it can be very hard to set up testing later on when the codebase has already ballooned in size.
+
+From that perspective, if you have a Greenfield codebase, now would be a good time to invest into adding automated testing structures.
+
+If you are building a severely safety-critical application, it may be worth evaluating different methods of development - specifically Test Driven Development.
+
+The layers themselves run from small to whole. Unit tests check individual functions in isolation and run in seconds, which makes them the layer that catches regressions the moment they're written. Integration tests check that components work together — the app and its database, the escalation flow and its vendor. End-to-end tests walk the product the way a user would, top to bottom, and are the slowest and most brittle of the three, which is why they tend to be reserved for the paths that matter most. The conventional shape is a pyramid: many unit tests, fewer integration tests, a handful of end-to-end tests on the critical paths.
+
+For software of care, the distribution follows the harm ranking rather than the pyramid alone. A critical path earns coverage at every layer, including the end-to-end walk; the settings page does not. Two kinds of tests do disproportionate work in this context. Failure-path tests check what the system does when things go wrong — the vendor timing out, the network dropping mid-session, the malformed input — because the fail-safe behavior designed in the system design chapter only exists if something verifies it. And regression tests written from incidents turn each adverse event into a permanent guard: the bug that reached a user once becomes a test that keeps it from reaching one twice.
+
+Test-driven development inverts the usual order: the test is written first, fails, and then code is written until it passes. Its relevance to safety-critical work is less about the ritual and more about what it forces — behavior gets specified before implementation, so every requirement has a test by construction, which is the traceability discipline from the safety-critical section arrived at through workflow rather than documentation. The cost is real (slower early progress, and a test suite that ossifies bad design if the design was wrong), which is why it tends to make sense for the paths where the specification genuinely matters and less for the parts still being sketched.
+
+| **Testing types** | **Explanation** | **Implementation** |
+| --- | --- | --- |
+| Unit Testing | [CONTENT] | CONTENT |
+| Scenario Testing | CONTENT | CONTENT |
+| Regression Testing | CONTENT | CONTENT |
+| End to end testing | CONTENT | CONTENT |
+| Accessibility testing | CONTENT | CONTENT |
+
+### Ensuring knowledge continuity.
+
+Codebase cleanliness is succession, and survival of the code. Codebases should have good hygiene, and the standard markers of updated and understandable code. READMEs are crucial, and should contain information that enables someone other than the primary maintainer(s) to be able to run and test the codebase.
+
+Testing should also be clearly unified in one clear place, with clear definitions about what components of the codebase require what tests. Critical paths should have the most stringent testing suite that your level of entity allows. Personally, I enjoy component level .READMEs as well for each critical path where the main business logic is located.
+
+You need, even if you are a solo developer, to have a plan for what can happen with the code if you are not able to be the primary driver or developer of it. Planning for others to at least be able to understand and navigate your code is an investment into the longevity of your solution.
+
+Outside of the codebase, having an engineering knowledge base where common runbooks, constraints, and any other information is generally helpful. Generally, it’s important to follow the rule that you don’t want to make the same mistakes twice. A process that you will use is the process you should build. At Faura, we utilized a lot of Zooms and had a large amount of runbooks within a shared and joint Notion.
+
+A codebase that is ready for succession looks like:
+
+- Updated documentation and testing, with clear references on how to start and where to find valuable information like .env variables or other codebases that must run locally as well.
+- Generally updated and documented CI/CD procedures that make deployment understandable without large amounts of reverse engineering
+- Documentation that is done within the context of the code written, but also with additional documentation throughout that clearly delineates sensitive and critical paths, or load bearing elements that shouldn’t be touched.
+- Outstanding tasks clearly labeled as TODOs, as opposed to abandoning half-finished solutions for them to remember.
+
+## Development Operations
+
+### Enabling quality code.
+
+Quality tooling exists to make good code the default rather than a discipline someone has to remember. The current practice is layered, with each layer running at a different point in development:
+
+Formatters and linters are the base. Formatters handle the cosmetic side entirely — indentation, spacing, line length — so human reviewers never spend time on style discussions, and linters catch per-file mistakes: unused variables, risky patterns, syntax errors. They run in seconds, so they belong on every commit as a pre-commit hook, and in the editor itself, where the feedback arrives while the code is being written. Their quiet cultural value on a team is that the linter's opinion is nobody's opinion; review time goes to logic instead of taste.
+
+Coding standards are the agreements tooling can't fully enforce: how errors are handled, what gets logged, how critical paths are marked, what a test must prove before merge. Written down, they survive turnover. The best ones are encoded into the linter's configuration wherever possible, so the standard enforces itself.
+
+Static analysis goes deeper than linting, tracking control flow and data flow to detect bugs that require understanding program behavior — null dereferences, resource leaks, injection paths, race-condition-shaped mistakes. The defects that broke THERAC-25 live in this class. These tools take minutes rather than seconds, so they typically run on pull requests and nightly builds rather than every commit. Frameworks like NIST's secure development guidance now treat automated code analysis as a baseline practice rather than a nice-to-have — for care software's critical paths, it is cheap paranoia.
+
+Dependency scanning is its own layer, checking packages for known vulnerabilities — the supply-chain concern from the third-parties section, automated.
+
+Breakpoint code is the practice from earlier in this chapter given a home in the process: assumptions true at writing time get marked in the code and logged in the breakpoint document, so when an assumption breaks, the places built on it can be found instead of remembered.
+
+The layering matters more than any single tool. The most effective setups combine multiple layers rather than relying on one: fast checks at commit, deeper analysis at review, and dependency scanning running continuously. A solo developer gets most of this for free — the standard tools are open source and wire into CI in an afternoon, which is a small price for a second set of eyes that never sleeps.
+
+### Deliberating under and overengineering.
+
+Codebases of all sizes and shapes struggle with figuring out what over and under engineering is. This is an evergreen debate in software engineering, especially as more architectural formats come in and out of style, and frameworks promise to solve underlying problems (and create new ones).
+
+Over and under-engineering solutions can be especially amplified in a social good context. For over engineering, cautious developers may want to pre-build a system to a level of scale and abstraction it is not currently at, ‘just in case’. This over engineering may make the abstractions and codebase harder to navigate as the product re-iterates or as it experiences adverse events.
+
+For under-engineering, an engineer may say that because the problem the software is solving is so important, we should build something undersized to solve the problem immediately.
+
+There is no right or wrong, because they can both be correct in different contexts. Both can be justified, constantly. That is why the mindset of letting over or under engineering products be the result of a logical decision can be incredibly hard.
+
+This being said, the standard for code that needs to be written is higher. So, what can be considered over engineering at another company in a different context is the bare minimum for a piece of software serving a user through an emergency. The key difference here is that the safety margin should be accounted for within the process used to actually develop the code, and the codebase should not suffer from bloat that it does not own.
+
+A good rule of thumb, as ironic as it is, is try to not let the gravity of the problem impact the code mentally more than it needs to. The code you write and the system you built should fit the resources you have: this means the team, time, scale, and user base size. It is inevitable that all code decays and will need to be rebuilt as the system shifts, and sitting in the middle ground is the best way to not make those shifts too terrible.
+
+### Equipping safe automation.
+
+One of the ways in which software of care products can very much benefit and reduce burnout is by investing in automation early on (but correctly). Utilizing CI/CD tools to manage deployments and rollbacks is a must have in a modern software development organization, and you do not want to be manually managing infrastructure in incidents. Building test suites into your CI/CD pipeline, or automatically reviewing PRs with code review bots can be helpful.
+
+Go further with automations to a point where you are not experiencing diminishing returns. Dependabot is a classic for a reason, and generative AI tools are pervasive in software development now, although long-term impact and benefits are still being determined. It is especially worth it to invest in security scanner tools that passively evaluate the code for known vulnerabilities and incorrect configurations.
+
+If your team utilizes generative AI tools, please make sure to leverage basic guardrails and infrastructure on it. Do not let generative AI code explode your codebase without your eyes on it. Automation is only as powerful as the team you have, and the rails you put on it.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+### Forgoing blame.
+
+Many development teams over time have worked to understand and manage their idea of ‘blame’. Blame when it comes to incidents is almost never a useful tool for diagnosis, and often shifts the responsibility to an individual person when it may also be the responsibility of problematic systems and expectations.
+
+This is especially relevant to software of care, wherein the stakes are higher and the pressures can be more intense and related to real world impact. Often, cultures of blame, e.g: “Kieran is responsible for breaking the build when he pushed to production!” can create environments where people are afraid to make mistakes, and share them when they occur.
+
+This is devastating in regular companies, and can lead to tangible harm in social good products. Concealed incidents can mean concealed harm, and learnings that are not able to permeate through the greater team. It also means a culture where caring for a user and wanting to do the right thing for them comes secondary to protecting yourself for fear of blowback from others, which is a pattern that most definitely can escape the development team and infect the organization. This is not to say that a blameless culture should absolve people who repeatedly fail to take accountability or complete due diligence. But it is about making sure that generally, when mistakes happen (as they will), people will generally feel comfortable surfacing these issues.
+
+Being afraid to fail and doing work from a place of working to avoid shame is a self-defeating mechanism. Mistakes will happen, and they are inevitable. Mistakes are also not often traceable to a single person or instance. Working to enable a blameless culture on your team when mistakes happen is an investment in making sure you can work to roll them back as soon as they happen. Even as a solo developer, this is something you can do to reduce your own burnout and stress.
+
+<Callout type="example">
+
+Adopting a blameless culture looks like:
+
+- Focusing in on the action that caused a problem as opposed to a specific individual
+- Understanding the systemic circumstances that may have caused someone to take a poorly thought out action
+- Working to understand if configuration or process errors encouraged this problem.
+
+</Callout>
+
+## Considerations of development.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Considerations of Development graphic"
+  width={1600}
+  height={1000}
+  caption="Considerations of Development graphic"
+/>
+
+Safety practices fail on small teams and early products not because teams don't care, but because practices can be a blocker to shipping, and designed as if time were abundant. Keeping safety in mind is related to creating a culture that accommodates time for it, setting it in motion early as small tasks to do over a long period of time instead of treating it as a sprint that can occur retroactively. They also require building into a consideration that the development team, and greater entity understands and finds time for.
+
+- **Automate everything that can be automated.** When a safety check runs without a human (like CI tests, security scanners, dependency updates, linters on critical paths) it creates safety and checks and balances that persists through crunch. It also looks like making sure automated tooling accounts for the safety criticality. Implementing the hazard analysis in an AGENTS.md tool, correctly ensuring that CI/CD is running accessibility tests through Chromatic, and configuring tools correctly to align the team’s goals with the tooling is crucial to making sure the automation is correctly tuned.
+- **Make knowledge shared by default.** A team dynamic that is sustainable is where everyone involved is responsible in a small way for one aspect of the system, instead of one person being shoehorned to advocate for a behavior or view. In this sense, I think everyone on a team is responsible for ensuring privacy, safety, accessibility, and security. These are skills that need to be cultivated by a leadership, and incentivized to be shared from one person to another through mentorship. This means runbooks, breakpoint documents, and short written decisions mean safety context doesn't bottleneck on one person's availability. A team where only one member can review the crisis pathway has a safety process with single point of failure, a similar flaw the system design chapter forbids in infrastructure.
+- **Keep processes light enough to actually happen.** A process that occurs is worth more than a thorough one that doesn't. Processes should be built and created for the size of the team and the resources they have. Processes that have no incentives, or feel too cumbersome are not going to be sustainable or deeply protected within the team.
+- **Price safety into the timeline before development starts.** Safety work that isn't in the estimate becomes "extra" work, which places it in an inherently vulnerable position. When optimizing for speed, extra work loses to deadlines every time. Timelines that include testing, review, and hazard-analysis updates from the start set expectations correctly with the team, and with whomever the team answers to.
+- **Front-load, and avoid batching.** Safety and care is a continuous strand. It should be a little in every sprint, every feature, every review, and the team and leadership should work to make sure it stays feasible indefinitely. Safety as a giant initiative (like “the security sprint," or “the accessibility overhaul") gets deferred, shrunk, and eventually cancelled. Alternatively, it becomes linked to an external event, like a SOC2 audit or an accessibility lawsuit. When those sprints reach an external deadline, it causes problems and puts pressure to get these processes done fast instead of sustainably.
+
+### Confronting technical debt.
+
+If you are a startup or a resource constrained non-profit, this will be especially relevant to you. From a CTO perspective, technical debt is an advantage. You build it now to pay it down later when the cost feels more feasible. Technical debt can be even harder in a software of care context: the funding can be fewer and far between, serving users feels imminent, and the pressure is turned up to high in a way that working on generic B2B software is not.
+
+If you are resource constrained, protect your critical paths and let other things go with less scrutiny. This is especially true if you can buy many solutions upfront and bring them in house later. Also, leveraging open-source libraries and pre-existing frameworks, on top of keeping product scope to a minimum, are other levers that you can pull to manage this.
+
+If you do have technical debt, even if you let it build, designing a comprehensive test suite that captures that growth and regressions within it is a good investment.
+
+I often advise many non-profits or startups to leverage no-code tools. It seems very easy in the beginning of a project to want to program everything, but the maintenance costs add up over-time, often exponentially. This can lead you to go back and be focusing on non-core work to move the core work forward, or can cause precious delays or confusion.
+
+If you are another entity that doesn’t experience as much resource constraint, it is worth making sure technical debt is addressed consistently over time and not allowed to grow to an inhumane amount. Every amount of active software development is often allocating a portion of developer’s time, like a pie chart.
+
+For a startup, it might be 50% new feature development, 25% integrations, 20% testing, 5% technical debt. For a government project codebase, it could be 100% adding in a layer of test coverage before moving towards 50% reducing technical debt and 50% adding a singular new feature.
+
+The proportion of work depends on your resources and operating entity, and what being strategic about technical debt looks different for each.
+
+### Harm management through process
+
+[ASK RISK REGISTER EXAMPLE]
+
+Harm minimization happens by keeping a codebase easy to maintain, understand, and to fix. What that looks like for your specific codebase or team will depend, but the important takeaway is that harm-minimization is a mindset that you are considering often.
+
+All choices you make around the code-base should be shaped to the resources of the entity that will be operating it, and the care of the user. For example, if you’re a solo inventor, use tech frameworks that are simple to use and have lasted a long time, and which will not often require major security upgrades or time invested in keeping updated with changes.
+
+<Callout type="example">
+
+Harm minimization can look like:
+
+- Building education about the problem into developer onboarding materials
+- Utilizing test driven development
+- Making self-documenting code a requirement
+- Keeping stringent QA checklists
+- Having special PR or QA and testing processes around critical paths.
+- Keeping standards like principles of least access, making sure people cannot delete things that shouldn’t be deleted.
+
+</Callout>
+
+### Presiding over 3rd parties.
+
+[ADD CONTENT ABOUT WORKING WITH VENDORS, OSS PROJECTS, WHERE TO PUT BUSINESS LOGIC, INTEGRATIONS, ETC]
+
+Every party involved with software of care needs to be thorough when it comes to external parties and the work brought into the codebase. Many new security bugs coming out are getting in through dependencies via supply chain attacks, and your security posture is only as good as your weakest vendor or dependency.
+
+You will need to find tradeoffs in between externalizing work as much as you can to focus on the core of your product, and not just trusting anyone with a Github account to install their code.
+
+A good process for this is to have a checklist of what you look for in external 3rd parties, and what red and green flags are. For me, frameworks who have accompanying tools that have raised VC money are red flags because of the lack of stability and pressure for growth and revenue they inevitably face. Also, projects that have not been maintained or lack understandable communication can be a problem.
+
+This also applies when it comes to vendors, as many software vendors can operate more similar to the mafia than they do to a little startup in a garage operation. I always go the extra mile in getting references for others prior to making large decisions that silo us entirely within one vendor or framework.
+
+It can often be beneficial to shoot someone a message on LinkedIn adjacent to someone who provided a testimonial or who has publicly used that vendor or framework to get their honest thoughts about it. Avoid using references introduced directly by the external party, as they can have revenue sharing models or an implicit agreement to back their partner up.
+
+Understand also that almost anything someone who has something they want to sell to you can say is propaganda. This especially applies to vendors and frameworks. Focus on the actions, maintenance consistency, history of correcting incidents, experience with the team, and non-marketing related references as primary points of what your working relationship will be like instead of what the landing page said, or what their YC funding announcement video proclaims.
+
+If someone is in your codebase, they have your digital balls in a vice grip. Choose carefully.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+### Contemplating harm.
+
+If you are in a position of leadership for a development team, or are a solo developer, you may often be in situations where you have to contemplate harm and impact daily. Keeping a software product up and serving users means that you will often be thrown into situations where you need to use your problem solving skills immediately, and you do not have the time to thoroughly come to a good decision.
+
+These are the areas where leadership and managing software of care is incredibly hard. Coming to make these judgement calls is about being able to choose between two evils, which is much harder to do and foresee compared to finding a path without evil. Especially in early development, you are often choosing speed of development and taking on technical debt or short fixes in exchange to buy more time to ensure survival of the greater company, or entity.
+
+This is further compounded in startup circles, where engineering is the sacrificial lamb of business and company development. Being able to make the call between, “the harm of this bug potentially happening and affecting 2 users” vs. “the harm this ships late and affects a customer that churns and greatly loses us resources to support all customers” can be a common scenario. The only way to be able to go through these calls is by making them and doing the best we can to mitigate harm. There are often no easy choices: just clear ones. The trick is understanding and managing consequences, instead of letting them stack up in silence or let them overwhelm you from action itself.
+
+<Sources>
+
+1. THERAC-25 overview, Nancy G Leveson http://sunnyday.mit.edu/papers/therac.pdf
+1. https://dl.acm.org/doi/epdf/10.1145/332051.332078
+1. https://www.barbarawaderose.com/journalism
+
+</Sources>

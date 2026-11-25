@@ -1,0 +1,307 @@
+---
+title: 'deploying & maintenance'
+label: 'Chapter 10'
+---
+
+Although the most exciting parts can happen at the ideation and design stage, software products mostly live and die by how deployments and maintenance are managed. This is the messy middle where iterations happen, feedback is gathered, and a strategy is formed.
+
+## Deployments
+
+Deployment is where everything that you have come to know and work on meets the learned road of the world. Deployments are specifically of importance, as they are where new fixes, bugs, features, and more are introduced. It can often be the most exciting, or scariest part of the process. Managing it well can save you heartache.
+
+### Facing inevitable failure.
+
+My personal philosophy regarding deployments, adverse events, and incident management is very similar to the approach taken with aviation safety. Something might be very unlikely to happen, but if it is, you will want to practice it in safe conditions prior to needing to do it for the first time. Running a piece of software that can affect the lives of users in legitimate way can feel overwhelming, and like a large responsibility. One of the ways that you have to implement a software of care mindset, and to reduce burnout and strain on the developer(s), is to practice things failing before they do. And failure should expected, and mitigated prior.
+
+Prepare to have rollbacks, to turn off features, or to have security bugs found on release. Going through the worst case scenarios and knowing how you will respond in each makes facing it less scary, and more feasible.
+
+Some sample problems that you should aim to prepare for are:
+
+Managing and responding to cyberattacks
+
+- What disclosure times are you legally bound to? What is your process for going through and finding intrusions into the system, and are your logs correctly configured to capture the relevant information?
+- Managing rollbacks of a deployment that had an adverse side effect
+  - Uh oh. You deployed a feature that was meant to get dogs adopted, but instead it rolled out to cats in an area where there are no cats to adopt. How do you rollback the feature so that users do not go looking for fluffy cats that don’t exist?
+- Turning off a live feature using feature flags
+  - Can you turn off a live feature gracefully without accidentally breaking the application?
+- Budget alerts from a traffic spike
+  - Imagine some major event happened that drove a mass amount of people to your product, without you expecting it. You have a limited budget, but are going to try and meet the demand for it where you can. What’s your plan for managing this traffic? Are you going to turn off the app? Slow down the amount of users coming to the product? How will you manage if demand outpaces the resources you have for the product without accidentally harming users?
+
+### Running tabletop exercises.
+
+A tabletop exercise is essentially, roleplaying a real disaster with your team.
+
+The team sits down, someone presents a realistic scenario (ideally, a more harmful version of an event that has previously occurred) and everyone walks through what they would actually do, in order, out loud.
+
+There is no code runs, or anything simulated technically. You are testing the humans within your team, the plan, and the gaps between them, which is where real incidents actually go wrong. The exercise earns its keep in the specifics, and specifics should be stress-tested here as opposed to in an actual incident.
+
+A good tabletop should surface the single person who holds the vendor relationship, the runbook that lives in someone's head, the escalation path that assumes a lawyer you no longer retain. For additional confidence, run them on the scenarios your hazard analysis and adverse-event tracking rank highest, and pull the scenarios from your own near-misses when you have them. An incident that almost happened is perhaps, the cheapest training material you will ever get. For products where failure touches safety, include the uncomfortable scenarios: not just outages, but misuse, compelled disclosure, and the death of a user.
+
+Strong output for a tabletop is not just a report, but a list of gaps with owners added to the sprint backlog, and a calendar entry for the next one. Twice a year is enough for a small team. For solo founders, the discount version still works: write the scenario, write your honest answers, and notice where the answer is "I don't know" or "that's only in my head”.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+### Rolling out features.
+
+When rolling out features, you will want to choose a release strategy based on the changes being fixed and who they are targeted to. You may want to trickle out the features slowly, and target users foremost who have been identified as potentially lower-risk.
+
+For example, if you are developing a mental health application and creating a feature that walks people through calming down during suicidal thoughts, you may want to target users who identify as having low-grade anxiety or depression prior to an extensive rollout of users who are struggling with trauma and intrusive thoughts. Rolling out features can cause adverse events in different forms.
+
+Rolling out features to lower risk users, even if they are not the primary audience for the feature and will not receive much impact, can catch engineering and design failures. Then, as the feature permeates to higher risk users, you can determine if the product and care methodology itself is doing its’ job. This enables you to format a process of elimination that works slowly, so that you’re not rolling out to highest risk & impact users things that could have been determined on a lower-risk group.
+
+You should also potentially have a deployment QA checklist that confirms that features have been reviewed by the relevant parties, and special processes if there’s any critical paths that are affected.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+### Tending to migrations and compatibility.
+
+Managing migrations and backwards compatibility may be a growing point of contention, especially as scale increases and the potential for data loss becomes more and more problematic. For newer versions of deployments or features, it’s worth having a bare minimum list of the software and device types you want to support. Migrations are also worth practicing in a sandbox environment, or another environment prior to releasing to the general public. A failed database migration without proper data protections can mean lost user data that genuinely sets back the user.
+
+You should also test mobile binaries or other front-ends that aim to be compatible with older devices on older devices. When working at Astra, I had a set of devices at different price points, both newer and older that I accumulated over the years and used. It is one thing to run a simulator and see an application take a long time to boot up, and it’s another to try to open a website on a phone that is the best selling device at Walmart and to see how long your fancy animations take to render.
+
+Make sure to pre-plan migrations, ensure backups are present for failure, and backwards compatibility requirements are met and tested on the frontend and backend side. Note what backwards compatibility needs to be: e.g: specific browsers, devices, etc, and make sure those constraints are written down and checked prior to deployment.
+
+### Overseeing release timing.
+
+There will be a bump period in every release where a new feature is, that tells you how it is doing. Plan accordingly. E.G: No releases on Fridays, or do sensitive releases at night.
+
+It would also be a wise idea to release and test features at a cadence that works to the cultural desires of your users. For example, if you are the inventor of a sobriety app, it would be worth potentially planning additional releases and support around the holidays. Your release cadence should follow the timeline of your users and their needs, not the needs of the team.
+
+### Rolling back features.
+
+There may be instances in which you deploy a release candidate, or deploy a feature set that immediately needs to be undone. If you have a larger team, this would be a good thing to develop an updated runbook prior to experiencing.
+
+If you are solo, I would recommend a practice of shipping a mock feature that is only accessible to you, and then practicing a rollback. Essentially, you just want to make sure the first time that you need to undo something that it is not a real emergency, and that you’ve practiced it before. Major features should be guarded behind a feature flag, and ideally you should deploy with the feature flag disabled, and turn it on at a point when users are mostly off the system.
+
+### Navigating hotfixes.
+
+A hotfix is a change shipped outside your normal release process because something is broken. It often escapes safeguards and additional review in an attempt to reverse a live bug, or problem in a fast way.
+
+In software of care, the stakes cut both ways. Leaving a broken crisis pathway up for another six hours is harm, yet pushing an untested fix that breaks the working half of the product is also harm. Neither instinct is automatically right.
+
+It’s in your best interest to decide the rules before the emergency, because judgment during one is the can be the worst judgment you'll have.
+
+**1. Define what qualifies**: harm to users on a critical path qualifies, an embarrassing typo does not, and the harm ranking from system design is the line between them.
+
+**2. Define the floor that never gets bypassed:** even a 2 a.m. fix gets a second pair of eyes if the path touches safety, gets deployed behind a feature flag where one exists, and gets smoke-tested on the critical path it's rescuing before anyone goes back to bed.
+
+**3. Define the rollback:** the fastest hotfix is usually not a fix at all but a revert to the last version that worked, or a flag flipped off.
+
+Good habits counteract bad hotfixes from corroding the core product.
+
+- **Every hotfix gets a follow-up in daylight**: the rushed patch is reviewed, additional tests are added, and the fix is folded into the normal release train so that a hot fix is not a structural solution.
+- **Hotfixes are a metric for diagnosing a broken SDLC:** Each one is a place where your process let something harmful reach users, so log them with the adverse events and read the pattern. A product that needs a hotfix every week does not have a hotfix problem, it has a testing problem.
+
+For solo founders and tiny teams, the second pair of eyes may not exist when you need them to. The substitute is the checklist you (hopefully!) wrote while calm. It should cover what to verify before pushing, what to check after, and when the honest answer is to take the feature down rather than fix it live.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+### Rectifying deployment burnout.
+
+In 2020, I had just designed and built an entire new mobile app after COVID to replace AnxietyHelper with the Astra Labs team supporting me. It was a major launch, with a mental illness management tool that had 30+ tools and serving 20+ niche mental illnesses. It was also the biggest launch of our company, and one that I had personally overseen with a painful degree of investment.
+
+We launched it. I felt nothing. I went to go get ramen with my dad, and all I could think about was the fact I wanted to do more, and that were so many open threads to get back to. I can’t remember anything about that day besides the aching and all-consuming desire to push myself more, to help more people, and the feeling that if anything went wrong - it would be a direct reflection of my failing skills.
+
+This, at the time was normal startup brain to me. But in hindsight, it was the beginning of a mindset that left me open to burnout. Over time, I’ve learned to orient myself and the teams I lead towards celebrating outcomes within our control, and to truly take the wins to the strongest amount that I can.
+
+Managing emotions around major deployments is one way that you can show care to yourself, and the team. Deploying software can feel like a major relief, but can also be an emotional time where the pent-up emotions of crunch time or stress start to flow out in unexpected ways. It can also be a time where depression spikes, if people feel like they have pushed out a lot of work that has not resulted in tangible gains or improvements.
+
+Keep an eye on your team and how they do, and make sure to provide the necessary support to them after a launch. Focus on the work that you actually completed, and don’t undercount the amount of effort that happened. For yourself, make sure to also take a step back to get a breather before just pushing forward. I like to time it so that major deployments are followed by relaxing downtime for the team with bullshit tasks, and to highlight the part that each person played regarding this. Postmortems and retrospectives can also be helpful moments where the team (or you) is able to relieve tension that obviously built up over the course of the process.
+
+Burnout on the team can threaten continuity of care, not just continuity of software development. Investing in your team now pays off directly for your users, and it’s the little moments and day to day work where that burnout can compound and be mitigated.
+
+### Diagnosing deployment problems.
+
+If deployments consistently cause issues in some form or another, your SDLC is broken. Deployment is often where you can see if the way you are developing software is conducive to landing it, and multiple broken deployments signals quality problems, infrastructure problems, or other things that will eventually undermine your ability to put out good quality work. Tackling those things before deployment turns into full-time crisis management is imperative.
+
+## Maintenance
+
+Maintenance is a key component of being a good steward of your software product. It also enables you to build evidence of your product working, build trust with your users, and learn how to re-iterate the core systems of your software product. This is where you’ll learn the cadence and boring work that keeps pushing the rock up the hill.
+
+### Tending to your software.
+
+Focus on keeping dependencies and packages up to date, and utilize tools that scan for vulnerabilities and do automatic code review. You will also need to potentially tend to technical debt or other major things that you initially wanted to do, but didn’t have the time or resources to do.
+
+### Communicating to users.
+
+Part of building trust with users is building proof of maintenance, and being able to display your efforts. This is also a great time to showcase the team or the work you have done on the product. Make sure to communicate new changes to the users with clear explanations of why they happened. If anything major has been moved, make it clear to the user where the new version is.
+
+Consistency and clarity is key to maintaining trust. Making visible changes to the platform, pointing out user feedback that has been integrated, and consistently profiling the work that you have done to the user will help in building the trust that you are not just building a piece of software, but putting effort into your relationship with the user and taking their feedback seriously.
+
+Adverse incidents will happen, and you should prepare for these incidents ahead of time. It is much easier to be honest and upfront with the user, if you can acknowledge a widespread issue. Your communication strategy will depend on if it’s a singular user who is affected, or if it’s all users involved. You should be clear about the adverse incident, even responding prior to knowing the full extent of the issue.
+
+When discussing with users, you should be honest with them and reverse issues they face as soon as you can. Provide thorough explanations in layman’s terms where you can. Have a post-mortem process with yourself, and retrospectives with the greater team if you have a project structure.
+
+### Managing adverse incidents
+
+#### Tracking adverse incidents
+
+Adverse incidents usually spike at the point of new releases, or when people use features in a new way or a path that is not commonly used. As such, managing adverse incidents comes in different flavors, different timings, and should be tracked and traced over time to see how your software product is behaving.
+
+Remember that adverse incidents is a term that expands beyond engineering incidents to encapsulate failures, both full and partial, of all kind that can affect a product. Each product will have different forms of adverse incidents depending on the tech stack and how its’ built, but generally you will want to have some form of being able to understand when these incidents happen and to be able to contextualize them comparatively to the rest of the tool.
+
+Further in the chapter, we discuss how to triage the feedback from adverse incidents to feed them back into the product. Adverse incidents should be monitored during rollouts, deployments, expansions, rollbacks, or any other moderate to major change to the system.
+
+Building a tracking system should enable the software product to:
+
+- Manage reports of downtime or other errors that occur within the codebase
+- Receive reports from users of incorrect information, bug reports, or other problems.
+- Receive information from users who have completed a tool successfully and are reporting on its’ effectiveness.
+- Receive generalized feedback from other points of user communication, like social media or app store reviews.
+
+A tracking system can be as complex or as easy as your entity needs. For the most part, you may be able to wire these all into a spreadsheet, or may have an entire Slack channel with bots that alert you when relevant actions or submissions are made. However you can triage this information without getting overwhelmed, and in a way that’s actionable for you.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+#### Communicating rollbacks and adverse events
+
+If you must eat a shit sandwich, it would be wise to eat it fast. This is the mindset I have towards communicating during adverse events, and rollbacks. Communicating negative things to your users should be clear, be honest, and be to the point. Do not belabor your failures or highlight your positives. Focus on communicating information clearly, concisely, and consistently.
+
+Make sure to prioritize users that were directly affected, if there were any. If you have multiple channels, use them. Some users may not look at their email, or some will only look on Instagram. It does not make you look untrustworthy to admit your mistakes, it makes you look untrustworthy to bury them.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+#### Communicating cybersecurity attacks
+
+This is one area in which the law takes precedence over you. Because you read this book and took it seriously, you should have worked with counsel (at least Google) to help define what specific laws your software product may fall under. Major compliance or legal frameworks like GDPR, HIPAA, SOC2 will state how you should manage cybersecurity attacks, and the timeframe in which you do so.
+
+A breach disclosure can also be a life-altering event in the timeline of your product. A breach of user’s data is not just losing someone’s music library, but potentially exposing the most vulnerable details of their life and breaking their trust within other institutions who may do this work in the future. Even a breach notification can be an announcement of disclosure to people who the user may not want involved, such as a breach notification for an abuse recognition app, or one for those who are managing drug addictions.
+
+Managing cyberattacks is something that you should do prior to ever meeting one: and it starts with reducing the harm surface that can be exposed and used against the user.
+
+You should approach cyberattacks as meeting legal obligation, remediating the problem, immediate harm remediation towards your users, and then the long journey to building their trust again. This is also why in the system design chapter, I stressed the importance of the data store problem. If you do not store sensitive data about the user, you have a much easier time managing a cybersecurity attack. Most software for social good products that experience a major hack lose their credibility, funding, and reputation in the space.
+
+#### Overseeing incident response
+
+Rank and respond to incidents based on user harm, as well as system severity. When you figure out what the issue is, correctly communicate to the person affected (if someone is affected), and ship a hot fix for it. Do not break the system more to fix a broken system, but make up for deliberate movement by strong communications with those affected.
+
+Make sure to have appropriate alerts in place for software incident response prior to first deployment. It also helps to make a cursory check at the development stage to ensure that incident alerts run. If you have the resources, investing time into tabletop testing and scenario testing incidents is a valuable tool to ensure that in a real world scenario, the work you think you’re putting in to catch incidents is correctly functioning. Every time I’ve ever had an incident, there have been minor oversights or misconfigurations that looked solid in practice, and undermined us in action.
+
+Incidents should call, text, email or Slack people. Personally, I prefer an on-call system that is linked to my phone and to our Slack. I have properly labeled the contact, “YOUR SERVER IS DOWN”, and it strikes the fear of the divine into me every time.
+
+You may need some fine-tuning also to make sure your alerting system is not too sensitive, or letting things slip under that should not be there. Incident response should primarily be tuned to your team, and practiced enough that incidents are not a nightmare, but not so over-optimized that incidents take forever to document and to process as a team and resolve.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+#### Undertaking a root cause analysis.
+
+A root cause analysis is the discipline of asking why an incident happened until the answer stops being a symptom. The server crashed is where the question starts, not where it ends: it crashed because a query timed out, because a migration added an unindexed column, because migrations don't get performance review, because nothing in the process requires one. The standard technique is asking "why" about five times over; what matters is not the count but the depth, because a fix aimed at the first answer patches the incident while a fix aimed at the last one prevents the category.
+
+The trap in root cause analysis is stopping at a person. "The developer pushed a bad migration" feels like an answer, and analyses that end there produce fixes like "be more careful," which is not a fix. The fields this chapter keeps borrowing from — aviation especially — treat human error as the starting point of the analysis, not the conclusion: if a person could make the mistake, the system allowed the mistake, and the useful question is what would have caught it. Analyses conducted this way also tend to find that incidents rarely have a single root cause; they have several contributing ones that lined up, and each one is a separate, smaller fix.
+
+In practice the analysis feeds the post-mortem in the next section — the RCA is the digging, the post-mortem is the record and the ritual around it. For a solo developer, the discount version is the same habit at smaller scale: writing the chain of whys down before fixing anything, because the chain identified in the heat of the incident and the chain reconstructed a week later are usually different, and the first one is more honest.
+
+<Callout type="example">
+
+
+
+</Callout>
+
+#### Undertaking post-mortem & retrospectives
+
+If you are working with a greater engineering team, it’s especially imperative to make sure that you have retrospectives after major projects (or ideally every sprint, if you use that model). Beyond retrospectives, post-mortems of incidents and major adverse incidents will help to contribute to a culture of looking at problems and solving them as they arrive.
+
+Even as a solo developer, just being able to take space and perhaps write a note to yourself about what happened, what you can change, and what you’re going to do about it will put you in a valuable place. The goal is not to build a system for the sake of building a system, but to see adverse incidents as fixable things that can contribute to making your software product.
+
+## Re-iteration
+
+### Discovering your product axis.
+
+Over time and with repeated usage, you’ll be able to see what parts of your software product are the most used and what parts are not. The core is the most-used features, or features with extremely high retention compared to other parts of the software. The core feature set that you’ve developed should be subject to special protections as you see fit, and also seen as further points of growth. User interaction and behavior with your system should be a grounding factor in most, if not all of your decisions.
+
+Understanding the core feature set will set the stage for properly calibrated strategy, and can help you reground and strategize towards what is being used the most. Determining the most used features can also help you discover alternate paths and ways that people are using your features, in a fashion you didn’t expect. The best product rollouts and features are the ones that users have been asking for, or using shortcuts to get access to.
+
+The core is important because it creates common paths used by your users. Disturbing them, sunsetting them, or improving them can have amplified successes, or failures.
+
+### Oscillations of product safety.
+
+A specific phenomenon can be seen in new innovations as they are brought to, and diffused within the market. For the most part, a majority of safety issues and major problems occur within the first few years of a product coming to market. Then, the majority of the most adverse safety issues are able to be addressed and fixed through constant iterations and watchful eyes.
+
+Later, another horizon comes. The second horizon of safety is the impact of the product on the world, post-mass adoption. How it changes behavior, makes an impact on those around it, and how it shifts the industry over the long term. So, measuring safety in multiple ways is about measuring the initial tail of adverse events and combatting those, and later on, addressing safety concerns as the product settles into its’ ecosystem and becomes adopted in the world.
+
+Building and seeing your product in the world requires you to keep an eye on those curves over time, and to see where your product is. Your communication cycles with your users, and your evidence harness are two components of being able to review and track this.
+
+### Tracing success and failure.
+
+Coming directly from your impact measurement section, you should often find time to measure the success and harm of your software product. Being able to develop a baseline of success and harm over time will signal when your product is making meaningful shifts, both positive and negative.
+
+The cadence for this should be determined by the severity of your product and the resources of your entity. Generally, a checkin every month is the bare minimum, but you may find it prudent to do it more or less frequently depending on the amount of traffic your product receives, and the amount of new features and deployments you make.
+
+Being able to manage and have a baseline of success and harm will serve as a guide also towards managing and addressing change. A long period of stagnating success and lower retention (e.g: people use the product successfully but are still leaving), or using it negatively but still growing are great points of feedback to have as you see how the product interacts with and exists in the world.
+
+### Abstracting the core.
+
+If you managed your feedback channels correctly, your feedback should enable you to determine the different layers of the core and what is failing and succeeding. You should continue to use these pieces of feedback to determine what is doing well, and what is not. Eventually, as you continue to develop and put out software, you will get an intuitive sense for what is working and what is not, and can correctly aim to rightsize your software product and its’ impact.
+
+Not all of the feedback that you may receive should be acted on, or is valuable to act on. A lot of it may be out of reach, unfeasible, or a distraction from your core focus. Developing a balancing act of knowing what to work on and what to not is more emotional and gut driven, and helpfully supplemented by data. It is also so contextual and dependent on your entity structure that any detailed recommendations would be unhelpful.
+
+Generally, you will learn to triage and prioritize feedback as time goes on. You should prioritize issues and feedback according to the priorities you have, and the resources you have to attain those priorities. It also depends on the time horizon that the project has, and other future plans of growth.
+
+Most of managing feedback initially will be intuitive. Base response times and resolution based on size, scale, and severity of the problem, or proposed fix. It’s also important to not only respond to feedback that is negative in nature, when you have the resources to do so. Only focusing on the problems occurring with a piece of software and not working to expand it or improve it can feel like fighting an EV battery fire. Even when it goes out, it will come back and take the rest of your resources.
+
+| **Component** | **Problem** | **Determine by** | **Action** |
+| --- | --- | --- | --- |
+| Care methodology | Software is ineffective, or the core idea of it is not solving the main issue. | Impact data showing negative results | Re-iterate on the assumptions made by the care methodology, and carry through with resolving them. |
+| Engineering System | The software is failing to be efficient, or isn’t meeting the actual demand or usage of the system. | Problems encountered in production don’t align with system, system is overbuilt and hard to modify or under built and missing controls. | Redesign the system to account for live-usage of the product |
+| Product Design | People are confused by the design, or like the concept and fail to engage or use the item | Heatmaps of user usage, user interviews | Leverage user interviews, A/B testing, and watching users interact with the product. |
+| Product Content | People are doing the wrong action, or receiving misleading information | Reporting of adverse events from users | Create better standards and protocol around managing the content, enable user to report incorrect info . |
+| Codebase | The codebase fails often, is riddled with bugs, or deployments are often stressful and require a high degree of rollbacks | Failed deployments, team burnout, higher rate of bugs than normal, mass outages, etc. | Go through and diagnose the problems that may exist in your SDLC that contributes to these bugs. |
+
+### Cultivating proof of impact.
+
+As you’re iterating on your system and finding it works, you will want to start centralizing proof of impact. A centralized ‘proof of impact’ is essentially a collection of information stating that your product actually does what you say it does, from multiple different angles. Whereas the evidence engine you built earlier should define if your care methodology is correctly functioning, the proof of impact should show that your product is meeting the demand and implementing the care methodology correctly.
+
+Remembering that a product can have multiple threads where adverse events can happen, a proof of impact should show positive impact across those threads. A good proof of impact will contain information about your care methodology, product design, system design, SDLC, and then marketing and maintaining of the product as effective within your given domain.
+
+This is for many reasons:
+
+- It just feels good to know that your hard work is impacting people. Being able to centralize it and share it with the people who are also working on this with you is a big motivator and closes the loop of the massive amount of effort put into your work.
+- You will need it for funding, growth, and determining where your product should go.
+
+The evidence engine that you have built while creating your product design should provide a segment of this information. Often, great companies I know have a spreadsheet or some sort of document where they list internally all of their accomplishments and they refer back to them as needed. I like this approach, and also use this personally when I feel lackluster to show the impact already made.
+
+A proof of impact should contain:
+
+- Metrics from the evidence engine that show the system is working as intended to create the outcomes it’s designed to
+- Potential testimonials from users about how it’s impacting them, sourced from internal forms of feedback, app store reviews, or emails directly to the non-profit.
+- Any additional materials from other trials or tests that you may undergo. I find that surveys, trials (clinical and blind), and other testing sessions and user interviews can provide clear and resolving insights that strengthen the position.
+
+Once you have a store of your proof of impact, like in a spreadsheet or data warehouse, build the narrative around your proof of impact that contextualizes it within the world it exists in. It is one thing to hear that a new application reduced “symptoms by 65%”, but how does that translate to the world where the user lives? Impact through metrics is the foundation, but being able to frame it into tangible outcomes for users is what genuinely delivers the promise of the product. Being able to tie this back to your theory of care is crucial.
+
+Faura, when we came out with our new homeowner report, were struggling a bit to be able to quantify the actual impact of the product. We had metrics showing that users opened and engaged with the report in a never before seen way. Marketing executives at insurance companies were shocked at the engagement we were getting.
+
+However, we didn’t know exactly how to quantify that engagement towards an outcome or behavior. Therefore, we had proof of impact but didn’t have the narrative of the product that would encourage market adoption.
+
+We set on creating a number of surveys through online surveying platforms. We then proceeded to show a wildfire resilience report sample to thousands of homeowners, 95% of whom said they would see their insurance carrier in a better light if they received this report from them. That set off a new thread of storytelling for us. Communicating resilience was not just about improving survival during a natural disaster, but it was also about deepening your relationship with the policyholder and being transparent with them to create information equilibrium.
+
+This is what proof of impact is meant to be: the through line that explains what your product does, why it does it, and how it works. A proof of impact story is necessary to gather new users, gain social trust, and to be able to fortify and build upon your reputation.
+
+<Callout type="example">
+
+
+
+</Callout>

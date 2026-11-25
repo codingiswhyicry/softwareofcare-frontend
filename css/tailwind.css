@@ -1,40 +1,56 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/forms";
+@plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @source '../node_modules/pliny';
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: 'Departure Mono';
+  src:
+    url('/static/fonts/DepartureMono-Regular.woff2') format('woff2'),
+    url('/static/fonts/DepartureMono-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Core theme configuration */
 @theme {
   /* Font families */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans:
+    var(--font-exo), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-display: 'Departure Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Colors */
   /* Copied from https://tailwindcss.com/docs/theme#default-theme-variable-reference */
-  --color-primary-50: oklch(0.971 0.014 343.198);
-  --color-primary-100: oklch(0.948 0.028 342.258);
-  --color-primary-200: oklch(0.899 0.061 343.231);
-  --color-primary-300: oklch(0.823 0.12 346.018);
-  --color-primary-400: oklch(0.718 0.202 349.761);
-  --color-primary-500: oklch(0.656 0.241 354.308);
-  --color-primary-600: oklch(0.592 0.249 0.584);
-  --color-primary-700: oklch(0.525 0.223 3.958);
-  --color-primary-800: oklch(0.459 0.187 3.815);
-  --color-primary-900: oklch(0.408 0.153 2.432);
-  --color-primary-950: oklch(0.284 0.109 3.907);
 
-  --color-gray-50: oklch(0.985 0.002 247.839);
-  --color-gray-100: oklch(0.967 0.003 264.542);
-  --color-gray-200: oklch(0.928 0.006 264.531);
-  --color-gray-300: oklch(0.872 0.01 258.338);
-  --color-gray-400: oklch(0.707 0.022 261.325);
-  --color-gray-500: oklch(0.551 0.027 264.364);
-  --color-gray-600: oklch(0.446 0.03 256.802);
-  --color-gray-700: oklch(0.373 0.034 259.733);
-  --color-gray-800: oklch(0.278 0.033 256.848);
-  --color-gray-900: oklch(0.21 0.034 264.665);
-  --color-gray-950: oklch(0.13 0.028 261.692);
+  --color-*: initial;
+  --color-sequim: #c1c5ff;
+  --color-goth-blueberry: #353647;
+  --color-ice: #aeb5c3;
+  --color-frost: #ebeef5;
+  --color-black: #000;
+  --color-white: #fff;
+
+  /* Cool blue-gray scale anchored at ice (#AEB5C3) and frost (#EBEEF5) */
+  --color-gray-50: #f8f9fb;
+  --color-gray-100: #ebeef5; /* frost */
+  --color-gray-200: #d0d5e4;
+  --color-gray-300: #b8c0d2;
+  --color-gray-400: #aeb5c3; /* ice */
+  --color-gray-500: #8891a5;
+  --color-gray-600: #636c82;
+  --color-gray-700: #444c60;
+  --color-gray-800: #282f40;
+  --color-gray-900: #141824;
+  --color-gray-950: #0a0e17;
+
+  /* Primary scale anchored at sequim (#C1C5FF) */
+  --color-primary-300: #d6d9ff;
+  --color-primary-400: #c1c5ff; /* sequim */
+  --color-primary-500: #a8adff;
+  --color-primary-600: #8b91ff;
 
   /* Line heights */
   --line-height-11: 2.75rem;
@@ -57,36 +73,72 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  html:not(.dark) body {
+    background-image: url('/static/images/lightmode.bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  html.dark body {
+    background-image: url('/static/images/darkmode.bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-goth-blueberry, currentColor);
   }
 
   a,
   button {
-    outline-color: var(--color-primary-500);
+    outline-color: var(--color-goth-blueberry);
   }
 
   a:focus-visible,
   button:focus-visible {
     outline: 2px solid;
     border-radius: var(--radius-sm);
-    outline-color: var(--color-primary-500);
+    outline-color: var(--color-black);
+  }
+
+  :where(.dark, .dark *),
+  :where(.dark, .dark *)::after,
+  :where(.dark, .dark *)::before,
+  :where(.dark, .dark *)::backdrop,
+  :where(.dark, .dark *)::file-selector-button {
+    border-color: var(--color-ice, currentColor);
+  }
+
+  :where(.dark, .dark *) a,
+  :where(.dark, .dark *) button {
+    outline-color: var(--color-ice);
+  }
+
+  :where(.dark, .dark *) a:focus-visible,
+  :where(.dark, .dark *) button:focus-visible {
+    outline-color: var(--color-frost);
   }
 }
 
 @layer utilities {
   .prose {
     & a {
-      color: var(--color-primary-500);
+      color: var(--color-black);
       &:hover {
-        color: var(--color-primary-600);
+        color: var(--color-goth-blueberry);
       }
       & code {
-        color: var(--color-primary-400);
+        color: var(--color-goth-blueberry);
       }
     }
     & :where(h1, h2) {
@@ -97,22 +149,29 @@
       font-weight: 600;
     }
     & :where(code):not(pre code) {
-      color: var(--color-indigo-500);
+      color: var(--color-black);
+    }
+  }
+
+  :where(.dark) .prose a {
+    color: var(--color-white);
+    &:hover {
+      color: var(--color-sequim);
     }
   }
 
   .prose-invert {
     & a {
-      color: var(--color-primary-500);
+      color: var(--color-white);
       &:hover {
-        color: var(--color-primary-400);
+        color: var(--color-sequim);
       }
       & code {
-        color: var(--color-primary-400);
+        color: var(--color-sequim);
       }
     }
     & :where(h1, h2, h3, h4, h5, h6) {
-      color: var(--color-gray-100);
+      color: var(--color-frost);
     }
   }
 }
@@ -123,10 +182,6 @@
 
 .task-list-item {
   @apply list-none;
-}
-
-.footnotes {
-  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
 }
 
 .data-footnote-backref {
@@ -172,4 +227,24 @@ input:-webkit-autofill:focus {
 .linkicon {
   display: inline-block;
   vertical-align: middle;
+}
+
+/* ---- Book reader ---- */
+
+.footnotes {
+  @apply border-ice dark:border-sequim mt-16 border-t pt-8 text-sm;
+}
+
+.footnotes h2 {
+  @apply !mt-0 text-sm font-semibold tracking-widest text-gray-500 uppercase dark:text-gray-400;
+}
+
+/* Tables imported without a header row get an empty one; hide it. */
+thead:not(:has(th:not(:empty))) {
+  display: none;
+}
+
+/* Keep in-page jumps clear of the sticky reading bar. */
+article[data-chapter] [id] {
+  scroll-margin-top: 5rem;
 }

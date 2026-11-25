@@ -80,14 +80,17 @@ async function createTagCount(allBlogs) {
   writeFileSync('./app/tag-data.json', formatted)
 }
 
-function createSearchIndex(allBlogs) {
+function createSearchIndex(allBlogs, allBooks) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
     siteMetadata.search.kbarConfig.searchDocumentsPath
   ) {
+    const bookEntries = allCoreContent(
+      [...allBooks].sort((a, b) => a.sortKey.localeCompare(b.sortKey))
+    ).map((doc) => ({ ...doc, tags: [], date: null }))
     writeFileSync(
       `public/${path.basename(siteMetadata.search.kbarConfig.searchDocumentsPath)}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
+      JSON.stringify([...bookEntries, ...allCoreContent(sortPosts(allBlogs))])
     )
     console.log('Local search index generated...')
   }
@@ -128,6 +131,82 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
+/**
+ * Book entries. The folder structure is the book structure:
+ *   book/00-introduction.mdx          -> chapter outside any part
+ *   book/01-part-one/index.mdx        -> part title page
+ *   book/01-part-one/01-chapter.mdx   -> chapter inside a part
+ * Numeric prefixes control order and are stripped from URLs.
+ */
+const stripOrderPrefix = (segment: string) => segment.replace(/^\d+[-_.]/, '')
+const bookSegments = (doc) => doc._raw.flattenedPath.replace(/^book\/?/, '').split('/')
+
+export const Book = defineDocumentType(() => ({
+  name: 'Book',
+  filePathPattern: 'book/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    label: { type: 'string' },
+    summary: { type: 'string' },
+    epigraph: { type: 'string' },
+    epigraphAttribution: { type: 'string' },
+    image: { type: 'string' },
+    poem: { type: 'string' },
+    poemTitle: { type: 'string' },
+    poemAuthor: { type: 'string' },
+    poemText: { type: 'string' },
+    draft: { type: 'boolean' },
+  },
+  computedFields: {
+    kind: {
+      type: 'string',
+      resolve: (doc) => (doc._raw.sourceFileName === 'index.mdx' ? 'part' : 'chapter'),
+    },
+    slug: {
+      type: 'string',
+      resolve: (doc) => bookSegments(doc).map(stripOrderPrefix).join('/'),
+    },
+    path: {
+      type: 'string',
+      resolve: (doc) => `book/${bookSegments(doc).map(stripOrderPrefix).join('/')}`,
+    },
+    partSlug: {
+      type: 'string',
+      resolve: (doc) => {
+        const segments = bookSegments(doc)
+        const isPart = doc._raw.sourceFileName === 'index.mdx'
+        return isPart || segments.length > 1 ? stripOrderPrefix(segments[0]) : ''
+      },
+    },
+    sortKey: { type: 'string', resolve: (doc) => doc._raw.flattenedPath },
+    filePath: { type: 'string', resolve: (doc) => doc._raw.sourceFilePath },
+    wordCount: {
+      type: 'number',
+      resolve: (doc) => doc.body.raw.split(/\s+/).filter(Boolean).length,
+    },
+    readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
+    toc: { type: 'json', resolve: (doc) => extractTocHeadings(doc.body.raw) },
+  },
+}))
+
+/**
+ * Stamp every top-level block with a sequential `data-rid` so a reader's
+ * position can be saved and restored down to the paragraph.
+ */
+function rehypeBlockIds() {
+  return (tree) => {
+    let id = 0
+    for (const node of tree.children) {
+      if (node.type === 'element') {
+        node.properties = { ...node.properties, dataRid: String(id++) }
+      } else if (node.type === 'mdxJsxFlowElement') {
+        node.attributes.push({ type: 'mdxJsxAttribute', name: 'data-rid', value: String(id++) })
+      }
+    }
+  }
+}
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -149,9 +228,13 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Book, Authors],
   mdx: {
     cwd: process.cwd(),
+    mdxOptions: (opts) => ({
+      ...opts,
+      remarkRehypeOptions: { ...opts.remarkRehypeOptions, footnoteLabel: 'Notes' },
+    }),
     remarkPlugins: [
       remarkExtractFrontmatter,
       remarkGfm,
@@ -177,11 +260,12 @@ export default makeSource({
       [rehypeCitation, { path: path.join(root, 'data') }],
       [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
       rehypePresetMinify,
+      rehypeBlockIds,
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
+    const { allBlogs, allBooks } = await importData()
     createTagCount(allBlogs)
-    createSearchIndex(allBlogs)
+    createSearchIndex(allBlogs, allBooks)
   },
 })

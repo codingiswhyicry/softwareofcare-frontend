@@ -1,0 +1,379 @@
+---
+title: 'impact'
+label: 'Chapter 6'
+---
+
+In 1996, a 9-year old girl named Amber Haggerman was kidnapped, being pulled off of her bike by a stranger who threw her into a black truck. She was found dead days later in a creek. In the aftermath, a woman calling into a radio show suggested that we should crowdsource information from witnesses, and enable everyone in the surrounding area to search for a missing child through a public communication system. This is how AMBER alerts were invented, one of the most visible software for social good projects.
+
+The premise of AMBER alerts is clear: by utilizing citizens around us, we can prevent the most egregious harm that can occur from kidnapping a child. The assumption is that by treating kidnapping solely as a logistics problem that can be solved with sourcing mass amounts of information, we are able to find kids faster, preventing harm by racing against the clock.
+
+When you dive into the data of the system, how it performs in kidnapping cases is less straightforward. To send out an AMBER alert, there’s a set of criteria that law enforcement must confirm that the case meets prior to engaging the system.
+
+The 4 pieces of criteria are:
+
+- Law enforcement must confirm that an abduction has taken place.
+- The child must be at risk of serious injury or death.
+- There must be sufficient descriptive information of child, captor, or captor's vehicle to issue an alert.
+- The child must be under 18 years of age.
+
+All of these pieces of criteria must be confirmed to send an AMBER alert out, but different municipalities and states treat them differently. A lot of law enforcement can overestimate criteria #2, and criteria #1 is also subject to individual interpretation. Once the criteria for the municipality is met, alerts are sent out through tiered levels. Some alerts only go out to law enforcement, and the most severe buzz people’s phones directly with information about the case.
+
+The majority of cases were activated 3+ hours after initial reporting, and the majority of recoveries happen the first 2 hours after reporting. AMBER alerts are generally most effective at the immediate point of kidnapping, and the power dilutes with time. An average alert to recovery time is 6 hours from first abduction. The average amount of time it takes to confirm a case meets all 4 points of criteria is 3 hours or more.
+
+Unfortunately, most harm from stranger abduction would already happen within that 3 hour window. Therefore, any delay from initial kidnapping to alert distribution directly impacts the possibility of recovery.
+
+Going back to the average 3 hour long window it takes to report an alert, it would stand to reason that we should simply loosen the criteria of the system to enable faster send out of alerts. However, let’s take a look at another important impact metric: hoax, or unfounded cases that were passed into the case acceptance stage.
+
+Despite the 3 hour long window from case intake to alert send out, almost 20% of cases are hoaxes or unfounded. This means that for AMBER alerts being sent out, 1/5 are incorrect or are unfounded. If a system fires incorrectly 1/5th of the time, many people would simply stop taking the system as seriously.
+
+If we reduce the time it takes to verify criteria, the amount of hoaxes and unfounded cases can slip through, decreasing the power of AMBER alerts as a trusted reporting and tip generation tool for severe situations. But, if the criteria isn’t met fast enough, the system loses its’ chance for intervention.
+
+This tension highlights a serious problem with the AMBER alert system that completely rewrites its impact and how it lands in the real world. Although AMBER alerts were made to reduce the harm from stranger abductions, they are statistically highly unlikely to prevent harm to kids from stranger kidnappings. They, however, are able to intervene in domestic disputes or grooming cases, which is still a serious (yet incredibly different) level of harm.
+
+Even more so, the majority of kidnappings that have been reported through AMBER alerts were from members of the kid’s family, or grooming from online people. These abductions are abusive, but have a statistically lower chance of murder or long-term harm to the child.
+
+This is important for many reasons: AMBER alerts may be providing false hope to parents, or to the general public that we’re able to intervene quickly and effectively on a type of crime that we may not. I don’t wish to say AMBER alerts are not a benefit for the public or that there have not been kids who have been truly saved from inhumane harm. However, the system statistically does not perform to its named purpose from its own reported data.
+
+AMBER alerts provide a base for why this conversation matters. If you are building software of care, you have an innate responsibility to know how it is intervening in your users’ lives, and where the limits of that intervention are. Real consequences of systems at scale will come to your door, and it’s important to know what it is exactly that you have built before you open the door.
+
+### Clear impact is trust.
+
+If you are aiming to provide care for users, you need to measure your product to determine if it’s effective. Defining what you want your product to do, and evaluating it is the heartbeat that tells you if a product is doing its job, or pretending to. This can make your roadmap, funding options, and go to market strategies more clear, and substantive. Accurate, and strong impact data will improve funding across the board and builds the reputation of a product with users and partners.
+
+Getting impact measurements correct is the most straightforward way to ensure that you build trust with users of the product, and people who will support and fund it.
+
+Ultimately, landing a software product in the market is about being able to sustain and continue momentum. Defining the desired impact of a care methodology before product development can provide clear prioritization criteria for everything downstream. In addition, knowing the impact you want early on mitigates the prioritization challenges that software products can face in their infancy, and allows you to scale faster and more concretely. It also makes sure that the care methodology designed is correct, and has a ‘evidence harness’ on it that allows you to make sure its’ operating as intended in the real world.
+
+In addition, being able to determine when the product is ineffective provides the chance to intervene and modify the system early on, prior to overscaling it. It is much easier to fix products that have systemic issues prior to investing millions of dollars, years of your life, and thousands of users on your product. You cannot know how well you are caring for users if you are just ‘guessing’, and not verifying the care is reaching it’s full extent.
+
+Centering impact early on, as soon as you have a stable version of your product that you want to develop, is important. Mostly because products go off the rails when they don’t know what, how, or why they are measuring what they are. When no one decides what evidence proves the system is or isn’t working, no evidence easily can.
+
+This chapter is about making those decisions on purpose. I’m going to purpose a set of metrics and framework for measuring impact based on what my current knowledge is. But, as you may hear me repeat often, the most successful metrics and frameworks are the ones you will actually use. Take the parts that feel the most relevant or clear to you, and the spirit of everything else.
+
+The ideal impact framework will work to prioritize one metric of success, other metrics of general product alignment and misalignment, and a framework for collecting evidence regarding the efficacy of your care methodology. To boil it down, you want to measure:
+
+- What is success?
+  - What is failure?
+  - Is the underlying care methodology operating correctly?
+  - Is the product working correctly?
+
+If you capture all of the above, you are in a good place regarding thinking about your impact.
+
+My personal impact framework generally for a product will compromise of:
+
+- Top level success metric of the system
+  - Metrics of failure that define adverse events
+  - % of users completing an ideal user session
+  - Generally collecting engagement / outcome metrics
+  - Evidence harness regarding outcomes of product and care methodology
+
+A singular success metric should align a product with its’ theory of care, and the ultimate outcome of its’ care methodology. This is the singular most important thing to measure about the product, and should be your “carbon monoxide” detector of sorts. When it shows something is wrong, it signals that change in the environment is needed.
+
+Underneath the success metric of your product, two streams of data should be collected. One is regarding outcomes (did the care intended happen? If not, what did?). The second is regarding engagement (did usage happen? How did, or did it not contribute to outcomes?)
+
+In addition to measuring the care that occurs, a good product also measures its’ failures. The failures don’t exist so that you can beat yourself up over not creating the world’s best product, but so that you can understand and foresee problems before they culminate in something irreversible. Failure is also composed of two streams, somewhat inverted from the care stream. Outcomes of failure, known as adverse events. These are events that you pre-label ahead of time, that are failures of content, engineering, or the care methodology. There’s a secondary box, known as failure metrics. These are metrics that you have pre-created that tell you specifically when the product is not working as intended. This is another form of a ‘carbon monoxide’ alarm, that enables you to judge when a product is failing before it becomes abstract-able or visible.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Ideal metrics"
+  width={1600}
+  height={1000}
+  caption="Ideal metrics"
+/>
+
+The point of impact metrics and an evidence harness is to make sure the result of your product within the real world aligns with your care methodology, and is able to demonstrate that alignment. On the other hand, it’s also meant to tell you when you’re missing the mark and where you can correct it, before it becomes a major problem.
+
+## Forming Impact
+
+### Carve out your north star.
+
+You will want to clearly define what the definition of success is for your software project - just one. By optimizing for one clear through-line of success, an inventor is forced to make hard decisions and constraints that will force focus, and make downstream decision making easier.
+
+The intention of defining what success looks like provides a narrow point of focus for a product. Hopefully, for initial development, it will decrease the size of the product first built. You want to reduce scope early on, as more scope increases complexity, which in turn increases the amount of overhead and considerations needed to finish the product. Keeping your scope simple for initial development is giving yourself a running start.
+
+Your top level metric should ideally be one thing you prioritize around consistently and singularly, instead of working to optimize a product for 10-15 different metrics and eventualities. When you measure and optimize for more things, the less effective and more bloated decision making will be. Your aim is to keep impact tight, and to keep decision making about the product as easy as you can.
+
+This is especially hard for non-profits, who often have donations or foundations that require tracking novel metrics, or who would like to throw their ideas in there. This is also a struggle in VC backed companies, who are often on a treadmill of growth to return the amount of money initially invested. Maintaining the culture around prioritizing few things and not adding additional metrics will be important, and it’s important that you present how you measure impact first and defend it from additional expansion as much as you can. This will not always be possible, but leaving impact metrics available for anyone to request modifications to can lead to product bloat and lack of focus over time.
+
+Defining what the core determinator of success is should be a chance to also narrow in what you think is the most valuable thing you can give to the end user. Is it reducing anxiety? Providing clarity? Define one metric that acts as the most important thing that your software product can and should do repeatedly.
+
+<Callout type="example">
+
+**Success Metric:** # of panic attacks that have been reduced in severity by user, based on user self-reporting after the flow
+
+</Callout>
+
+### Expect, and measure failure.
+
+There will be moments where the software product does not live up to what it promises. It would be wise to go out of your way to measure these failures before you build a product so you can mitigate them ahead of time. It’s important to note that failure in this instance is not a clear black and white measurement. Of course, your app crashing on launch or otherwise having an engineering bug is failure. So is a social services referral application that operates functionality, but refers users to programs they are not qualified for.
+
+Most failures of a product may happen silently and can undermine your product. Users may not go out of their way to reach out to you and tell you that your app crashed, or was confusing. They will just silently quit, or otherwise fail to interact with the product in its entirety.
+
+As you’re thinking of these metrics, you should be going out of your way to determine what would improve if the product ISN’T impactful. What are indicators that can show you ahead of time if something is wrong before the product becomes dead on arrival in the market?
+
+This is also a good indicator that can tell you how to navigate the messy middle that may show up in impact measurement. This middle is where a product is not failing to reach adoption, but it’s not capitalizing on the impact it could have and the real impact lays somewhere undetermined. Working to get through that middle is about coming to understand the true outcome of someone using your product, and what your product is (or isn’t doing) to expound on its’ full potential.
+
+Determining and thinking through points of failure and how to measure them will help fortify your product, make sure it’s effective, and keep users safer. It’s also an investment into your time. Instead of banging your head against the wall for weeks wondering why users are not behaving in a way that you understand, you’re able to look at outcome data that shows that a majority of users are not getting suggestions they see as helpful, or have another issue that is not visibly detectable.
+
+You should separate these failures into multiple categories, depending on what your software product does. For most products, there are:
+
+- Methodology failures: the care methodology as designed did not meet the goal it stated
+- Engineering failure: a part of the software codebase or infrastructure failed to act as it should have.
+- Design failure: the interface design of the software was confusing, and therefore drove the user to an incorrect or misguided action.
+- Content failure: The information or metadata was incorrect, leading the user to an incorrect conclusion or action.
+
+Being able to generally label and triage failures will be a clear benefit to you. Define what failure is, and what categories it may touch: is it someone not engaging with the system? Starting to and then leaving mid-way? Finishing the flow and responding that it did not help them, or that the situation they aimed to resolve is still ongoing?
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Graphic showing how measuring ideal user session reveals market validation and adoption."
+  width={1600}
+  height={1000}
+  caption="Graphic showing how measuring ideal user session reveals market validation and adoption."
+/>
+
+This is information that directly informs how impactful your system is, and the devil of impact is often in the interpretation of details.
+
+<Callout type="example">
+
+**Failure Metric:** # of panic attacks that have not been reduced by using the tool, based on user self-reporting after the flow [methodology failure]
+
+**Failure Metric**: # of crashes that happened on app launch [design failure]
+
+**Failure Metric**: # of drop-offs that happen during the flow [design, or content failure]
+
+</Callout>
+
+### Ideal user usage.
+
+This is a metric that may not be applicable to all products, but is one that I find beneficial if resources allow. Obviously, when you are developing an application, you have an end vision in mind for the entire flow someone goes through. In reality, people don’t go through the ideal session that you have for them in your mind.
+
+One Laptop Per Child (OLPC) is a canonical example of the gap between the idealized usage that inventors can imagine and the usage users actually do.
+
+The OLPC program put inexpensive laptops in the hands of children across more than 40 countries, with Peru as its largest deployment. The initial theory of care was that access to the machines would translate into learning. The ideal session was obvious to those who conceived it initially - a child in a developing country would receive the laptop with a zest for learning, read the e-books, practice math, and complete homework diligently. The laptops shipped pre-loaded with 200 books, in a population where only about a quarter of children had more than five books at home.
+
+In actuality, the sessions of the kids using the laptops looked quite different.
+
+Computer logs from the randomized evaluation in Peru showed that a substantial share of time went to games, music, recording video, and other entertainment. Additional follow-up surveys found children were more likely to use the machines for entertainment than schoolwork. Among students given internet access, the majority used it for fun while very few reported using it for learning.
+
+The measured result matched the sessions, yet not the vision. There was no effects on math or language achievement, no gains in cognitive skills, and teachers reported lower academic effort from kids who received laptops. So, not only did the laptops not enhance a desire for education, they overall worsened academic effort.
+
+In another vein, the kids became genuinely skilled at using the laptops. So, not an entire loss, but the mission did not come to fruition.
+
+The lesson for this metric is that nobody involved was measuring against the ideal session until the evaluators arrived years later and hundreds of millions of dollars in. A defined ideal session, checked against real usage earlier on, could have unveiled the vision gap when it was still a design problem as opposed to a program retrospective.
+
+Before people even get to experience the full depth of your care methodology, they may not get far beyond the first few pages. Otherwise, they might strongly interact with one page but completely drop at another. Determining what percentage of users interact with the ideal user session will determine how effective your product is at getting people through the door, and if people actually engage with it.
+
+Of all of the people who use your software product, what does the ideal session look like? Is someone going through the entire flow? Clicking on a minimum of 3 resources?
+
+This should not be the best case scenario, but not the worst. Choose a session that ideally the majority of users will fit. This will help define what is going very well (when you’re exceeding expectations), or what is going wrong. This is a ‘baseline’ metric that can track through growth how your product improves or degrades over time.
+
+<Callout type="example">
+
+**Ideal User Session**: A user completes more than 60% of the panic attack walkthrough flow, and then ends and marks their panic attack symptoms of having dropped in intensity by at least 20%.
+
+</Callout>
+
+### Comparing outcomes and engagement.
+
+Public, or consumer facing software, is often designed to optimize for and maximize engagement from users on every level. Many of the metrics that a consumer software company may measure are related to daily, weekly, or monthly engagement. Although that engagement might be strong, it doesn’t necessarily correlate to direct benefits and good outcomes for your users.
+
+You should consciously define what measuring engagement, and long-term outcomes may look like. A user can barely engage, or engage just once with a piece of software that may change the trajectory of their life. They also may engage very consistently with a piece of software that does not have any impact on them at all.
+
+Consciously decouple short, medium, and long-term outcomes for users from engagement with the application by itself. Also, make sure to evaluate the effectiveness from the application across all of those angles to truly understand if a product has the intended outcome desired.
+
+**Defining Valuable Outcomes**
+
+Your outcomes should be pre-determined in some way by your top-line success metric. For example, if an app is solely designed to walk users through a panic attack, it would not be valuable inherently to measure effectiveness in terms of reducing the amount of panic attacks a user may have. That is not the top-level metric of the system, and may result in you incorrectly measuring an outcome that is not feasible for your product. Perhaps, a better metric would be to measure the reduction in anxiety someone may experience from having the walkthroughs, despite the number of panic attacks they may have.
+
+Your ideal outcomes should be intertwined directly to your top-level success metric, and should be as feasible as possible. It is very possible to set low targets for the impact you wish to have and achieve them easily, motivating you to create newer and more audacious targets. However, it would be demoralizing and hard to create a large ambitious outcome that your software product is unlikely to result in, and to continually miss the mark.
+
+Create and measure outcomes that are likely for your product, and feasible within your timeline and resources. As your product grows and finds a life within the market, you can deploy the more ambitious outcomes you have from a position of strength.
+
+**Defining Valuable Engagement**
+
+Measuring engagement will depend specifically on the front-end that you choose for your product. When you do measure engagement, every interaction and having the greatest amount of view in regards to how users are using your product is your end goal. The harder part is balancing this inherently intrusive desire for maximum amount of data to perfect and understand product usage with the privacy concerns that can come about through these tools.
+
+Engagement is the core of determining more granular interactions with the product. Many different tools exist to measure engagement in all of its’ different forms and modems. The most important part for social good software is making sure these tools are configured correctly so that PII (personal identifiable information) does not leak through.
+
+For example, a tool like PostHog may screen record user sessions to show you how users interact with your product. If you do not correctly configure that, you may be indirectly capturing videos of the entire experience of how someone uses your product, and everything they type into the product.
+
+<Callout type="example">
+
+**Engagement Metrics:**
+
+- % of people who open a panic attack flow
+- Amount of time spent on the flow
+- Opt-out / finish points
+- % of users who come back to the application repeatedly and meet an ideal session
+
+**Outcome metrics:**
+
+- Short term - % of users who self reported panic attacks were less severe
+- Medium term - 0-5 rating reported by the user after 5 flow completions
+- Long term - Email survey describing average panic attack after 10 flow completions
+
+</Callout>
+
+## Inventing an evidence harness
+
+You spent a large amount of time understanding your care methodology and thinking about how it meets the lived reality of your user. But, how do you know that you are actually enacting that care methodology properly in your product, or that it works at all? This is what an evidence harness is designed to find out, and prove.
+
+Think about the process of looking for a new product. The first thing you are often looking for before you decide to choose that product is proof that it actually does what it claims, enough for you to make this jump. The cosmetics industry does this supremely well. Do you buy a skincare cream because it looks moisturizing? Or because 95% of people in a 12-week trial saw a reduction in dry skin? People buy based on, and inherently trust proof.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Evidence Harness Graphic"
+  width={1600}
+  height={1000}
+  caption="Evidence Harness Graphic"
+/>
+
+Ultimately, what you want to aim to do with measuring impact is to create an evidence harness. This should determine how well you are reaching your top-level success metric, and all of the other metrics that lead into the determination of that success metric.
+
+This is a mental model that you can systemize, or an actual analytical dashboard that you may create. The idea is that you are measuring actual engagement, usage, and deployment data towards the success metrics you have and outcomes you want to achieve. The harness should keep you within the boundaries you set for yourself of success.
+
+In the early days, this harness should be used to determine care methodology effectiveness and to enable you to iterate fast towards the most impactful and optimal solution. As you reach that fit and push the product further out to market, it should stand to continue to verify your original assumptions, help make sure that additional features don’t rollback your baseline, and to gather evidence of your product’s long term impact. The evidence harness should also define the evidence you want to collect, and how you will collect it.
+
+<Callout type="example">
+
+**Panic Attack App Evidence Harness:**
+
+Top Level success metric: % of total panic attacks that have been reduced in strength
+
+Engagement:
+
+- App Store initial download metrics
+- Retention of application
+- % of ideal user sessions per sessions initiated
+
+Short term outcomes:
+
+- Feedback from user directly when walkthrough finishes
+- Ability for user to rate resources they are directed towards
+
+Medium term outcomes:
+
+\- Request for user to use the GAD-7 Scale survey if they have used the app more than 5 times
+
+Long term outcomes:
+
+- Email survey from user if they opt-in asking if they have experienced positive or negative effects
+- Email from users who have engaged and reviewed a resource asking if their review is still accurate after 1 month.
+
+</Callout>
+
+## Considerations
+
+### Delineation of critical paths
+
+A critical path is one that must be present for your application to provide care, and will cause adverse events if it isn’t present. These paths should be defined early on to provide additional protections and a bit more thorough engineering around them, in every layer of the software development lifecycle.
+
+Measuring impact also in some ways requires measuring negative impact, and adverse outcomes. Being able to label failures from the start, and being able to capture them enables a more resilient product, and one where failures are easier to find. A critical path is one that is a primary driver of care: it is most likely a feature, or a core component of the application. A good rule of thumb is, if you got a call from your developer saying a system is down and can’t serve anyone for a day, what system would make your stomach drop the hardest? The first ones that come to mind are strong candidates.
+
+If possible, come up with a way to determine how that critical path would be measured in negative impact. Is it if the software crashes, or if a user doesn’t find information helpful? These critical paths should be candidates for additional testing, ways for a user to report incorrect information, or heightened observability tools.
+
+<Callout type="example">
+
+**Panic Attack App Critical Paths:**
+
+API endpoints that
+
+- Return social resources to the user. [Reason: Ensure consistent access to other tools]
+- Return the walkthrough content and puppy gifs. [Reason: Ensure availability to core feature.]
+- Gather feedback from the user after the walkthrough is finished. [Reason: Ensure consistent evidence collection]
+
+</Callout>
+
+### Detangle performance and efficiency.
+
+Although we are talking about impact, it can be important to remember that performance of the software, and the impact on the user may not be intertwined things. A piece of software can perform to engineering expectations, without actually being beneficial to the user. Inversely, A piece of software can also fail technically to load an API or render a component, but can “fail-safe” in a way that doesn’t block off the user or greatly reduce the impact.
+
+Of course, there are ways where performance and impact are intertwined: if someone is using a mapping application for homeless shelters and it fails to load any, the performance of the software has failed (and the impact on the user is negative). When measuring impact, be clear to separate failures into multiple threads that will help us debug and re-iterate on the system later down the line.
+
+### Outcomes as a funnel.
+
+There may be specific times when you have a specific goal in mind that can be accomplished in a multitude of different ways. All of those ways can be integral to accomplishing your product or end mission, but you may struggle to optimize what specific action or outcome you should be aiming for.
+
+Let me tell you the story about one of the best hires I have ever made in my life. His name is Max Yen, and he worked at Faura to develop out the product and our scoring system. Our team prior to Max joining had perhaps banged our head against the wall multiple times, faced with vast resources, intense pressure, and the pathway of multiple possible ways to solve our core problem. His speciality was being able to go into a room, crunch the numbers and do the experimentation, and bring results back to the greater team that provided our most valuable signals in the dark.
+
+Ultimately, what Faura was about was capturing and validating property data from homeowners, and rewarding them for doing mitigation work. Faura was originally conceptualized as an incentives structure, similar to what Opower does for utility bills. If you are eligible in the U.S, you may receive an energy bill that compares you to your neighbors and provides context on your usage. The report is meant to incentivize users to encourage them to reduce power usage, to install more energy efficient appliances, and the sort.
+
+We wanted to do the same thing at Faura, for natural disaster resilience. Initially, we created our inspection app to qualify users for discounts upon doing mitigation work. However, we realized that solution would not get adopted in the way we needed it to. We also rarely got users outside of being forced by insurance companies with a theoretical gun to their head to complete the assessment on their own. What we instead did, as mentioned earlier was pre-scored their report using property data. However, most property data that is available on the market is quite inaccurate.
+
+This is surprising to most homeowners, who assume that details about their property are clear and consistently updated. This is not the case. Often, information about a home being used to underwrite insurance, mortgages, or to approve and deny policies can be entirely incorrect. This is why certain insurance companies institute home inspection programs, or utilize aerial imagery providers that fly over head and capture imagery across the US on a timed basis.
+
+Even those applications can be incorrect, as machine learning algorithms can struggle to detect the fine details that matter for natural disaster resilience of properties. Even more so, aerial imagery just detects top down information, which is a portion of the overall property state.
+
+So, now our product needed to do multiple things. It needed to:
+
+- Show users the current data about their property
+- Encourage them to submit updated information about things unknown or incorrect
+- Potentially push them to do a further assessment using our property self inspection tool
+- Or, report mitigation work already down without making them go through the entirety of the property self assessment flow.
+
+In this way, we had multiple different outcomes for the user that all focused on creating a more accurate and detailed vision of the underlying property, which would go into better estimating and predicting the survivability of a property to natural disasters.
+
+The issue was, “which possible outcome do we optimize for”? We had multiple different options, as homeowners were incredibly sensitive to any data input. Furthermore, the data updates all needed to be handled in a specific way within the context of our backend. Updating siding material is incredibly different from submitting information claiming a earthquake foundation bolting mitigation undertaken on a home located on a hill.
+
+We labored over this product for weeks. Surely, some on the team cried. Goat sacrifices were perhaps considered. And then, Max casually solved this issue in a singular PowerPoint slide.
+
+Each of the outcomes we were aiming to drive had different levels of user interaction, and also different levels of value to us. Harder outcomes were more valuable, because it was more unique property data to us, but it was harder to convert users. Easier outcomes were less valuable, sometimes only updating one point of data on a property profile of 50+ characteristics - but they still drove engagement and validated what parts of a property were stale.
+
+Max posited this as a funnel of outcomes: optimize for the easier ones, and build for the harder ones as we reached a threshold of volume that proved we needed it. It sounds simple in practice, but it completely floored me when I first saw it.
+
+If your product is aiming to drive multiple outcomes, stacking them as a funnel with clear prioritization metrics early on will help be able to navigate much of the confusion that comes with bringing a new product to market.
+
+### Limiting scope creep.
+
+Let me share a common horror story. An inventor comes up with a great solution to a social good problem. They fall in love with that solution, and start to see the myriad of ways that they can apply it to everything. Maybe PaniqAttack can apply to any mental health crisis! Maybe even medical problems! While developing the MVP, our faux inventor starts to see more ways to expand it. They get frustrated that their big vision of impact seems outsized, and under-resourced in comparison to the tool they’re initially developing.
+
+This is simple, they think, “let’s expand the MVP!” But, as the system becomes more complex throughout every stage, it becomes harder to test, design, and the amount of decisions grows exponentially.
+
+The amount of work from the scope creep turns into a development nightmare, and the product finally comes to beta testers. Bad news from the beta testers, the product is very confusing and doesn’t solve the core issue that they thought it did. Even then, areas where they thought the product was most impactful actually turned out to be not impactful at all.
+
+Then, broken and stressed, the product never makes it to market, or dies a quiet death because distribution around the product is severely complex, because of all of the things it can do. Even if it does come to market, users first question is, “So, what does this actually do?”.
+
+Scope creep is when a project in development gets more and more requirements that require rework of previously done work, and balloons complexity unnecessarily. Sometimes, scope creep is part of the job. There are things people uncover that will always add time and new learnings to the product.
+
+The problem with scope creep is when it is not seen as an issue that should be limited and mitigated. This can especially be an issue with software of care, where the majority of requirements need to be managed upfront as opposed to deferred costs to pay later. For this reason, scope creep is more dangerous to social good projects and can inadvertently stunt the project before it impacts a single person.
+
+Developing a software product based on a new innovation is ideally completed by developing an upside down pyramid. The inventor should build a small triangle of it, to test if the rest of the structure can hold. Then, they should continue to build onto the system, a bit broader and broader as the inventor tests if each chunk of the pyramid can be built. It will always be better to build a product too small in scope and get great traction to continue development of the product, than building a system too big in scope that fails because the distribution channel is not correctly sized for the product. This is why the most common startup advice is to build something small, quick, and test if it lands in the market the same way it does in the hearts of people.
+
+A smart inventor, or product manager will match the scope based on available logistics. For example, if you run a support group for people who have lost someone to cancer, you may want to build a software application for that. Although, the product can technically support grief of all kinds from medical problems, it should not serve that from the jump without a major initiative of expansion. But, if you don’t have the correct distribution channel or resources, you will alienate the people you do serve, and not reach the people you perhaps could. Increasing scope is feasible, but should happen when people are pushing heavily for it, and when the operating entity can properly resource for it.
+
+Scope creep should be defined as you develop the system and understand its limits. Are there populations or use cases that you know shouldn’t be addressed? Is there a specific part of the system it will do extremely well that you should focus on?
+
+You don’t need to systemize this at the development stage, but you will need a rough idea of the limits and bare minimum product and impact you want so that the software product is not in MVP purgatory so long that it never makes it to the market. This is a tricky one, because you will need to balance growth and entering new markets, with the scope creep becoming too much. When you introduce new metrics for impact, you often dilute the prioritization of the product.
+
+<Callout type="example">
+
+**Original Product**: Panic attack walkthrough product
+
+**Good scope creep**: Addition of crisis hotlines, self-care checklist feature that shows to the user post-panic attack.
+
+**Bad scope creep**: Puppy gifs on every screen, first-aid bullet wound walkthrough, hallucination walkthrough, etc.
+
+</Callout>
+
+### Understanding effect.
+
+The point of coming to think about impact prior to product development (and beyond it), is to have a clear idea about how your product operates in the world. In some way, it forces you to prove your own work and to ensure the product you’re building has a bit of a symphonic resonance to it. In software creation and development generally, most are encouraged to jump directly towards immediate creation and implementation of ideas.
+
+Because we’re aiming to build products that help people, that advice can be less beneficial. Jumping immediately towards bringing something to market can lead to an undeveloped product that doesn’t actually have a chance at achieving the goals set out for this. In this way, social good program development front-loads more requirements and work thinking about the system conceptually and understanding how it will reverberate through the world before you release it.
+
+### Continuing Impact.
+
+Impact is something that you should give strong consideration to prior to initial product development. Your vision of impact, and your thought-out care methodology should go into informing the initial version of your product. You should continue to think about it as the product reaches market release, and as you continue to modify and come back to the product.
+
+The point of impact is to measure if a guess about providing care is accurate and scalable, so that a product can be built to the closest version of reality possible. It is inevitable that ideas of how a product helps, or what the true value is, will inevitably shift over time. The important part of impact is not having an exact idea of how it happens, or knowing exactly where it will go. It’s more-so about being able to build a navigation system for your product, so you have the context you need to get where you want to go.
+
+It’s also worth mentioning that impact inevitability will shift over time. As a new innovation comes to market and is adopted and diffused, what was a novel innovation initially becomes replicated in the market and loses its’ foothold. Establishing where you are in that cycle, especially as you gain marketshare, will direct you to know when it’s the right time to make major strategic changes, or to sunset your product.
+
+<Sources>
+
+1. Julián P. Cristia, Pablo Ibarrarán, Santiago Cueto, Ana Santiago, and Eugenio Severín, "Technology and Child Development: Evidence from the One Laptop per Child Program," American Economic Journal: Applied Economics 9, no. 3 (2017): 295–320. Working paper version: Inter-American Development Bank. https://publications.iadb.org/publications/english/document/Technology-and-Child-Development-Evidence-from-the-One-Laptop-per-Child-Program.pdf
+1. Diether W. Beuermann, Julián Cristia, Santiago Cueto, Ofer Malamud, and Yyannu Cruz-Aguayo, "One Laptop per Child at Home: Short-Term Impacts from a Randomized Experiment in Peru," American Economic Journal: Applied Economics 7, no. 2 (2015): 53–80. https://www.aeaweb.org/articles?id=10.1257/app.20130267
+1. Ofer Malamud, "Technology and Educational Choices: Evidence from a One-Laptop-per-Child Program," Economics of Education Review 76 (2020). https://www.sciencedirect.com/science/article/abs/pii/S0272775719302729
+
+</Sources>

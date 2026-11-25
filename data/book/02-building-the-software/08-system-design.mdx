@@ -1,0 +1,370 @@
+---
+title: 'system design'
+label: 'Chapter 8'
+---
+
+MCAS is an avionics system known for taking two planes down, and collectively killing 346 people. It did so because of a failure in system design.
+
+The software component of the system itself was small. Boeing's 737 MAX carried larger, repositioned engines than earlier 737s. This changed how the aircraft handled at high angles of attack (AOA), the angle between the wing and the oncoming air. MCAS (the Maneuvering Characteristics Augmentation System) existed to smooth that difference and reduce the amount of training pilots would need to fly this type of plane.
+
+The fix was simple in practice, when the plane's nose pitched up too steeply, as a result of the engine reposition, it would automatically trim the nose back down, replicating the handling feel of earlier 737 variants so airlines could avoid pilot recertification. One sensor reading in, to one trim command out. As a component, it worked as written. As a system, nearly every choice around it was wrong and would lead directly to loss of life. I could belabor you all about the safety culture of Boeing and the choices that most likely made this incorrect ranking happen, but I will save you all a few hours of your life.
+
+The plane has two angle-of-attack sensors, one on each side of the nose. MCAS relied on data from a single one, even though the aircraft was equipped with two. The system design never asked the second sensor whether the first was telling the truth.
+
+The reason traces to a classification decision: an early version of MCAS required two independent conditions to activate, but when engineers later removed one, the designers saw no need for redundancy because the hazard assessment had classified an MCAS failure as merely “major”, a category for which a single sensor is the norm and doesn’t warrant additional redundancy.
+
+The harm ranking was wrong. Therefore, the processes meant to protect crew and passengers were not utilized, even though they existed. everything scaled to it was wrong. The fail-safe backup for all of it was the pilots: Boeing's design made the flight crew the backup to MCAS — a crew that did not know the system existed, because it was not referred to in the flight manual.
+
+On Lion Air Flight 610, the left sensor read roughly twenty degrees too high, and MCAS activated again and again. The plane experienced 26 cycles over thirteen minutes. The crew fought it with trim, until the stabilizer reached its full nose-down limit and the aircraft went into the Java Sea.
+
+Less than five months later, Ethiopian Airlines Flight 302 crashed in near-identical circumstances. The eventual fix reads like an inventory of the original design's absences: MCAS now compares both sensors and activates only when they agree, activates only once, and can no longer override the pilot's control column.
+
+Nothing in MCAS failed the way software is generally imagined to fail. The code did what it was specified to do. The system around the code — one sensor where two existed, a safety alert sold as an upgrade, a human backstop kept ignorant of what it was backstopping, rigor scaled to a harm ranking that was wrong — is what killed people. That is the layer this chapter is about.
+
+—-
+
+While you’re designing the product, you will also be working to design the engineering system that will come together to create your application. What seems like one application is usually a well orchestrated mechanism of multiple different components of software talking and co-ordinating with each other. System Design, as it’s formally called in software architecture, is the process of creating and maintaining those systems on a high level, before a line of code is written.
+
+System design is the high-level architectural details that determine how a software application (or applications) will actually operate, and the components needed to make it responsive to, and responsible for users. This involves determining data storage, transmission, authentication, and all of the other infrastructure that enables your product to reach its’ full potential.
+
+The good news is that good system design for software of care also translates often into general best engineering practices and principles. There’s some specific considerations, but it is mostly about being able to translate requirements into what is feasible. As long as you are cognizant of tradeoffs, understand the users and their requirements, and can get crafty, you will be able to manage these constraints and easily build a system.
+
+The harder parts will be determining how to translate resource constraints (funding, time, personnel), into building a system that is practical to operate. Often, software is built incorrectly not because lack of knowledge, but lack of incentives and resources to pursue a high-quality product.
+
+In that sense, your biggest challenge will not be designing a system, but designing a system that is able to get to market and meet the demands of your entity. This is where a lot of engineering prowess in social good software can meet the realities of the world: the constraints required to build it correctly can often be at a head with the desire to push a product to market fast and to start impacting users soon.
+
+Prior to going into system design, you should have a clear idea of priorities for serving your users, what your operating entity needs, what your own resources are, and what it may take for your product to meet the built world. Depending on how your entity runs, you may do system design prior to product design, or during product design. Ideally, both occur at the same time so you are able to iterate through them and uncover issues before either phase is completely done.
+
+## The process of system design.
+
+System design is the engineering equivalent of product design: it is where the lead software developers look at the product specifications and determine all software related components that need to go into it. For those who have not built software before, the amount of interconnected aspects across multiple different systems can be surprising. But, a system design is where the plumbing of code is built. It can focus on many different layers, from the most broad layout of a web app, API interface, and database towards specific specifications regarding algorithmic design.
+
+Safety-critical software tends to have more taunt system design, where the critical pathways should be properly specced out and given careful consideration.
+
+It also goes through the same iteration process as product development, but not open to other users. It mostly starts as product design becomes more solidified, and goes through its’ own rounds of revision and confirmation. Some smaller products that have limited components may not even need an entire system design build out.
+
+The more complex a product is, with more front-ends, data processing needs, and other engineering requests, the more complex the system design will inevitably be.
+
+## Considerations
+
+### Enhancing care, minimizing harm.
+
+Everything in system design should come down to your primary success metric, critical paths to achieving it, and the barriers that may stand in the way of it. Delivering your care methodology consistently and efficiently will be your goal, and adverse harm will be a consequence of not doing that. For the purposes of system design discussion, harm focuses less on indirect impacts of the products, and more so the threat of incorrectly designed features, infrastructure and architecture. The role that system design plays in a software for good context is ensuring that the constraints and research so painstakingly done are translatable into scalable, reliable, and consistent software.
+
+For example, if your panic attack management application is unable to load information from the API that walks someone through a prompt, the consequence of that may be that a user’s panic attack is worsened. If you design the system correctly, the consequence is that the system fulfills its’ purpose constantly by delivering strong up-time, properly contextualized features, and handling failures gracefully.
+
+Just as the system should be defined by achieving necessary goals to deliver care, parts of the system should be defined by the harm of an action incorrectly failing. For example, if your website fails to load calming images of puppies, that is less harm than a suicide text line that fails to deliver a message because of unhandled rate limiting.
+
+Maximizing care, and mitigating harm can be simplified into 3 principles:
+
+- Avoid harm
+  - Detect harm, and remove it
+  - Limit harm.
+
+What you are doing in system design is often two sides of the same coin, both relating to impact. You are aiming to maximize the impact of the product by making sure care delivery is consistent and reliable. You are aiming to minimize the impact of harm, and to maximize the impact of care. This is why critical paths are specifically labeled and codified, as these are your primary candidates
+
+You should not be thinking about this as aiming to stop all failures that your software may experience, ever. You should think about this as minimizing the most harmful consequences, and coming to mitigate the rest as you can. Working to build an entire system that never fails is an exercise in futility, and is also a waste of engineering resources. Especially when you are more resource-constrained, picking the most important components and practicing best form there will be more beneficial than working to treat everything in the system with kid gloves.
+
+### Carve out critical paths.
+
+As you design the system, make sure to highlight critical paths to your user’s care. These will be paths that essentially you want to ‘handle with care’ as it comes to the engineering system design phase, UI/UX design, deployments, and more. Paths defined as critical should also have stronger controls and testing around them.
+
+These should be the focus of adverse event reporting, thorough testing, stronger risk assessments, and additional reinforcements on the system design side to ensure stronger availability and fault tolerance. Wrap those critical paths in fault tolerant systems, and enable users to report harm. It is worth especially focusing on these areas during future load tests, infrastructure reviews, penetration tests, or architectural reviews.
+
+Critical paths are also primary categories for being wrapped behind feature flags, having redundant components within a circuit breaker, and being designed to either fail-safe or fault-tolerant standards.
+
+There’s many different ways that a system can be designed to manage, and stabilize around critical paths.
+
+| **Type** | **Description** | **Example** |
+| --- | --- | --- |
+| Fail-operational | Systems that continue to operate when control systems fail. | A run-safe tire that continues to be engineered to be safe to drive on after a flat. |
+| Fail-soft | Systems that continue to work, but at a reduced efficacy. | An API endpoint that returns partial information, even if subcomponents of it fail to render. |
+| Fail-safe | A system that becomes safe when it cannot operate. | A fire alarm that beeps when it’s batteries run out, to alert a human to replace it’s batteries. |
+| Fail-secure | A system that maintains maximum security when it cannot operate. | Verena erasing all of the data when a user requires shutdown, and utilizing a single encrypted feature flag. |
+| Fail-passive | Continues to operate in the event of a component of system failure. | An Elastic Beanstalk instance in AWS that generates a new instance when one is taken down. |
+| Fault-tolerant | A system that avoids failure as much as it can, even when faults are introduced into the system, | A system that utilizes alternate vendors and re-tries when a messaging service fails. |
+
+### Locating and resolving adverse events.
+
+Every software product will have negative events, like a server failing, something not working as intended, a user having a negative experience with your crisis escalation pathway, or some information being incorrect. Within your system design, you should work to include adverse events in the product as part of your incident response or logging strategy. This data should be treated separately from standard incident response data, and should be used to evaluate product efficacy and potential harms.
+
+You are not just tracking if a vendor failed or an uncaught exception happened, but you may also be tracking and accidentally storing information that is incredibly sensitive about a user’s circumstances and location. Storing logs that are cleared of sensitive data, or don’t contain it in the first place, is a great start to tracking adverse events. This is an especially crucial place to make sure you are not collecting PII you don’t intend to, and that analytics tools for the front-end are not inadvertently storing this either.
+
+Regardless, you should be building some sort of impact measurement system which accommodates for the multitude of failures someone can face, and should at least have a process for how to handle these things. For the most simple projects, this can be a feedback form with separate categories that triages into a spreadsheet and emails someone when new entries happen. Then, you can use an algorithm on that spreadsheet to track negative product impact (and vice versa for positive impact).
+
+There are a variety of tools that track if APIs or vendors go down and alert the team. It’s worth considering building a similar tool for tracking for adverse events that is as automatic as it could be without triggering false alerts. Being able to develop a baseline of adverse events will also help later when deploying software to find defective features.
+
+Depending on the severity of software that you are building, adverse event tracking is a natural progression to human intervention. Ideally, if there are paths that you are unsure of, or are worried about: enabling a slot for human intervention messaging is a good safe way to keep track of things prior to scaling them. Of course, as you scale, you will want to automate human intervention away from tools and replace it with formalized processes as much as you can. But smaller organizations, or organizations still looking to understand the impact of their product should over-estimate on human intervention during adverse events instead of under-estimate.
+
+## System Design, in actuality.
+
+### Understanding fault-tolerance.
+
+Fault-tolerance is a common goal within system design, and it’s one that you should familiarize yourself with. Fault tolerance is not about building a system that cannot fail (which is impossible), but building a system that fails well and can be stood back up again easily. If you have ever seen cars hit plastic barriers, where they bend with the car and then immediately spring back up, this is the same idea.
+
+For example, if a user messages a crisis hotline, their message may permanently be placed into a retry queue that retries an infinite amount until it passes through successfully.
+
+<Callout type="note">
+
+Implementing fault tolerance in a system design context looks like:
+
+- Beep
+- Boop
+- Beep
+
+</Callout>
+
+### Implementation of fail-safe.
+
+A fail-safe system is one that can fail, but does so in the most graceful or safe way it can. To continue the crisis hotline retrying scenario, a fail-safe system might retry across multiple vendors, and share a message with the user letting them know that something is going wrong and that you are working to fix it.
+
+If a message to your hotline fails to send, a retry mechanism should be implemented. If an incident log fails to save on someone’s phone because there is no internet, perhaps saving it encrypted with the app to re-try when someone gains service so all of the information is not gone is a good idea. If something does fail, it should clearly emphasize it directly to the user. For safety-critical paths, it should also direct them to report adverse harm.
+
+It’s worth mentioning that although we are designing systems, failure can encompass situations where the tool did not work, or had an adverse reaction. So, although the infrastructure and technology did not fail, the underlying product or content did. This may be an incident where a homeless shelter was closed when the product said it was open, or a crisis counselor was cruel and unkind. This should be accounted for in system design, but marked separately from engineering failure, and this is discussed later on in the chapter.
+
+<Callout type="note">
+
+Implementing fail-safe design in a system design context looks like:
+
+- Beep
+- Boop
+- Beep
+
+</Callout>
+
+### Adding redundancy where needed.
+
+Redundancy is the principle of duplicates, or triplets. The idea is that if a singular component fails or has an error, it is not the single point of failure. Redundancy is essentially, insurance or a mediator when you truly need it. It has multiple different forms in software: a second software, having a second vendor for aerial imagery, having a secondary place where backups are stored.
+
+In aviation, there are often many sensors that operate in extreme environments with extreme uptime requirements. One such example of how redundancy works in practice are airspeed indicators. In safety critical aviation software, one sensor’s data reading is checked against a second. If those two values are too far apart, a third sensor is checked to act as the final source of truth. This works off of a simple principle: it is very statistically unlikely for 2 out of 3 components to be broken. This ability to double check the work of a component and to ensure and validate its’ redundancy is part of what makes aviation one of the safest forms of transportation in our modern world.
+
+In the software engineering analog, there are many ways where you can utilize this, both within the context of a front-end or back-end.
+
+If you are utilizing vendors for critical features, it would be wise to develop circuit breakers around those external vendors, or those systems. That way, if you see with a specific threshold of requests that an API or a microservice you are leveraging is failing, you can degrade gracefully instead of not knowing about these services going offline. Ideally, you should have redundant vendors for critical paths where you can.
+
+The cost of redundancy is complexity, and resources. Although it seems like an easy fix to problems, it most definitely is not. I would personally recommend keeping redundancy to crucial components or safety critical paths. Work to determine what the most valuable components of your system are, and build a level of redundancy that works for your product.
+
+There are also forms of redundancy that can be relatively simple to implement. For example, if a crucial API call to fetch mental health resources fails, implementing a short list of resources within the front-end or the backend is a good backup that is low effort.
+
+<Callout type="note">
+
+Implementing redundancy in a system design context looks like:
+
+- Beep
+- Boop
+- Beep
+
+</Callout>
+
+## Architecting a system that encompasses the user.
+
+### Know what scalability looks like before it comes for you.
+
+Similar to the example of high school students all enrolling a few days before classes begin, certain types of software products will experience unprecedented demand during collective or cultural emergencies. For example, suicide and crisis hotlines may spike during recessions, or terrorist attacks, or a panic attack tool could surge during natural disasters. Burst size becomes incredibly important when working on software that is topical or may be intertwined with cultural events.
+
+Load testing prior to traffic spikes, enabling auto-scaling, creating alerts that provide a heads-up when more traffic than normal is coming through, setting budget alerts that give you notice prior to receiving multi-thousand dollar bills from your infra provider, and being smart about managing burst size are good considerations here.
+
+You should also consider having fault-tolerant components for the pieces of your product that are most likely to be impacted. Having a plan to communicate to users when large amounts of traffic are occurring so they don’t feel the software is silently failing is also good idea.
+
+### Managing public facing content.
+
+If you are utilizing information, like a directory of hotlines or additional resources, it would be prudent to manage access to that information as early as you can. Information that is considered critical should be easily findable and editable, especially outside of an SDLC context. Users should not have to wait for a sprint to be over to find out a homeless shelter has been closed, or that a page about legal protections is out of date. This may include building a CMS earlier than needed, especially if the product’s entity will be managed by non-technical people.
+
+A major issue that people encounter when interfacing with social service applications is that a lot of information is out of date, or has not been checked. Coming up with ways to update information, test for a heartbeat on a critical URL, or to report out of date information are considerations that you should evaluate. Especially if providing information is the entire value proposition of your service, maintaining fidelity of that should be a consideration embedded into system design instead of after.
+
+### Controlling and storing data.
+
+Properly managing and storing data is a major cornerstone of system design, and one with immense consequence if it is handled incorrectly. Every piece of user data you hold is a liability you have chosen to carry on behalf of someone else, and for vulnerable users, that liability is not abstract or theoretical.
+
+When you store sensitive data in a way that enables you to know what’s inside, a subpoena, a breach, or an acquisition can turn your database into evidence against the people it was built to help. Period tracker data has been sought in abortion prosecutions, utilizing vulnerable health information that doesn’t technically fall within HIPAA requirements to enforce a law a user perhaps did not see coming.
+
+Data storing is especially crucial for operating entities that will potentially experience instability. Data assets are often held by companies, and sold as an asset in bankruptcy or acquisition. Although your operating entity may treat it with kindness and consideration, the next entity may not. You cannot leak, lose, or be forced to hand over what you never stored.
+
+The 23andMe bankruptcy is an excellent example of this. 23andMe was a direct to consumer genetic testing company, that sold a product where the user would spit and the company would return genetic testing and ancestry results. While they went public in 2021, they had a large data breach in 2023 that compromised the personal data of 6.9 million users. Data privacy, as you may imagine, had always been a concern with this information. You were giving your DNA in exchange for ancestry to a private company that held that information, under their own practices in policies.
+
+Later on, 23andMe filed for bankruptcy in 2025. When it did, the subject of its’ data assets became a massive point for scrutiny and concerns for law makers, getting a massive coalition of regulators to argue that the company should not be able to sell the users’ biometric data, and that users needed to re-consent for the sale.
+
+Although the company was bought by a nonprofit founded by the CEO of 23andMe, this was a rare happy ending for what could have been a privacy and implication nightmare. When you store information, you do not always decide what gets to happen to it, nor who will buy it.
+
+With that in mind, decide what you are willing to hold before you write the first migration, while you have agency over the data you collect. Deleting a column later is easy, and deleting the copies of it from your backups, logs, and analytics tools is not. This can look like a simple note that just delineates what would be data that you don’t want in the hands of anyone else, and you can formalize it from there.
+
+A good place to start is by sorting data by the harm of exposure, not by what it ‘technically’ is. An email address in a meditation app and an email address in a domestic violence app are the same data type with completely different blast radii. Personal association with an application can become a liability in and of itself.
+
+For each field, ask three things:
+
+- do we need it for the care methodology to function?
+- what happens to the user if the wrong person reads it?
+- how long does it need to exist?
+
+Ideally, anything that fails the first question shouldn’t get collected, unless there is strong rationale or reason for it. Anything that fails the second should receive the strictest controls you have, and should be treated with thorough caution. Creating secondary processes for sensitive data is something that might be of consideration, if you’re storing a mass amount of PII, health information, or personal information that would generally be considered sensitive. Anything with an answer to the third gets an expiration date enforced by the system, not by someone remembering and manually clearing it. Having a cron job that removes expired data is a good step, but removing data that doesn’t need to be used currently doesn’t remove it from historical backups or other forms of data redundancy.
+
+Removing and not storing data at first can feel like it fights your evidence harness, which wants data to prove impact. For the most part, it doesn't. Impact measurement usually needs aggregates and outcomes, not identities and transcripts. Although impact measurement may benefit from segmentation, anonymizing data and not linking it directly to individual users is a good step towards maintaining fidelity of understanding the product, while protecting users.
+
+If you have done your job and been very lucky, your invention’s data will hopefully outlive your intentions. It persists through team turnover, acquisitions, and shutdowns. The promises you made at collection do not automatically travel with it, and often can’t. We'll return to that in the succession chapter, but just note the best way to manage data issues long-term is to not collect sensitive data, when you have the option not to.
+
+### Preserving privacy.
+
+Almost nothing about handling sensitive data well is exotic or unknown. A safe product utilizes best practices that have stood the test of time, instead of new or unproven technology. [ADD CONTENT HERE]
+
+Basic data hygiene includes, but is not limited to:
+
+- TLS in transit
+- Encryption at rest
+- Proper data tenancy protections, and RLS enabled
+- Least-privilege access, and scheduled user access reviews every quarter or half year.
+- Utilizing a secrets manager instead of a .env file in Slack
+- Automatic dependency and vulnerability scanning within CI/CD pipelines
+- Backups that have been actually tested to ensure they can actually restore.
+- Reviewal of logs to ensure PII and other sensitive data is filtered out
+
+The uncomfortable truth of most breach post-mortems is that nobody needed a zero-day to access the system. Hacks are boring, and can have boring vectors of access. This boringness in fact, is what makes it so dangerous. It is most likely that someone left a bucket public, reused a credential, or forgot a staging server. If you do the boring basics with consistency, you are ahead of a shocking amount of companies. Sensitive data does not need heroics, but it does need hygiene, held consistently and steadily for years.
+
+### Tuning authentication systems.
+
+Depending on the populations that you’re serving, authentication may become a bit more complicated. This is specifically a problem with disabled users who may struggle with regular captchas (as some versions may cause issues with assistive devices). Users who are extremely low income or unhoused may also struggle to access similar devices, consistent phone numbers or internet service, or to access accounts from the same location. These are all markers of fraud, which can mean standard authentication systems can easily lock these users out of their accounts.
+
+Unhoused individuals can also have issues retaining paperwork while being transient, leading them to lose IDs and social security cards for identity verification. Authentication and being able to access their accounts is a leading problem for people who move around a lot and use a lot of devices, which could lead them to lose access to emails and phone numbers that they apply to social service programs with.
+
+Options for this can be more rudimentary security questions as opposed to 2 factor authentication, or a manual account recovery process instead of an automated one that locks out users. This is especially a consideration for mobile applications, since some app stores require usage of sign on with select partners, who may have authentication systems that override your own.
+
+Ultimately, you may need to make the tradeoff to have lower security standards in order to make your product more accessible to end users.
+
+## Algorithmic Design
+
+### Offline and low-connectivity situations
+
+If a user may be using information with low-connectivity or offline, especially rural areas, it may make sense to utilize local storage (or a more secure version) of information. For example, if your panic attack management app is unable to establish a secure internet connection, a good idea may be to have a local copy of instructions and a one-page fail screen that is able to walk someone through the process without requiring the internet. Having a cache of emergency information might be a good idea, especially for mental health or health software products.
+
+### Battery Life
+
+If you are developing safety-focused mapping applications that heavily leverage GPS, location, and Bluetooth technology, conserving battery life will be a major consideration that you should consider as a primary factor at the system design stage. Imagine you are building a safety application that sends a live feed of someone’s location to a chosen contact if they did not set off a timer.
+
+The constant live-streaming and updating of a location can be draining on the user’s battery, and inadvertently cause the device to die earlier than anticipated for the user. It may make sense then, to have an automatic disconnect of location services if the battery level is below 20%, or to intermittently report a location on a timed basis instead of live-streaming it.
+
+You must also evaluate that as a tradeoff with cutting off services at a point where the user’s safety is arguably at its’ most dangerous: when their battery is low and they need to be found immediately. An alternate way to handle this may be to share the information the user’s battery is low with their emergency contacts so they handle the situation with the gravity required.
+
+Regardless, battery life may need to be a consideration that you evaluate with multiple angles and solutions. The most important thing about tradeoffs and considerations like this is that you want to at least think of them, and not find out these problems in production.
+
+### Crisis Intervention and Escalation
+
+In the chapter prior, we discussed the creation of crisis intervention and escalation algorithms. In system design considerations, we will discuss more about what these may look like.
+
+A crisis intervention and escalation has:
+
+- Defined points at which a crisis is potentially created
+- A point at which a crisis is triaged
+- An interaction, or action taken about the crisis
+- An audit trail of those interactions.
+- [Optionally], a mechanism or method to specifically gather feedback in regards to the crisis intervention.
+
+### Encryption & User Safety
+
+One major consideration for software products involving encryption are both the negatives and the benefits that derive from them. Encryption provides safe user storage, and additional protections for harmed and vulnerable users. On the other side, encryption can be used to harbor criminal activity, and has been labeled directly as a risk to child safety. This section aims to provide context so appropriate decisions can be made, but let it be known that encryption will be an evergreen debate that most likely will never be entirely resolved, or truly finished.
+
+#### Encryption and safe storage.
+
+Encryption and the technology that enables it creates safe storage. This means that the content of documents or other media is protected from prying eyes, or from unintended users or use cases. A great example of when encryption enables safe storage is in relation to the handling of evidence in criminal cases. One unique example is that most material related to child abuse that used to be stored on DVDs, and other physical media. As lawyers and those involved in investigations would share evidence, these DVDs used to get lost, or would fall into the hands of those who weren’t supposed to have them. Instead, newer technologies use encrypted storage systems with tight access control to ensure that evidence is in proper controls, and is never left to the world exposed.
+
+#### Encryption and user protection.
+
+Encryption, by virtue of safe storage, can enable further user protections. For example, the safety plan of Verena that changed functionality was able to enable user protection features through reading local feature flags on the device,
+
+#### Encryption and child safety.
+
+Quite simply, some child safety and human trafficking organizations have accurate concerns about encrypted messaging, files, and imagery being used to perpetuate child sexual abuse, human trafficking, and more. On the opposite side, encryption of items is correctly used to prevent tampering of potentially sensitive information, like evidence in a criminal case, information used to whistleblow, and medical records. Encryption is a technology that is unbreakable, both in good and bad ways.
+
+Depending on your product, you may be eventually pressured to build a secondary system that keeps the fidelity of encryption intact, while also preserving child safety and reducing criminal misuse. The current approach to this is client-side scanning for pre-existing CSAM hashes, creating reporting pathways for users, and utilizing AI tools and algorithms to detect high-risk content. Even this approach is not perfect, and subject to a high degree of criticism.
+
+There are databases of hashed CSAM, which enable on-device scanning to match for already known CSAMs, which flags images while not revealing information about the photo aside from the hash match. But, this is disingenuous to the spirit of E2EE and does not track images that have not been stored in the hash database.
+
+You can enable user reporting tools to mark specific messages, but this may require the user to work against their own incentives. You can also utilize metadata and other AI tools to be able to gather information and detect the risk of a chat. For example, if a 13 year old girl is messaging a 47 year old man who has no other shared connections, and client-side NLP analysis of the texts are too friendly, this could be grounds for flagging the chat and escalating reporting tools or educational material about talking to a trusted adult to the 13 year old.
+
+These are problems further exacerbated by your end users: vulnerable communities can particularly like, or not like the benefits of encrypted messaging. Finding out that chats are being searched for problematic or criminal activity can be enough of a worry that well-intending users who are afraid of overreaching would not utilize your software product.
+
+All of this to say, this is an unsolved problem that is marred in controversy no matter the side you take. But, this is a balance of multiple people’s rights to autonomy, and safety. This is the kind of philosophical, societal, and engineering problem that can make software of care seem infeasible.
+
+However, if you are planning on having a public application that combines encryption and can also be used by children, this may be a problem that you need to confront. All Tech Is Human has a great guide about balancing child safety and encryption that will be linked in the resources.
+
+## Decisions
+
+### Facing Vendor Lock-in
+
+Managing vendor lock in is a system design and financial design decision. More and more companies are offering abstracted infrastructure tools at the cost of trapping software projects into vendor lock-in. The benefits are easily understandable: at initial usage, save development time. Then, pay up as scale grows and as your system becomes more locked into a singular framework. This is a big issue with newer frameworks, where the open source framework is the referral generator, and the actual underlying product deploys and manages the infrastructure behind it effectively.
+
+You may also have vendors who provide specific data or functionality, where you can get locked into singular vendors who have large amounts of leverage, both in terms of pricing and contractual obligations they can meet.
+
+Managing what this looks like in a system design context is mostly a business decision. Some larger companies will be ok with building a larger system setup and investing in IAC (Infrastructure as Code) that can make that transition easier, or would not mind vendor lock in. For smaller startups, being initially locked into a vendor that reduces the amount of cost from development is a worthwhile trade, one that can be re-negotiated and managed with each passing fundraising round. But the important thing is knowing if it’s an issue prior to needing to do a massive migration or system redesign
+
+If you are a startup or VC funded, you may experience infrastructure companies aiming to get you locked in at the early stage of development with free credits, accelerators, and very smooth account managers.
+
+An example of tools like this is Vercel, which is cheap to start but rapidly balloons in cost as usage and DevOps complexity grows. Next.js is an appealing framework, but is not easily deployed on AWS without a lot of additional work. Faura used Next.js and Vercel, but regretted it. The gains we had from the framework and ease of deployment did not feel worth it in the end, after experiencing a myriad of assorted issues.
+
+The good news is a lot of newer products within software infrastructure are aiming to tackle this, like Terraform and other Infrastructure as Code tools that can enable a smoother transition. But regardless, knowing you have access to those tools shouldn’t enable you to make unnecessarily bad decisions. The programming language and frameworks you may use are less portable and require further, and careful deliberation.
+
+The best tech stack you can have is one that you do not have to fuss over. It needs to be boring, consistent, and ideally widely known so that you’re not having to hire specialists to work on it. Watch out for getting into vendor lock in, especially if that vendor is new on the scene, fighting for market share, or is a VC backed company. These can be signs that costs will spike and the product may not be worth it, or may undergo significant changes.
+
+### Determine the relevant core of the system.
+
+If your product takes off, you will be majorly time constrained and struggling to keep up with the load of maintaining everything that you may want. Therefore, you should triage as early as you can what should be owned in-house, or otherwise built externally. For the most part, you should use most things out of the box.
+
+This is especially an issue with legacy non-profits or enterprise customers, where they are often certain they need to build a large in-house solution when they do not. Although it makes sense from an engineering and time perspective, resist the urge to rebuild what is not broken. It is better to use built, out of the box components and then transition to a custom system when necessary instead of accruing unnecessary technical debt and mental load by overbuilding solutions.
+
+<Callout type="note">
+
+[EXAMPLE BOX]
+
+</Callout>
+
+### Pre-plan budget failover.
+
+Especially if you are a smaller entity, or solo developer, you should give serious consideration to what you can and will do if your system scales beyond what you can afford. Imagine you build a mental health app where a user engages with a generative AI version of themselves to facilitate self-understanding and forgiveness. An upsetting news event or viral post could drive more traffic to the tool than you can reasonably pay for. Put simply, you need to determine if you are going to shut down and cut off access to the tool, or work to fundraise in other ways.
+
+<Callout type="note">
+
+[EXAMPLE BOX]
+
+</Callout>
+
+### Managing depth of observability.
+
+Observability in a codebase is just that: tools that are installed and embedded into the code to catch bugs, crashes, or other problems to surface them to the development team so they can fix them. Inevitability, managing observability will become a core part of monitoring critical pathways and catching adverse events.
+
+<Callout type="note">
+
+[EXAMPLE BOX]
+
+</Callout>
+
+### Testing against the hazard analysis.
+
+If your product did under the hazard analysis discussed in the product design chapter, setting a point in time to review the system design against the hazard analysis is the first step in implementing it. Ideally, the hazard analysis is completed prior to system design and components of the system and specifications in algorithmic design are built with it in mind. If not, at the very least it should go through a cursory review prior to development as the system design enters final stages of crystallization.
+
+<Callout type="note">
+
+[EXAMPLE BOX]
+
+</Callout>
+
+### Aligning evidence harness.
+
+An easy role that system design has is ensuring there is a spot for an evidence harness to be implemented. This is often easily enough embedded within analytics tools with proper labeling, or being built as an additional module with specific analytics and outcomes being recorded. One could even go as far as to build a module that integrates the adverse events tracking, outcomes through user-information requests, analytics, and bug reports to automatically generate and update the evidence harness.
+
+<Callout type="note">
+
+[EXAMPLE BOX]
+
+</Callout>
+
+**———**
+
+<Sources title="Resources">
+
+-&gt; The optimal amount of fraud is non-zero: https://www.bitsaboutmoney.com/archive/optimal-amount-of-fraud/
+
+-&gt; Balancing privacy and child safety in encrypted environments: All Tech is Human
+
+-&gt; Circuit Breaker in System Design: https://en.wikipedia.org/wiki/Circuit\_breaker\_design\_pattern
+
+https://web.archive.org/web/20180417100835/http://iansommerville.com/software-engineering-book/files/2015/08/Ch-12-Safety-Engineering.pdf
+
+</Sources>

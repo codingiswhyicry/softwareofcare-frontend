@@ -1,0 +1,546 @@
+---
+title: 'product design'
+label: 'Chapter 7'
+---
+
+Deep inside a burn center in Seattle, a nurse tends to the burn wounds of a burn patient. And that burn patient is wearing a VR headset.
+
+Doctors commonly rate burns as one of the most unbearable forms of wounds. When patients are resting, they often feel no pain with the help of opioids or other forms of pain management. But, burns are incredibly complex injuries. They require increased daily care over the course of recovery, sometimes with grafts requiring staples, cleaning, or bandage changes.
+
+University of Washington discovered that even with opioids, the pain management during wound care was not enough. With morphine, a majority of burn victims rate the pain as severe or excruciating (a 7/7 on their pain scale).
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="University of Washington, Photo Credits"
+  width={1600}
+  height={1000}
+  caption="University of Washington, Photo Credits"
+/>
+
+SnowWorld is a VR headset video game that is designed to distract from this pain for burn victims during wound care. In a VR world, often with headphones and other items, a user flies through a snowy wonderland and throws snowballs, and interacts with the world. SnowWorld reduces the pain a burn victim experiences during wound care by up to 60%. The more interactive the game, the more distracted the patient becomes, and the less pain they feel.
+
+Because of the major reduction in pain, University of Washington Harborview Burn Center took it an extra step. They designed a VR headset that can be used within water. Some forms of wound care requires a patient to be bathed, utilizing the water to soften the skin with the burns.
+
+SnowWorld, and the accompanying design of the software and the VR equipment that delivers it, is an excellent example of product design. Not only does making the product more engaging correlate with less pain, they have situationally met the user during their toughest situations, in the environments they’re in.
+
+Now that you’ve undergone development of your care methodology and built an early idea of the impact you want to have with it, it’s time to turn to design the product that will meet the hands of your users.
+
+## The product development cycle.
+
+The product development cycle is best conceptualized as a loop, instead of a line. This loop will be familiar from our care methodology and theory of care iterations. In development, you research the problem, define the smallest version worth building, build it, put it in front of real users, learn from what happens, and feed the learning back as improves towards the next round.
+
+A product can move through this development loop dozens of times before it's mature. Often, products that fail treated the loop it as a line. Instead of iteratively building small, they research once, build for a year, launch, and discover the assumptions were wrong in a deeply expensive way.
+
+At the start, a theory of care and a care methodology, even thoroughly researched and dissected, is nevertheless a stack of unproven guesses. Iteration is the process of converting guesses into knowledge, with the riskiest guess first.
+
+Ideally, each cycle of early product development picks the most foundational or unknown assumption standing and builds the smallest thing that tests it. This can look like a prototype, a survey, a landing page, a single working feature. It’s important to note that the point of the early builds isn't to serve users, it's to find out whether the function being built should exist in its current form (or at all).
+
+This is directly where the assumption remediation from your care methodology can plug in, as a list of assumptions to start testing and debugging. Even further, the evidence harness can be tweaked and used as a first format for early user testing and interviewing.
+
+Generally, progress in early development is determined by assumptions sustained or understood as incorrect. There’s also more nuance: some assumptions are not entirely true or false. They can sit in some middle, perpetually broken ground. Going back to the PaniqAttack example, an assumption that goes through remediation may be related to if people who are having a panic attack wish to interact with an app. The answer may not be yes or no, but “13/20 people we talked to did”. Thus, there is an intermediary graveyard for assumptions where an inventor may need to form risk tolerance. 10/20 people who are comfortable with using an app may be an acceptable risk. But, if 3/10 like a walkthrough, that is an unacceptable risk.
+
+Returning back to the thread about markets, your product development iterations are an early taste of your market. If PaniqAttack is only liked by a pool of 20 people who experience panic attacks, it may not be a strong value proposition or the right move. But, if out of multiple different feature options, the walkthrough performs the best, it may be the best one. At that point, the inventors can decide to take the risk or not.
+
+There are two irreplaceable inputs keep the loop moving forward, and grounded in reality. The first input is conversation. Talking to users and doing the work to disprove your assumptions and first instincts is never a research phase that reaches completion. The people designing and developing the product should be as close to these conversations as possible, if not leading them. Early in the development of Faura, I would listen to every recording of sales calls that Valkyrie was on and review all of the notes from her meetings. Beyond users, talking to stakeholders involved on a product can continue to develop the prism around it and come to better inform you about your end users.
+
+The second input is data: each cycle should define prior to gathering user input what result would mean "keep going" and what could mean "change course”. Results interpreted after the fact can always flatters the product, or be shaped towards the direction that a company is headed in irregardless.
+
+For software of care, there is an additional amendment needed for the critical paths and safety-critical components of the product. The speed should vary based on risk. The parts of the product that are guesses about preference iterate can iterate fast and freely, without much concern or oversight from the team. On the other hand, the parts that are guesses about safety should iterate through prototypes, advisors, and co-creation before they iterate on live users. This is especially the case with anything that is a critical path, or could be crisis care.
+
+## Prior to design.
+
+### Defining resource constraints
+
+The core of your product and what will ultimately shape it over time are the constraints around it. These constraints are funding, social, time, feasibility, and more. Defining resource constraints ahead of time will help define what kind of product is feasible. The best product is one that is feasible, and sustainable to continue to develop.
+
+A short blurb or thought about resource constraints that is known by the inventor and everyone on the team can help share thoughts, and align on what is feasible and what is not. It also helps to know the strength of people involved with the product, and what is an easy build vs. something that will require finding additional personnel.
+
+Resource constraints should include knowing: what kind of time commitments people have made to the project, what kind of financing is current and what is being pursued, and what other support has been devoted or earmarked towards this project.
+
+### Define product requirements
+
+The first order of designing a product is figuring out what it needs to be. At this point, your early research, care methodology, and impact brainstorming should have given you a solid idea about what the requirements are for your product are. This will shift over time, and will grow as you commence engineering system design. An early product should start small and aim to keep the scope of the requirements tight, and based on what’s necessary.
+
+The product requirements should come out of the resource constraints, and the desires of the user. This is where the care methodology, user research, duty of care, threat modeling, impact measurements, resource constraints, and everything comes together to form what the product needs to have.
+
+Product requirements should:
+
+- Define the situation and a bit of the user situation, enough to inform situational constraints and desires.
+- Encompass the cost and resource limits of the operating entity
+- Clearly define the desired success metric and the outcomes users want
+- Discuss the care methodology and the different components needed to make it happen
+
+One of the biggest problems with social good products can be the need to have an incredibly broad scope. It also comes naturally, as someone who wants to help others, to keep on putting things onto your plate that you imagine will make the product more helpful. Defining scope from an impact standpoint will help correctly frame the narrative that you can give to yourself, team members, investors and more.
+
+Defining scope that you are not leveraged to do can help focus in on what you will be better at. Your entire premise is to be figuring out and leveraging to the fullest extent what your system can do for your users. Having a clear limited scope sets you and the team up for success.
+
+<Callout type="example">
+
+**PaniqAttack Product Requirements:**
+
+- Based on a mobile application that is able to load offline instructions
+- Way for user to say after they finish a flow if it reduced their panic attack
+- Calming flow, with clear content that is easily readable for people in stress
+- List of local resources to be delivered
+- Number of self-care tools, or a self-care checklist to help return a user to their baseline.
+
+</Callout>
+
+### Devising a feature set.
+
+A feature set is the care methodology translated into things a user directly interacts with and can touch. A feature set is the delivery mechanism for the aspects of the care methodology that survive testing and product iteration.
+
+In practice, a feature set for a product sorts itself into three tiers.
+
+- Core features deliver the methodology directly.
+- Supporting features make the core usable.
+- Outcome measurement features.
+- Any features specific that minimize adverse events, or support safety-criticality.
+
+Each feature also should inherits its weight from the importance of the methodology step it serves. A feature delivering a step where the user is in crisis is safety-critical whether or not it looks like it, whereas a feature serving convenience or visual sweetening can fail like ordinary software.
+
+### Choosing a point of application front-end
+
+The most important part of a software product will be the point of public application - or, how users interact with your software product. This should be directly defined and informed by research on the ideal user, and the problem they’re facing. The more primitive and simple to build at first, the better. For those working in a pre-existing larger entity, your tech stack may already be defined for you.
+
+The personal rule of thumb I have is to use the most general point of public application that you can. When successful, a product can always add more front-ends at a later point. But to keep it simple, an early product should niche down to the format that will be logistically the easiest to iterate on, instead of generalize up to a more complex format.
+
+Each tradeoff that you want to choose as your public point of application will depend on your personal background, resource constraints, risk appetite, and more.
+
+|  |  |
+| --- | --- |
+| Website | A lot of applications on software of care can be completed through a website. This is a good option for mostly content-based tools that do not need custom interfaces, complex data stores, and can serve and share broad tools. This is also a good idea for authentication-less systems, where you want anyone to be able to access information. This is also the best idea for resource-constrained non-profits, who can use no-code website builders to create their own simple software products.<br />(Example: Wikipedia) |
+| Mobile Applications | Mobile applications are best suited for software products that need to be immediately accessible to users, that will be used often, and that have offline or specialized requirements. Mobile applications will often have to go through review to be approved, and will require additional marketing assets and attention to detail to stand out. Mobile apps may require a yearly fee, but you often do not pay front-end hosting costs. Mobile apps with a back-end on device can be a very cheap way to provide tools to people.<br />(Example: Headspace) |
+| Video Games | Video games can be an under-utilized component for many strong pieces of software.<br />(Example: Wii Fit, SnowWorld) |
+| SMS / Text Messages | Text messages are a great way to make a device agnostic tool that is accessible to most, and that does not rely on the internet. The flip side is that you need to own a phone number, often pay per message, and comply with regulations that can be confusing and hard to understand. This is a great option also for a light codebase that does not require UI design, and just requires content and content flows.<br />(Example: Crisis Text Line) |
+| WhatsApp / Social Media Bots | This is a slight version of the SMS bot, but that would work better for a more international audience. This would also be a good consideration for users who are running into harm on these social media platforms (like having triggered eating disorders). This can also serve as having your distribution point and access point close together, potentially leading to higher ROIs.<br />The primary issue is then that you are a vendor locked into that social media platform. That platform will also use the information of others interacting with you to form its algorithmic opinion.<br />(Example: CHAYN’s WhatsApp messenger) |
+| Hotline / Voice Agents | A hotline can be accessed through calling a phone number.   (Example: National Suicide Hotline) |
+| Web Application | A web application is an ideal end case for someone who will have consistent internet access, and who will repeatedly interact with a software product over time.<br />(Example: Khan Academy) |
+| Desktop Application | This is for computationally intensive applications that need to be in the user’s workflow, and for users who will have repeated access to a laptop. This would probably be more beneficial for an enterprise product, or a product that requires compute and also offline storage.<br />(Example: NordVPN) |
+| Wearable Device (like an Apple Watch) | Wearable devices are properly leveraged when you need access to a sensor, or closer access to them compared to a mobile app. This might be a good option for more health-focused software products, or products that need an emergency interface.<br />(Example: Apple Watch, Oura ring) |
+| Proprietary Hardware Platform | A Proprietary Hardware Platform (like a medical device or friendship robot for the elderly) is the highest threshold of moat, and the hardest to actually complete and most capital intensive. It also is perhaps the best option for medical or safety devices, and ensures a physical presence in your user’s life that no app on a phone could compete against.<br />(Example: PARO the robot) |
+
+## Fabricating your product.
+
+### Universal Design
+
+Universal design is an approach to creating an artifact that is built for the widest possible ranges of people. The idea is a product should be built from the start to be as adaption-free as possible, and will be able to be used by the greatest extent of people possible. The most common example of this are curb-cuts in sidewalks, or the parts of the sidewalk that dip down to street level at pedestrian crossings.
+
+While these are helpful for those using mobility devices, they can also be utilized by those pushing strollers, or pulling luggage. The core idea behind universal design is that often, those at the edges of usage can face challenges that are not different from the majority of users, but just greatly amplified. And by building a solution that works to encapsulate those edge cases, everyone benefits. Universal design is often seen within the context of buildings, but is directly applicable to software.
+
+A lot of practices that make websites and mobile apps accessible and understandable benefit all users involved, and force clarity and functionality that works for users. Although there’s variations for different ways that universal design is implemented (like through clothing, physical products, etc), the original UD framework is heavily applicable to software.
+
+- Equitable use: one experience for everyone, no segregated "accessible version."
+- Flexibility: multiple ways to do the same thing: mouse, keyboard, touch, or voice depending on the user's needs.
+- Simple and intuitive: usable regardless of experience, literacy, or concentration level.
+- Perceptible information: content survives any sense being unavailable (alt text, captions, contrast).
+- Tolerance for error: mistakes are hard to make and easy to undo.
+- Low effort: minimal steps, no sustained precision.
+- Appropriate size and space: targets reachable by any hand, grip, or device.
+
+Although universal design is meant to cover most edge cases, there will still be instances in which additional accessibility concerns will need to be outlined and resolved. We’ll discuss those further into the chapter.
+
+### Finding ways to prototype
+
+You can find easy ways to prototype what an actual product would look like without needing to build a functional one. PowerPoints that can be shared as a PDF that someone can easily walkthrough is super helpful, and so are short videos that someone can watch that demo the system and allow them to give feedback without requiring a large portion of their time. Prototyping, especially for early stage products, should be incredibly easy and designed around fast and early feedback cycles.
+
+The value of prototyping is to create a minimum effort version of your care methodology and to see how people react to it, prior to investing in the software infrastructure of managing it. You should ideally have some assumptions from your care methodology risk assessment that you’re looking to prove or disprove, as well as general direction from your impact brainstorm.
+
+You should go into prototyping with clear ideas of what you want to understand from it. Some points of focus should be: does the care methodology work? is it clear how to interact with it? does it feel like an effective solution even at the early stage in development that you’re at?
+
+Each round of user interviewing should have some specific goals, or insights that you’re trying to garner. Just showing someone a prototype and asking them their thoughts is unlikely to garner useful information you can bring back to product development. Handing them a prototype and asking about clarity, their thoughts about the privacy implications, or specific situations where they would have used this is a stronger base of questioning.
+
+If you have the time, doing research on interviewing users is an immensely helpful skill to have. It may feel intuitive to watch people look at your prototype and to know if they like it, but it is deeply important and nuanced skill that takes time to develop. Understanding whether or not you are gauging the correct insights and response can make or break your product.
+
+It is a good idea to also not test especially sensitive situations in-situ at this point, until the product is more concretely set in stone and has a bare minimum amount of protections for beta users. This is less of a concern for less safety critical applications, but more for security systems, medical focused applications, and anything else that implies a high degree of trust that is not replicated within the actual prototype.
+
+### Ensuring accessibility.
+
+Accessibility is typically imagined as a lens that makes sure software is usable to those who have disabilities. Although that’s a start, accessibility can encompass multiple levels of a product, from interaction with assistive technology, making legal jargon understandable, to going further and ensuring cost-accessibility of the product. Think about accessibility as making software easier for everyone, increasing therefore the scale, market share, and size of your potential user pool.
+
+Beyond that, accessibility is consideration and due diligence. There have been instances in my career where I am working on projects specifically for disabled people who have motor or vision issues, and they are barely able to read the website of the company because the color contrast work was not done correctly.
+
+Doing accessibility well is another form of acting with consideration to your users, and working to build the trust and baseline understanding of their life that enables you to provide care.
+
+**Accessibility for those with disabilities**
+
+Working to provide accessibility options is easier than it may seem, if you are a beginner in software development. Accessibility checks and protocols are widely accessible, and take a bit of elbow grease and consideration initially to learn. But, when the process is embedded, it is quite easy to add accessibility to tools and ensure everyone has an experience that works for them.
+
+The accessibility standard today is WCAG 2.2, and a new version comes out every so often. There are multiple levels for different intensities of accessibility, Level A being the easiest and bare minimum to Level AAA being most comprehensive and hardest to implement.
+
+Under United States law, software products that serve the general public are somewhat legally required to be ADA compliant, of which WCAG is the equivalent. Many lawsuits are filed in bad faith against software products that do not take accessibility into account, and can cause a lot of strife that is easily avoided. The ADA’s applicability to websites at this point in time is being contested in courts, but it definitively applies to local and state government entities, while private sector obligations are determined mostly by case law.
+
+The specific focuses on accessibility requirements you should choose for your software product depend on the context that it is used in, and the ways your product can reasonably support accessibility depend on the actual usage of your product.
+
+If you are choosing a front-end tech stack, you should make sure that any UI libraries or front-end frameworks can support accessibility if it’s a clear requirement. Some PWAs and newer UI libraries can struggle with this, and it’s worth a cursory check at the system design stage to make sure there’s no foreseeable incompatibilities with that.
+
+**Accessibility for low-income users**
+
+Accessibility can also sprawl into the context of financial accessibility. If a user may benefit from your smart watch app, you are inherently limiting access to people who can afford a smart watch. Software products that are built to the building edge of device, framework, and operating system features may be innovative, but can leave users with older devices, or those who cannot afford additional devices (like wearables) behind.
+
+Work to understand the socio-economic limitations that your software enables, and work to find edge cases for them if it’s a priority for you.
+
+Many freemium models are good at this, where a subset of features are free and more advanced ones are behind a paywall. You can also build a product structure in which a greater institution pays for access to the product as a benefit to its’ institution’s members. Like a wellness app being offered by an employer or health insurer, a security system application given by a non-profit to its’ community. Selling into institutions can often be a long, and drawn out enterprise sales cycle, and often needs to be accompanied by a strong consumer user base and evidence base as well.
+
+Additionally, some software companies have implemented a buy-one-give-one structure, where they have scholarship programs that gift membership to someone who is low-income for free or reduced cost.
+
+Many wellness products also go through approval with the FDA in order to be eligible for HSA/FSA funds, enabling people to pay through it from other means.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Figure"
+  width={1600}
+  height={1000}
+  caption="Figure"
+/>
+
+**Accessibility for situational concerns.**
+
+Think of accessibility less as a specific person or criteria, but more as a mode of trying to make your software product available to anyone and everyone who may find it beneficial. Accessibility is access, encoded. Literally - and having an eye towards accessibility while designing software of care goes beyond a checklist or financial literacy. It means making sure your software product is findable and usable to people where they are in their current lives.
+
+If a user is in crisis, are they able to find the resources they need? Or are they buried 5 screens deep, with no intuitive sense of how to get there? If you are building a domestic violence app, is it “accessible” if your feature set requires a user to enable them while in a physical fight? Building for accessibility means lowering the bar, and making it as easy as possible for the user to engage with your product for it to make its’ intended impact.
+
+This is especially critical when engaging with users who may be going through uniquely stressful or harmful circumstances. For example, building an incident log tool that is unable to manage edits for abuse victims is inaccessible to many people. Some people who go through a traumatic situation are unable to remember details all at once and need to considerably revise and ruminate with time to be able to accurately remember everything.
+
+It’s also worth remembering that digital analogues to real-world services may not often translate, and can be more of a burden than otherwise considered. It is not enough to just take a physical service and to translate it digitally. You might need to additionally rework it further to be a digitally native process.
+
+I’ve addressed this a couple of times within the context of apps.
+
+First and foremost, my app AnxietyHelper was a guidebook that had articles and some tools, sorted by mental health condition. It was quite rudimentary, and one of my concerns was that it might be triggering or too overwhelming to throw resources at a user directly. The solution to this was a feature called ‘quick access’, where someone could find a resource for the mental health condition they were looking at by long-pressing on the screen. An alert would show that would show the resource and ask the user if they wished to move forward.
+
+Secondarily, my mobile app Verena faced a number of security and safety concerns that I wanted to get ahead of. It was meant to be a mobile application for those in dangerous situations, where someone was able to send a message to their community, save photos and videos, and set a timer (where if it went off), a message would be sent to someone’s contacts telling them there was an emergency. The contacts were tiered, so emergency messages were not sent to everyone. The emergency process would contact more people if the user did not check in with the application to say they were ok.
+
+One of the most complex challenges I had was hiding the application from other actors in the user’s life. For example, someone who has an abusive partner may have their phone and be able to access their applications and photos. This required the application to be a ‘chameleon’, and had a variety of interfaces that changed the app icon and the initial landing page of the application. The dummy applications functioned as real products: real cookbooks, math tutoring applications, and a real news website. Then, when the user logged in, they were able to access the real feature set.
+
+Part of the appeal of the false interface is that it allowed users to interact with the feature set without actually logging into the application. If a user held down the log-in button with no information added, it would alert their highest priority contacts. If a user typed “shutdown” into the login fields and tried to log in, it would erase everything on the application and turn it into a dummy application. All data would be erased besides the shutdown mode being enabled, so all user data would be erased and inaccessible. A user is able to breathe safe knowing that they have the autonomy over their data: the choice to erase what could be later valuable evidence is up to them.
+
+When someone opened the application after enabling shutdown, it showed an intentional recurring server error. This kind of detail requires accessible situational awareness for your users. As you design the actual product interaction layer, make sure to consider the usability for these critical paths and the circumstances where someone is coming to use your product. Perhaps, they are in danger, mentally unwell, feeling especially triggered, needy, or uncared for. Understanding the mindset and their needs and being able to predict them before the user recognizes they even have the need is a beautiful way to provide care when someone needs it.
+
+**Accessibility for everyone.**
+
+Accessibility is a benefit that enables more people to use your software. Many early stage products do not take the time to consider accessibility as a requirement or consideration, but building it in early as opposed to layering it on top of pre-existing software over the long term can save time and build familiarity with the concept in many ways. Overall, software that cares should be accessible to people who wish to use it. Accessibility is a way to encode empathy for your user, and is something that you should wield as much as you can, when you can.
+
+### Bespoke UI/UX Components
+
+If you have any safety critical paths, or critical paths in general, UI components are a direct way to communicate care, support, and direct users to a clear pathway. Especially more recently in the mid 2010’s, there’s been further development of UI components specifically meant for safety critical situations, or crisis situations. I’ll describe each of these, best practices, and show a visual sample for reference. These components are important, because they are the first visual example that you’ll get of being able to encode empathy for users. These components show the first flesh of what it means to meet users situationally.
+
+#### Emergency Exit Bars
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Figure"
+  width={1600}
+  height={1000}
+  caption="Figure"
+/>
+
+Emergency exit bars are banners at the top of websites where a user may need to immediately exit if someone enters the room. They are mostly deployed on websites for victims of abuse, human trafficking, or other interpersonal relationships where harm occurs. These websites can also show an announcement on landing warning the user to clear their internet search, or informing them of other information to keep them safely browsing.
+
+The example on the right was Astra’s web app, Everine. It was a general resource directly for entirely digital programs that someone could apply for entirely from home. Although it wasn’t an app specified to abuse victims, we provided a lot of resources for abuse victims.
+
+On the thread that software products are uniquely advantaged for more stigmatized things, an emergency exit bar might be a good idea for anything that someone may face stigma about or consequences for. Generally, the more vulnerable a group is, the more autonomy you want to give them and opportunities you want to provide them to retain control over their situation.
+
+| **Used for** | **Action taken** | **Shown when** | **Notes** |
+| --- | --- | --- | --- |
+| Emergency exit | Typically, a user is immediately redirected to another website that is more benign. | A user is on a website that a close partner or connection may have a negative reaction to. | [ADD NOTE]] |
+
+#### Intervention / Cooldown Components
+
+Intervention components are part of crisis detection, or resource referral. They can also be repurposed to limit user interaction with harmful material, or to force the user to pause interaction with the tool.
+
+A cooldown, or check-in screen, is considered a step in some crisis intervention flows. These are typically used within social media platforms as a way to surface content directly to users instead of passively allowing them to interact with negative content on the platform. It can also be used to target users who are posting cruel, or otherwise prohibited content on platforms.
+
+Cooldown screens can be repurposed in mental health and crisis applications to enable a user to monitor their window of tolerance and to ensure that a user’s triggers do not spiral without checks and balances. Often, these screens will not do more than offer resources and inform a user that an automated system or a referral from a user induced the cooldown screen.
+
+[ADD EXAMPLE IMAGE]
+
+| **Used for** | **Action taken** | **Shown when** | **Notes** |
+| --- | --- | --- | --- |
+| Interjecting into negative user behaviors prior to the point where they cause deep harm. | There is typically not always an action taken by the user besides acknowledgement or potentially clicking into a resource. | A user has a reaction that prompts a cooldown. | [ADD CONTENT] |
+
+#### Support Tools
+
+Support tools is a word for a wide variety of screens that often funnel users to emergency resources. This can be considered a last-mile delivery crisis response, where software products ‘handoff’ users in crisis or who otherwise need support to organizations and resources equipped to handle that support. They often are designed with clear calls to action, and mostly include references to hotlines and helplines.
+
+[ADD EXAMPLE IMAGE]
+
+| **Used for** | **Action taken** | **Shown when** | **Notes** |
+| --- | --- | --- | --- |
+| Providing a handoff to additional external resources | Pushing user to engage with a secondary resource more tailored to their needs | When triggered by user, or otherwise strategically placed within the user interface or navigation menu. | [ADD CONTENT] |
+
+#### Hidden Interfaces
+
+A hidden interface is a bit of a trapdoor for users to hide the true purpose of a product behind a false wall. Similar to emergency exit bars, these are typically used in situations where the user wants discretion from another 3rd party. These hidden interfaces are typically generic or otherwise generally relatable forms of website, like a fake news or cooking application. Then, when a user needs to engage with it, they theoretically remember how to sign in and activate the true interface underneath.
+
+A hidden interface is a very interesting idea, and one that requires a lot of deft and proper consideration to get right. We had one within Verena, and the considerations that followed were of big consequence.
+
+First and foremost, a hidden interface needs to be convincing. This means adding additional content or business logic to an application, like a news API or a cooking receipe API. If an interface is not convincing, it risks someone finding it and sparking more suspicion. Ironically, while it needs to operate well, it needs to NOT be publicized. The more widely advertised a fake interface is, the more it can be a concern that those who it is meant to keep out will catch on. So, it needs to be bland, functional, and utterly unremarkable in many ways.
+
+The secondary considerations are in relation to the usability of that interface. Will a user in crisis remember the specific way to log in or to find the true interface underneath? This was a huge concern for Verena, but also for the other applications that have used this. In Verena, we created a bit of a fake interface within the hidden interface. There was 3 modes to this:
+
+- A user chose their own version of a hidden interface
+- They would come to the sign in screen to operate the security system
+  - They could log in directly to the application to access the full toolset
+  - IF ENABLED, they could hold down the log-in button without any content in the sign in screen. That long press would show an alert that a user’s highest priority contacts have been alerted. This action was chosen specifically, because we believed it would be highly unlikely for a person to go to a sign in screen and hold down a log-in button for long periods of time. The idea was by inverting a principle of usage, we would hide the mechanism.
+  - IF ENABLED, a user could type ‘shutdown’ into the username, or password field. When they opted in, it would destroy all of the data saved on the device, which was encrypted locally. The only thing that would remain on the device was an encrypted local feature flag, which showed a persistent ‘failure’ screen, telling the user a server crash had happened. To restore usage of the application, they would need to delete it entirely and re-download it from the App Store.
+
+With the hidden interface within a mobile app, we were able to change the App Icon. Unfortunately, we were not able to change the name of the application from Verena. This was a big security hole, and one I wish we were able to come up with a better solution towards.
+
+[ADD EXAMPLE IMAGE]
+
+| **Used for** | **Action taken** | **Shown when** | **Notes** |
+| --- | --- | --- | --- |
+| A dummy interface to hide a secondary interface underneath | Pretending to be an actualized interface, with one or more secret mechanisms that enabled to access or enable the underlying interface and feature set. | A user is on a website that a close partner or connection may have a negative reaction to. Should be the first screen that shows up, or can even be integrated within the emergency exit bar to switch from true interface to false. | Requires nuance, attention to detail, and a strong degree of fidelity and design finesse to make happen correctly. |
+
+#### Accessibility Tooling
+
+Accessibility overlays are overlayed icons that display consistently on a screen, designed to make accessibility tooling and changes easier to surface for a user. In some contexts, they are well designed. In iPhones, these bubbles exist on the Home Screen and core pages, and enable users to switch on and off accessibility functionality. In addition, users can program specific gestures to automatically enable an accessibility feature. My own iPhone has an accessibility shortcut where by double tapping the power button, it automatically turns my phone black and white.
+
+Although accessibility tooling is mostly discussed in the form of providing accessibility changes to users with disabilities, it can also be extended into the realm of crisis support.
+
+In Aureus, we re-worked the accessibility bubble on iPhone to provide users with a ‘Quick Access’ bar of crisis features. In Aetheria, the mental illness management application, these features included a panic attack guidance feature, a safety plan feature, and hallucination / delusion walkthroughs, as well as crisis resources. Accessibility tooling and crisis design can often be sisters, both working to provide the user a fast and easily enabled way to access additional support.
+
+Alternatively, some accessibility overlay tools can be counterproductive. A segment of technology companies take pre-existing websites that fail accessibility audits, and add an overlay that is supposed to repave over the broken accessibility functionality of the core website. These overlays are often critiqued for being a band-aid fix to an inaccessible website that can otherwise not be navigated with system-level accessibility features (like those natively packaged with HTML, VoiceOver on iPhone, etc).
+
+[ADD EXAMPLE IMAGE]
+
+| **Used for** | **Action taken** | **Shown when** | **Notes** |
+| --- | --- | --- | --- |
+| Enhancing access to tools that need to be close to the user. | Depends on the use case, can direct users to crisis resources, favorited tools, or pre-determined accessibility tooling. | A user is on the main pages of an operating system, or the software product, | Some accessibility tooling overlays used on inaccessible websites can cause more anger than they resolve. |
+
+#### Emergency Interfaces
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Figure"
+  width={1600}
+  height={1000}
+  caption="Figure"
+/>
+
+Emergency interfaces are screens that take an emergency action on behalf of a user. This can mean notifying authorities, sending an emergency SMS message to a group of trusted contacts, or an otherwise serious action. Emergency interfaces are kept simple, clear, and with direct informing of the action. Some emergency interfaces may also add a secondary layer of friction by asking the user to double opt in. You can see a rudimentary version of a tool called Panic Alert that was added to AnxietyHelper in 2016. In hindsight, I would have made the text easier to read and added more visual cues instead of relying on text to communicate. But alas, failure is the price of existence.
+
+Most emergency interfaces will have little to no calls to action, and a clear singular outcome that will occur as a result of pressing one button, or in terms of not making something occur.
+
+A good emergency interfaces will abstract all relevant information to the user and make it as easy for them to swallow.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Figure"
+  width={1600}
+  height={1000}
+  caption="Figure"
+/>
+
+| **Used for** | **Action taken** | **Shown when** | **Notes** |
+| --- | --- | --- | --- |
+| Initiating emergency communications, like an SMS alert or calling 911. | Either opting into, or not allowing an emergency action to occur. | A situation or flow initiates it, like a user not finishing out a timer, or a user starting an emergency flow process. | [ADD CONTENT] |
+
+#### Safety Planning
+
+Some products specifically focused on users in unsafe situations have implemented usage of a safety plan. Some products have even formulated this as a core feature set. In social work, a safety plan is a pre-made plan for what happens in a scenario that the user has to rely on. It can be used in the context of therapists aiding suicidal patients, or domestic violence victims planning how to safely leave a violent situation. When I was developing Aureus, Astra’s open source front-end framework to design user safety critical products, we took the concept of a safety plan a step further.
+
+In the Aureus context, users were able to create a safety plan that would be encrypted and stored locally on device. The safety plan defined modifications a user could make to the application that would enable it to be safer for them.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Figure"
+  width={1600}
+  height={1000}
+  caption="Figure"
+/>
+
+In no comprehensive list, the safety plan functionality for Aureus included:
+
+- Requesting the developer only sent necessary emails
+- Requesting notifications be disabled
+- Requesting no biometric requests
+- Requesting enabling 2FA
+- Requesting local data storage instead of storing information on a database
+- Requesting data is deleted within the application if too many log-in attempts fail
+- Enabling a permanent exit bar to exist at the top of the screen
+- Disabling screenshots of the application
+- Logging all failed log-in attempts for the user to review later.
+
+Beyond those settings, the developer could also enable the Quick Access bar previously mentioned, and link their own tooling and business logic within. In hindsight, 5 years later, some of these requests feel a bit redundant. But, the idea of enabling the user to directly modify a software application to make themselves safer is something I am genuinely proud of.
+
+| **Used for** | **Action taken** | **Shown when** | **Notes** |
+| --- | --- | --- | --- |
+| Changing functionality to protect the user, or walking them through a dangerous situation. | Context dependent, can change the underlying business logic of the application or can simply be a flow users walk through. | A situation or flow initiates it, like a user not finishing out a timer, or a user starting an emergency flow process. | Should always be user initiated and in user control. Safety without autonomy is prison. |
+
+## Product Testing
+
+### Formulating user segments
+
+As you will undoubtedly find, most products do not have a monolithic user base or user story. You will often find users to have multiple ranges of problems, solutions, reactions, and contexts. As the product is developed, formulating tabs on user segments will help to organize information and to provide customization that feels augmented towards each segment. A strong product is able to traverse these different segments by augmenting them across the core care methodology.
+
+What this will look like, as the product is adopted by different user segments, is that the core care methodology is standardized, but specified and made more relevant to that specific user by adjusting for their segment. Information that is helpful for a user who is looking for financial aid for college as a young student is not the same as resources that you may provide for a single mother who is looking to go back to school.
+
+User segmentation and developing user profiles and stories as they become clear is important, because it helps to contextualize what is otherwise a mass blob of people with different desires and perspectives. Managing segments in product development, and then checking them post-launch to determine what user segments are adopting, and which ones are not, can also be a good indicator of where your care methodology is well tailored, or where it’s falling short.
+
+#### Engaging in co-creation.
+
+Co-creation means the community you're serving helps build the product from initial conception to market release. There is a wide gap between interviewing users about their problem and putting people from that community in the room where scope, features, and duty of care get decided, and the gap shows in the finished software.
+
+Products built *about* a community or problem can feel skin deep, and more akin to a vanity project. Products built in conjunction with a group of users show a deep understanding of them, encoded through the feature set, language used, distribution channels chosen, partners aligned, and more. People are exceptionally good at sniffing out, and avoiding, those they do not believe to be authentically engaging with them. Products are the same.
+
+Even more so, people want to feel understood when they use products. Co-creation, and shared authorship and autonomy are a way that users can feel the products were tailored to them, and not just as though they got a generic version of a tool that could belong to anyone. For example, I get a little wary of any autism related group that does not have a singular person with autism involved - but instead has people who flaunt relationships with others who do have autism. That to me signals that they care enough to show that people with autism are involved, but not enough to give them autonomy and ownership around decisions that directly go towards impacting them.
+
+Co-creation is the process of giving people ownership of a product that solves a problem they have experience in. This is where if you are a user who is solving a problem for yourself, you have a major strategic advantage already. The best sort of inventor is one who is solving a problem they have faced, and have seen others face.
+
+Otherwise, co-creation can occur by filling those with direct and indirect experience to be directly involved with the entity, ideally with ownership if the entity is a for-profit. The first, and most foundational step is recruiting people with direct experience of the problem into roles with actual influence.
+
+This can be standing co-design group that reviews builds, community members on your advisory board rather than in a feedback channel, or in the strongest version, on the team. It also means paying them, through ownership, credit, autonomy, and ideally compensation.
+
+Communities that attract social-good software tend to be over-studied and under-compensated, and "exposure" is not a rate. If someone's lived experience is shaping your product, that is expertise, and expertise gets a check. If money is genuinely impossible, something real they name themselves.
+
+This is a struggle I have experienced a lot, and have also been on the other side of. Often, helping vulnerable communities is underfunded, and there is not often a lot of capital or ability to formally compensate people to the true extent of their contribution. There’s many indirect ways to be able to support people who help you, like adding LinkedIn recommendations, helping them source a job or providing them with a recommendation, giving them credit directly and working to share what you have with them.
+
+The best thing to do in situations where you don’t have a lot of resources is to be honest about it. It may drive people away, but it is better to be upfront and aligned than to lie and lose trust from people.
+
+Don’t promise people money that you cannot pay: this happened to me once where I was brought to a startup where I worked 4-5 months without payment from the start, even though I was promised salary initially. I have even taken a job where the company paid for an apartment as part of the benefits, and gave me a limited salary in addition to that. I was incredibly grateful for it, because it showed me they were working to provide the most they could.
+
+My cofounder for Faura gave me her fellowship stipend to fund my salary when we had no funding for the company, and that also meant more than words to me. We both moved to Oakland in California, and commuted to Napa often to be close to homeowners who were at the heart of the wildfire insurance crisis. This was an intentional move to facilitate co-creation. If our solution did not work here, where the majority of homeowners are wealthy and facing insurance cancellations and wildfire risk left and right, it was a solid bet that our product would not work anywhere.
+
+There was even an instance where in Faura, we received a grant that was supposed to fund a developer. While searching for candidates, we heard news that this institution was shut down by law enforcement. I immediately emailed all candidates and informed them of the situation, and told them we would re-follow up with them once funding was directly secured. We did, and one of those candidates became one of our first developers.
+
+Another lesson in co-creation is to work within the structures the community already trusts before inventing your own. Most communities in crisis already have communication infrastructure, like church groups, WhatsApp group chats, or a Discord server everyone is in. Software that plugs into those channels inherits their trust, but software that tries to replace them competes with the community's own immune system and usually loses. The question to ask early is not "how do we reach these users" but "who already reaches them, and what would make their work easier." Sometimes the honest answer to co-creation is that your product should be a tool handed to an existing framework, as opposed to a destination of its own.
+
+#### Leveraging early advisors
+
+Ideally, a product has a group of people to consult with about the product from the research and system design stage. Leaning on them to ask for introductions to others, posting flyers asking for beta testers, and posting on online forums is a good way to gather a group of people who want to be involved and can provide valuable feedback. You will want your user interviews and product feedback at the testing stage to be extremely positive, and to iron out as many open threads as you can prior to starting programming.
+
+Good advisors are people who have seen the issue you’re aiming to face from multiple different angles, and hopefully have direct experience with the problem you’re tackling. They should be able to help you translate real world constraints and experiences that people will find and have with your product. A strong advisor does not just copy and paste not just their own experience, and they act like a translator that will help you bridge the gap from where you are to where you want to be.
+
+#### Protecting beta testers
+
+Initial testing and early users should be treated with different privacy concerns than actual live users. Where you may want to track all information when it comes to anonymous users, you inherently have a relationship with your beta testers. Thus, you should have more discretion about the data you collect, and how you handle your relationship with them.
+
+It is in your interest, especially if your testers are from vulnerable communities, to think ahead of time to protect them and their identities. This may also be where it is important to have leverage with previous advisors, and to have a history of being a trusted person. The more vulnerable the person, the more discretion you should use in communications. Particularly, keeping information limited to phone calls and not writing things down, not gathering their full name or adding them automatically to a mailing list, and going out of your way to express gratitude and discretion are good first steps.
+
+I went through this phase when Verena, the security system application, was being expanded to potentially explore a version for sex workers and escorts, who would naturally benefit from the timer functionality and from the logging. I conducted most of the interviews in person, I did not utilize the people I spoke with for further marketing, and I asked them to state their interest in helping the project further. Only if they expressed interest in continuing to help, did I build a further relationship with them.
+
+I also did a lot of core diligence on what the lived reality of being a sex worker is, which showed them that I was working to be respectful and not giving them the entire burden of educating me about their life. Respect for those who are giving you their time is one of the best tools of care you can employ. For you, this is doing research on a product. For them, this is donating a bit of their life and experiences to make your product better, often without pay or acknowledgement.
+
+## Product Considerations
+
+### The balance of friction.
+
+On the product design level, you should determine layers of strategic friction that may need to be included. Friction points should be where sensitive action can be taken, or where the operating entity can be overloaded with spam. You should also plan for bad actors to potentially abuse unguarded limits for fun, or for more nefarious purposes.
+
+Friction should be implemented and be determined according to the risk assessment taken prior. For example, you should double-opt in users to major decisions, like proceeding to reach out to law enforcement, or to send a message to their family saying they are suicidal.
+
+Some common friction points can be:
+
+- Double opt-in or confirmation before taking a serious action
+- Getting email verification or 2FA codes prior to sign in
+- Submitting feedback forms with CAPTCHA
+- Requesting an email or a message be sent to a user
+
+Too little friction on reporting harm, or calling for human intervention and you create over sensitive systems ripe for spam. Too much friction, and you risk losing valuable information about how your system operates, and can block users from getting care in a timely manner.
+
+It is up to you and your team to eventually design systems that find a correct balance between benefit and annoyance to users. This threshold may need to be modified and changed over time. It’s worth making these systems flexible so that applying more and less friction is not a major redesign of the system.
+
+### Considering adversarial use.
+
+If you are building software for vulnerable communities, you will need to ensure that you are protecting them, and not acting as an attack vector for those who have adversarial goals to them. This is especially important for abuse victims, or people who are being targeted by governments or larger institutions.
+
+Looking at threat modeling from a traditional lens assumes a hacker is trying to penetrate the system from the inside out. But, adversarial threat modeling for software of care will have you modeling what can go wrong if someone has authorized access. It’s essentially a way of understanding who can be hurt when the system is working as intended.
+
+When you are focusing on vulnerable communities, specifically abuse victims or those under surveillance, your most likely adversary is not a hacker or some teenager running Low Orbit Ion Cannon. It’s more likely to be an abusive spouse, an agency with subpoena power, or a stalker.
+
+Studies of intimate partner abuse consistently find that abusers rarely exploit vulnerabilities in code; they use features (like location sharing, shared accounts, notification previews, account recovery flows). One survey found that 70% of adults in relationships share access to their phones with their partners[^1], which means one-user, one-device threat models are inadequate for them. If your product assumes each account maps to one person who controls their own device, you have already made an assumption an abuser can utilize to their advantage.
+
+Doing adversarial threat modeling can be as simple asking, “if someone my user feared had access to this, what could they do either it?”. The answers become failure modes or abuse cases that you are able to address through product requirements and further attention.
+
+Abuse cases can go into product requirements, testing prior to development and deployment can include a layer of adversarial threat modeling, and a failure metric can also be reported or suspected misuse.
+
+### Managing users in crisis
+
+You may have moments where a user is in danger, whether by someone else, to themselves, or to others. In these instances, you may need to develop algorithms that are able to understand, detect, and estimate the level of crisis and respond correctly.
+
+The general process for creating a crisis management and escalation algorithm are:
+
+- **Define behaviors that constitute a crisis.**
+  - These will typically be a gradient spectrum of behaviors, ranging from light and early interventions and nudges towards more serious interventions that require human review and context reviewal.
+- **Define your options for managing a behavior in crisis.**
+  - What is the goal of your intervention? Is it simply to refer users to hotlines or resources in their area? Is it to make them feel more seen and to change their behavior? Understanding the ideal outcome for what you will do
+  - Beyond understanding your goals, you need to understand your regulatory requirements. Building an algorithm that acts as a light redirection for users that experience rumination and self harm is entirely different from being a teletherapy app that may have users on who are both mandated reporters, and the subjects of mandated reporting.
+
+**3. Review partners in the space.**
+
+- There are many companies who work with products to provide additional support or to act as an infrastructural layer in crisis. Findahelpline is a database and API of verified resources, which can directly plug into a crisis resource and pre-adapt to internationalization. Thorn is a tech non-profit that works to detect child sexual abuse material, and they intersect with larger tech companies to find and remove material. Crisis Text Line uses historical training data that detects specific words and context to automatically triage users.
+  - It would be ideal to plug into the crisis infrastructure that already exists, instead of rebuilding your own.
+
+**4. Map crisis pathways.**
+
+- A crisis pathway should be a clear decision tree. It should demarcate what is a crisis, what escalates the severity of it, and how your product will, or will not react. It goes without saying that crisis management and escalation is a critical pathway that needs additional security and fidelity during development.
+
+**5. Workshops your crisis management pathway with others in the space.**
+
+- This is the most important consideration. A bad crisis management protocol alienates users, and leaves them worse off than no crisis management pathway. It is also worth strongly considering understanding and managing a human intervention process. This is hard for resource constrained companies, but often is the best decision. Algorithms are not to the point of being able to manage and contextually understand a crisis entirely. Even more so, a crisis is one of the most human things someone else can be in. It often will take a human outreach or confirmation to make a judgement call. This human intervention is especially integral in the event that your algorithm is marking something as abuse material, calling in a wellness check on someone, or bringing in law enforcement to report human trafficking or sexual abuse.
+
+**6. Develop a crisis management algorithm based on triaging, and the crisis management pathway.**
+
+- This will be discussed more within the algorithmic design section of the system design pathway. But ultimately, what product should hand off to engineering is the point of behavior where crisis should be detected, what should define a crisis, and what should happen within that crisis.
+
+Managing users in crisis is a deeply philosophical question, as well as an engineering one. You should understand different points a user may be in, the escalation points behind them, and what to do with users across those escalation points. You may need a separate system module responsible for tracking user behavior in crisis, evaluating how bad the crisis is, and escalating the behavior while trickling out this crisis information. Deciding how you want to intervene in a crisis, if at all, should also be discussed with your field’s best practices and current industry standards at the heart of it all.
+
+For example, you may want to limit a user’s messaging or increase their messaging ability, you may want to build in a cool-down period, or to refer them to a hotline. Being able to track and measure crises and co-ordinate with other components of the software to meet them in their needs will set you up for success or internal escalation if necessary.
+
+This would also be a beneficial time to note if you have any legal obligation to manage users in a crisis. Managing a user who is suicidal is very different from a building a tele-therapy application where a child user may disclose abuse through the chat, requiring the therapist to enact mandated reporter laws.
+
+This is once again, where you should be pulling in your duty of care to the user and be undertaking philosophical and ethical discussions about how to manage users in crisis. I cannot implore you enough - if you are serving users in crisis, consult experts in the space you are operating in! Many times, people do not do their due diligence and can end up getting users extremely hurt, or getting the reputation of their product or entity damaged forever.
+
+It would be beyond wise to consult multiple experts, review best practices literature, and engage with legal counsel to determine what your legal obligations may be. You do not want to DIY crisis response. It is also important to keep an eye on the field as it evolves, since new information about how to manage and discuss topics like suicide, domestic violence, and homelessness can be constantly evolving.
+
+In the event that you are monitoring for crises, it would be optimal to design a discreet client side system that looks for signs of a crisis, and guides users through a pre-defined escalation path and to resources that can enable them to access care. You should collect anonymized data about this crisis response system, and enable users to (perhaps after a cooldown period) send anonymized feedback about what you could have improved. This is just a suggestion modeled after client side harm detection algorithms, but you should fit it and modify it to protect your user base.
+
+Personally, I have come to the ethical decision that I will publish material for future products that users can read through to understand how escalations happen, and what the end result is for them. I have also decided, for future products, that I may also open-source the escalation options to a user and allow them to disable certain crisis escalation pathways.
+
+For example, the user may be able to disable panic attack or manic episode detection, but may not disable abuse or suicidal planning detection. Informed consent from an annoyed and skeptical user is highly different from covert monitoring that a user is unaware of. Making a user aware of monitoring and background algorithms running where you can may make them trust you, more than a user discovering that they have been covertly monitored and ‘baby proofed’ in a piece of software without their knowledge or consent.
+
+Before you ship anything like this, you should walk through the entire system with multiple people who have gone through the crisis you’re building for and ask for feedback. Ideally, you should do the same with the experts, advisors, and your counsel.
+
+## Prior to commencing system design
+
+### Gather target specifications.
+
+If you are working on safety-critical solutions, you may need to define detailed specifications ahead of time that inform key engineering targets. Being able to define general target SLAs for your development team will be a key point in defining your infrastructure, testing, and code requirements.
+
+These SLAs should inform the threshold of engineering system design. Determining what is acceptable (1% of incidents) will determine how complex the infrastructure will need to be. The less tolerance for mistakes, the more complex and expensive the infrastructure and backend development will be. How much uptime a panic attack walkthrough app needs to have will be vastly different than a medical record storage application, or suicide hotline.
+
+### Consider a hazard analysis.
+
+A safety critical system is a system that can cause injury or death in systems that fail. This will apply to a smaller segment of software, but is worth mentioning. Safety-critical software development has been strongly driven by the avionics and medical industry, both of which have a wealth of knowledge for us to base our own development processes on.
+
+If your product is safety-critical, undergoing a hazard analysis defines the specifications and provides crucial guidance for everything downstream. It feeds into your system design, your testing strategy, QA checklist, etc. Defining how seriously you want to take safety and what it looks like within your product creates the shape that your engineering process will follow.
+
+One format to be able to formalize it is a hazard analysis, which is a formal process of defining, labeling, and ranking hazards that can occur within the product. Instead of asking "what can fail?,” it asks a deeper angle of evaluating what can hurt someone.
+
+A good hazard analysis looks at the product as it sits and works backward to enumerate hazards as they display to and are experienced by users. Then, connecting it to an engineering, content, or design failure within the product. From that connection link, rating the severity, hazard, and finding design controls that meet the severity of the rating as specified.
+
+The goal of a hazard analysis is a living document that tells you which parts of your system need stronger controls, and other areas that can be re-iterated with a lighter touch. Being able to understand and have confidence in that proportionality is the entire point.
+
+The avionics and medical industries learned it the expensive way, and their frameworks show it. Avionics (the electrical systems of an airplane and the software that controls them) assigns software levels by the severity of what failure causes, from catastrophic crash to no-effect. Medical device standards do the same with risk classes. You do not need to adopt DO-178C or IEC 62304 wholesale, nor would it be feasible for the majority of social good products, but you should adopt their habit and mindset: Classify harm by consequence and impact on the user first, and let the classification set the rigor.
+
+A good hazard analysis is one that is developed early enough to be embedded into the structure of the product, the entity, and eventually the processes of that entity around it. As such, I would recommend you commission it early. Alternatively, a hazard analysis performed after you've built and shipped a product is likely to be an audit that generates regret. When performed before, it generates requirements and correctly sets up the rating of where anxiety around consequences is warranted, and then unwarranted.
+
+### Verifying legal requirements.
+
+Prior to finalizing the design of the product, you should consult with a legal counsel to determine if you are running afoul of any regulation. You should also be aware if there’s additional protections or data protection requirements that may change your system or UI/UX design meaningfully. If you are a non-profit entity, you may be entitled to pro-bono legal services.
+
+### Finalize a funding model.
+
+If you do not have a plan on how to get your product funded, you may be accidentally preparing to let it fail. This may not be relevant if you are one of a small number of people who are able to run your project while also maintaining income, or if you do not need income.
+
+But eventually, products that grow need capital to do so. Just as you are building your product around your user, you will also need to build your product around your funding model. This is even more prudent if your end user is not purchasing the software, or is an indirect user. Further on, there’s a chapter about different kinds of entities and how they affect software for social good products.
+
+<Sources>
+
+1. https://www.rdworldonline.com/virtual-snowworld-helps-burn-victims-cope-with-extreme-pain/
+1. https://depts.washington.edu/hplab/research/virtual-reality/
+
+</Sources>
+
+[^1]: Molly Dragiewicz, Jeffrey Ackerman, and Marianne Haaland, Smartphone Sharing with Intimate Partners: Implications for Telecommunications Consumer Cybersecurity (Griffith University & Australian Communications Consumer Action Network, 2025).

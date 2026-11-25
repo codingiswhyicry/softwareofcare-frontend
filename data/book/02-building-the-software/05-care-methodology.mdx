@@ -1,0 +1,440 @@
+---
+title: 'care methodology'
+label: 'Chapter 5'
+---
+
+In 1987, Peter Rossi wrote a paper, aiming to understand why most social service programs fail, that would become an evergreen piece of the social sciences movement. Called, “The Iron Law of Evaluation and Other Metallic Rules”, he proposes 4 rules.
+
+- **The Iron Law** - The expected value of any net impact assessment of any large scale social program is zero.
+- **The Stainless Steel Law** - The better designed the impact assessment of a social program, the more likely is the resulting estimate of net impact to be zero.
+- **The Brass Law** - The more social programs are designed to change individuals, the more likely the net impact of the program will be zero.
+- **The Zinc Law** - Only those programs that are likely to fail are evaluated.
+
+Inevitably, further into the paper, he gets to the root of why these laws exist, and why we see them repeatedly across initiatives.
+
+> “Starting with the conviction that the many findings of zero impact are real, we are led inexorably to the conclusion that the faults must lie in the programs. Three kinds of failure can be identified, each a major source of the observed lack of impact: The first two types of faults that lead a program to fail stem from problems in social science theory and the third is a problem in the organization of social programs:
+>
+> Faults in Problem theory: **The program is built upon a faulty understanding of the social processes** that give rise to the problem to which the social program is ostensibly addressed;
+>
+> Faults in Program theory: **The program is built upon a faulty understanding of how to translate problem theory** into specific programs.
+>
+> Faults in Program Implementation: **There are faults in the organizations, resources levels and/or activities that are used to deliver the program** to its intended beneficiaries.”
+
+Peter’s paper still stands today. Even Effective Altruism, the branch of philanthropy that donates money specifically based on and around impact, has saved many lives but in some ways, has failed to make large dents into the problems facing the world.
+
+Any product that will land in the world should be built with the history and context before it. As such, we’re going to be discussing how to lay the foundations of your product with these metallic rules, and the conclusion of them, in mind.
+
+—
+
+The most important part of a product is the system(s) it encodes. We will be discussing this system in its most simple terms. What are the tasks that a user and your product needs to do to enable care to happen, and how does that care come to the user?
+
+Prior to designing a software product, start with simply determining a care methodology. This is essentially your hypothesis for how a system would provide support to users. I would encourage you to think abstractly in terms of flows and situations, and actions at the highest level. You should avoid narrowing in on a format (like app, website, hotline, etc) while going through this initial system design process. By starting with a predetermined idea of how you want the software to be formed, you may shoe-horn a solution into a tech stack that isn’t ideal for your use case.
+
+We will be using a fake example of a panic attack walkthrough software called ‘PaniqAttack’ for the rest of the book, so you’re able to see from start to finish how a product can go from ideation to market delivery.
+
+## Conduct research, obsessively.
+
+Care is inherently an intimate and vulnerable thing. It implies the possibility of a relationship occurring, and being owed (or owing) something. It is also the chance to be disappointed, scorned, or turned away. To hope for and desire care is to open up the possibility of being denied care, as well. Therefore, your user coming to feel that you have done your research to know them is a foundational part of being able to properly help someone. You need to earn the vulnerability and intimacy your product asks for, before you ask for it.
+
+You should be an expert on your user and your problem. This comes from engaging heavily with the people you want to serve, and see the problem they are experiencing first hand. Going back to the prism, you should be able to understand the problem you are seeing from multiple different angles, perspectives, and eyes of the people who interface with it. The more well-rounded and grounded your research is, the better impact your product will eventually be able to have.
+
+You should:
+
+- How the problem their facing occurs, in all of it’s forms
+  - What mechanisms that problem has, and what makes it worse and better
+  - What systemic forces are keeping that problem in play
+  - The legal, political, and economic factors around the problem
+- Know how they access software, and what devices they have access to
+  - If they have access to the internet and consistent cell-service (which can be a big factor in serving rural and unhoused populations).
+- Understand the physicality of how the problem they experience may play out, or the triggers that would drive them to use your tool.
+  - What times of day it may happen, where they may be, how they might emotionally respond, or what they will (or won’t do) because of it.
+- Understand the incentives that drive them to reach for care, what it looks like if those incentives are not there.
+- Work to understand the web of history surrounding this situation and how people have tried to solve and impact it (or have failed)
+  - Any relevant policy related to the problem and how people have reacted
+  - Any previous organizations, companies, solutions, or landmark works written about the problem
+
+How you want to gather this information depends on your own specific talents. Some people are incredibly good at doing outreach and striking a conversation with people, others are supremely good at internet research and reading. I would encourage you to build the most-even keeled approach to gathering information that you can. You should source from online forums, non-fiction books, discussions with people / experts / previous companies in the space.
+
+Research about the core user group is a place where founders who are building for their own struggles are uniquely advantaged, as long as they are not blinded by self-bias. Sometimes founders come into a problem and have a solution they would like to see implemented, but others do not agree with the solution or find it easily implementable.
+
+Even if you are the user yourself, you are not EVERY user. You should aim to build a team of people who know your problem and can attest to it from multiple angles, and to utilize them within the development of the product as co-inventors or advisors. The best people to build solutions for the problem are often the people who experience it.
+
+This is a chance to get to know your users in a deeper context, and how others in the space come to see them and treat them. There is a lot of value to be derived from following industry standards and practice, and familiarizing yourself prior to development will benefit you in the long run. If other products have already made big mistakes in the eyes of the group you’re building for, it would be prudent to avoid making them again and to study previous failed and successful projects.
+
+<Callout type="example">
+
+PaniqAttack Research:
+
+Users who experience panic attacks can:
+
+- Struggle to understand their surroundings, or words.
+- May only be able to focus on the panic, and not be able to initiate other things
+- May experience them repeatedly, or only in moments of great stress
+- May not be able to manage them initially, but might be more receptive to intervention as they come down.
+
+</Callout>
+
+Once you understand your users, have come to build relationships with them and those around them, and have come to have some strong hunches about where a software product would be beneficial, it’s time to build your first theory of care.
+
+## Define a theory of care.
+
+**A theory of care is the one sentence explanation of what your care methodology will aim to do**. It should explain in the simplest terms possible, how you think your software cares for the user. Often, you may hear a version of this in non-profit circles, known as “theory of change”. It is the core thesis for how a non-profit, or organization aims to “change” the world for those they serve. Our version will be a different evolution on this concept.
+
+The theory of care example is important because it separates outcomes, methodology, and impact of care. Although it may all seem the same and quite inseparable, it forces clarity around the process that an entity is sharing to create care. Separating outcomes, methodology, and impact creates clarity around those systems. This is crucial for when the product is stood up and early evaluation impact data shows what parts are functioning as intended, and what parts are not.
+
+<Callout type="example">
+
+AMBER Alerts: We can care for abducted children by preventing additional harm to them through leveraging a community to look for their abductor.
+
+211 System: We can care for people struggling by providing a way for them to find social service programs in their area that can ease their situation.
+
+Crisis Text Line: We can care for people in crisis by connecting them with a trained crisis counselor for free, who is able to listen and walk them through the crisis.
+
+</Callout>
+
+Our sample theory of care for the panic attack walkthrough would be:
+
+<Callout type="example">
+
+PaniqAttack: We can care for those experiencing panic attacks by providing a walkthrough for them that aims to reduce the anxiety they experience during the panic attack.
+
+</Callout>
+
+As you develop a theory of care, you should start to look at some of the assumptions you’re making about it. What a theory of care is meant to do, is to show the link of problem -&gt; methodology -&gt; impact. Take a few rounds to determine if this theory of care is correct, and break into each section to determine how close to reality it is.
+
+For example, the questions I would ask from the PaniqAttack sample would be:
+
+- Do people who have panic attacks want care? Or would they want to be left alone to manage it themselves? If it’s not clear, can you determine what percentage?
+- Would providing a walkthrough reduce anxiety, or increase it?
+- Is it a form of care or kindness to someone with a panic attack to provide a walkthrough? Or would they find it annoying and more distressing?
+
+A theory of care, prior to developing a care methodology from it, should be dissected to the smallest detail. Often, failures of social good programs to make impact are in those smaller details, and not in the large surface level issues everyone can see from it. While examining a theory of care, remediate even common sense knowledge. Common sense knowledge, or commonly held ideas about a problem, may not actually be true for all kinds of people who face it. It’s important to question everything, beyond the point where it feels silly.
+
+When your theory of care feels properly vetted, aligned with the reality of your problem, and still feels factually and anecdotally solid, proceed to developing your first care methodology.
+
+## Develop a care methodology.
+
+A care methodology is how a theory of care gets it’s wings, and how it delivers care in practice. Start with a general idea of how that system would function, or how you want to “care” for your end user, based off your original theory of care. You will want to be as explicit as you can about the situation someone may be in, the circumstances in which they are using the system, and what mechanisms a system will use to change the outcome.
+
+<Callout type="example">
+
+I want to build a mental health system that users go to when they are having a panic attack. They should interact with it as they are having a panic attack. The system should work to guide them directly through it and to ‘care’ for them by relieving the anxiety from having a panic attack.
+
+The system should show a dynamic set of prompts and tools that will change depending on the user’s response, and the system will continue to distract, listen, and manage the user until they indicate the panic attack is over or subsiding.
+
+When the panic attack is done, the system will encourage the user to take care of themselves and push them resources that may prevent the panic attack from happening in the future, like references to local therapists and crisis hotlines.
+
+</Callout>
+
+What you’re aiming to do as early as you can in your care methodology design is to build your ‘Swiss Cheese’ model. This is a concept often used in safety to figure out how rare and uncommon accidents can happen. The idea is that rare accidents, like plane crashes, often happen because each layer of prevention is a slice of Swiss cheese. There is mostly a solid surface of process, but often things that are missing, or slip through the holes. If the layers of cheese have too many holes and they all line up at the wrong time, it is ineffective at catching problems and can let issues straight through.
+
+If you don’t resolve the holes, your product may not be effective - or worse, cause the inverse effect and end up being harmful to your user. The biggest holes and the hardest ones to patch are often at the system level.
+
+We’ll take this model and inverse it to make sure that we close the holes in your care methodology, by looking for edge cases and assumptions that may be incorrect. This is a leak test of your methodology, prior to actually developing it as a product.
+
+You can ‘reduce the holes in your cheese’ by:
+
+- **Knowledge and research prior to, during, and after building the system**. Do a majority of the learning up front, and build relationships with those who have lived experience with the problems you’re trying to solve.
+- **Utilizing and leveraging pre-existing methods of care** that have evidence, or have been adopted already by communities
+- **Being able to acknowledge and confront your own biases**, and admit when your solution can be wrong or biased.
+- **Establishing a line of honest feedback with the user** that enables them to correct you, and to reiterate on a system that is perhaps more effective
+- **Working to find a group of advisors** who can help rightsize your assumptions
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Swiss Cheese Model"
+  width={1600}
+  height={1000}
+  caption="Swiss Cheese Model"
+/>
+
+It is important to review the assumptions you have about your methodology and to confirm they are correct. System-level issues are the hardest to fix further down in the development cycle, so extra caution here is going to go a long way. It is as important to disprove your assumptions, and to narrow the scope of things you will be testing on as you iterate. There will always be more to fix later down the line, and battle testing your care methodology will hopefully limit expensive surprises and failures.
+
+Go through the biggest assumptions that would need to be true for this care methodology to work. Each layer of your system will have assumptions that are based off of your own biases, and the way you view the problem. It is your goal to align your own biases of how the system should operate with the truth of the user as much as you can.
+
+<Callout type="example">
+
+**Methodology Draft**: I want to build a mental health system that users go to when they are having a panic attack. The system should work to guide them directly through it and to ‘care’ for them by relieving the anxiety from having a panic attack.
+
+→ Assumption: Users will remember to go to a system while having a panic attack. They should interact with it as they are having a panic attack.
+
+→ Assumption: Users will have the mental capacity to use a product while going through a panic attack.
+
+→ Assumption: A walkthrough is anxiety-reducing, and will be beneficial to the user by providing stability
+
+→ Assumption: The system will be designed in a way that is easy to follow, and that ‘care’ for the user is reducing anxiety from a panic attack.
+
+</Callout>
+
+Each of the assumptions you make about the system informs directly how it should be built, and who it is for. The assumptions of the system will guide you into the direction of the product and where it needs to be. There are some assumptions that you will be able to research your way out of, and others that need to be deployed in the field to be able to test.
+
+With the cheese in mind, let’s take a look at the potential “holes” of the example panic attack app.
+
+<Callout type="example">
+
+- It assumes users can access and mentally focus on a panic attack system
+- It assumes the system will be relaxing and clear enough to the user
+- It assumes that a walkthrough is going to be a process that the user will want, and not an additional demand that can increase the anxiety of the user.
+- It assumes guiding a user through a panic attack will soothe additional anxiety
+- It assumes that soothing the anxiety will be a benefit to the end user.
+
+</Callout>
+
+Outright stating all assumptions initially can help illustrate what may become a big pit of quicksand. Inventors and entities often start development and realize their initial assumptions are almost unfeasible or incorrect. What seems like a clear, almost direct way to help users is actually bridled with unknowns. Some of these unknowns can turn into constraints, or directives, and others require more testing. We can easily figure out how to fix these by doing assumption remediation.
+
+In cybersecurity, you are often made to do a risk assessment about different scenarios. This is exactly what we will do, but adopted to determine if your assumption is correct or needs modification to improve the strength of the system. For each assumption, you should make a choice about what to do with it. You can choose one or more, but you should aim to close the gap between what is known and unknown as thoroughly as possible.
+
+|  |  |
+| --- | --- |
+| → Accept | An assumption that is true, and should be accepted as part of the system. |
+| → Deny | An assumption that is not correct, or worth embedding into the system. |
+| → Remediate | An assumption that is somewhat accurate, that can be changed at the system level to be more correct. |
+| → Mitigate | An assumption that is correct for the system, yet carries risks that need to be mitigated at the level of the product. |
+| → Research | An assumption you are unsure about, and should discuss more with experts or people close to the problem |
+| → Prototype | An assumption that you are not able to solve outside of user testing, and that can be resolved with a prototype. |
+
+Now that we know how to do assumption handling, let’s go back to our assumption model and determine how we want to handle the risk of our assumptions.
+
+<Callout type="example">
+
+**Methodology Desire**: I want to build a mental health system that users go to when they are having a panic attack.
+
+→ Assumption: Users will remember to go to a system while having a panic attack.
+
+→ Remediation: Accept & Remediate. This is a natural limit of the system, e.g: Software must be initiated by a user when they need it. It can also be improved with UI/UX clues, like making it a massive button or available to a user even when they are not signed into a system.
+
+———
+
+**Methodology Desire**: They should interact with it as they are having a panic attack.
+
+→ Assumption: Users will have the mental capacity to use a product while going through a panic attack. [notice how this may stop users who have such severe panic attacks that they cannot operate a device]
+
+→ Remediation: Research. Although this may be true, the inventor here should understand how often that is the case, and therefore how impactful their care methodology could be if they adopt this assumption.
+
+———
+
+**Methodology Desire**: The system should work to guide them directly through it and to ‘care’ for them by relieving the anxiety from having a panic attack.
+
+→ Assumption: The system will be designed in a way that is easy to follow, and that ‘care’ for the user is reducing anxiety from a panic attack.
+
+→ Remediation: Prototype & Research. There are many examples of applications that walk people through anxiety, but I would encourage the mock creator of this to discuss it with a mental health researcher. I would personally look for literature understanding what the biggest pain points of a panic attack are. Is it the anxiety that comes from them? The effect on family and friends? This would also be a good time to sharpen user interview skills and ask those who are affected what their experience is.
+
+</Callout>
+
+As you start managing the risk of your assumptions, you will quickly come to forks in the road that start to define the constraints of your product. The users you will serve are not monolithic. They will have different capabilities, and different desires. Understand that within your research, you will often get inconclusive answers and may need to make tradeoffs. These tradeoffs define the strengths and weaknesses of your product across its’ life cycle, but can also serve to grow and expand your product later down the line.
+
+For example, a fork in the road for PaniqAttack would be that the inventor would need to determine what to do about users that have panic attacks but cannot use their devices.
+
+If they are a software developer, they may accept that tradeoff and keep that in mind. If they are aiming to build a more thorough panic attack non-profit program, they may instead prefer an in-person program that teaches skills prior to a panic attack, with the potential of an app component later down the line.
+
+As you define the risk assessment of your assumptions, continue to research and discuss with your end users. You may have to go through multiple rounds of system design and research with users to chase down all ends and to come to a formalized system. This stage can take weeks for those more familiar with the problem, or months. Some people may choose to take this stage very seriously before designing the product and creating a prototype, and others prefer to rapidly prototype their system and then throw them away until they reach a point where the system is ready to be developed into an MVP.
+
+The path that you choose is entirely up to you and your own resources, as well as your own strengths and what feels comfortable to you.
+
+### Stress test your methodology.
+
+In addition to vetting a care methodology, a product setting itself up for success will be thinking about the world beyond. In addition to vetting your care methodology, now is the time to be evaluating how your product will transition to exist within the real world.
+
+I have two frameworks that I recommend for this:
+
+**SWOT Analysis:**
+
+A SWOT analysis covers Strengths, Weaknesses, Opportunities, Threats. It’s meant to be an internal evaluation tool used by the inventor and the operating entity to get clarity about if the product is the right fit for them.
+
+<Callout type="example">
+
+**STRENGTHS**:
+
+**WEAKNESSES**:
+
+**OPPORTUNITIES**:
+
+**THREATS**:
+
+</Callout>
+
+**PEST Analysis:**
+
+A PEST analysis covers the external landscape that a product is within. Think about SWOT as a more close-knit, internal / local view of your product and what you can do. PEST is a more macro-version that looks at the markets and other influences of the world.
+
+PEST stands for Politicial, Economic, Social, Technological.
+
+<Callout type="example">
+
+**POLITICAL**:
+
+**ECONOMIC**:
+
+**SOCIAL**:
+
+**TECHNOLOGICAL**:
+
+</Callout>
+
+### Validating your market and impact.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Frequency / Density / Pain graphic."
+  width={1600}
+  height={1000}
+  caption="Frequency / Density / Pain graphic."
+/>
+
+As one comes into developing a working care methodology, and theory of care, it’s easy to get excitedly attached to a creation and to assume it should move into development.
+
+Prior to investing further resources in this, a product should do multiple passes at market validation to assume that this solution has a group of people willing to use it, and that the care methodology situationally meets the demand of the market. You want to confirm that the frequency of usage, amount of pain, or amount of people who will end up using the product will be worth the cost of development.
+
+Frequency, pain, and density come together to form what kind of market you have. A product that has actual staying power will have at least two of the three, but ideally three. The less of any, the less market and the less funding attached to it. It will also inform what kind of distribution channel, marketing options, and partnership opportunities you should go for. If there is no frequency, no pain, and no density, there is no market.
+
+#### Human Variation
+
+Beyond frequency, pain, and density: there is one other consideration that most people fail to take into account for when creating a product: the varying nature of humans.
+
+Imagine 5 people who could benefit from your panic attack application. On the surface, they may seem like an ideal user. They all have panic attacks, and a mobile phone. The beauty of humans come from their finicky nature. One user may hear about the app and never use it. Another may try it and decide they don’t like the color. Another got information in a WhatsApp group chat about a juice that stops panic attacks, therefore they don’t feel the need to try your application.
+
+All of this to say, people who qualify on paper to utilize a product that will help them fail to engage with it in practice. Especially with entities who wish to become VC funded, there is a tendency to oversize the Total Addressable Market (TAM). Think realistically as you discuss with potential users. Imagine perhaps, 1% of the people who know about your product and qualify for using it will download your product and find it actually beneficial.
+
+As development continues, keep in mind the bare minimum amount of usage needed to ‘complete’ the care methodology. This amount of usage will also determine the amount of people who will use and interact with your product, and therefore your total market and impact. One tool that requires a single input from someone will have a greater conversion rate than another tool that requires 10 screens of information with user input to configure a system. This ‘bare minimum input’ will go into determining an ideal user session.
+
+#### This little Care Methodology goes to the market.
+
+The actual impact and situational cues you are building into can determine if your piece of software is effective, and what kind of front-end would be the most beneficial for your product. If you are building a product that doesn’t strongly impact the user, which they may only use 1-2 times a year, that is a strong signal that you should thoroughly think about the situational cues a user needs to experience to remember or utilize your product. It’s also a sign that there may not be a for-profit entity to be built around it, unless a vast amount of people need to use it and will pay a lot of money to do so, or experience a great amount of pain when they need to use it.
+
+To see how a care methodology ends up informing the market and impact, let’s examine two separate care methodologies that are aiming to reduce the impact of child abuse. One is a set of courses and role-play scenarios for parents who may be abusing their child, explaining the concepts of abuse and how to change their behavior over time to stop abusive tendencies.
+
+Another is a trauma dumping diary app for a child that enables them to vent, to find resources, and to be able to plan strategies to be out of the house to minimize harm.
+
+Both of these care methodologies are approaching the same problem, but will have different usage, different market impact, and different ways of directly ‘eating’ at the problem.
+
+For the parent application: it might be more often than used by the child application, but may overall get less users as parents may be reluctant to understand or forego abusive behaviors. It may also be a core solution to the problem that gets a small percentage of abusive parents to cease further abusive behavior. It could also be a revenue generating product sold as a compliment to abuser programs that can be mandated by the justice system.
+
+So, smaller impact and a harder sell to users, but potentially could solve the core of the problem, generate revenue, and make a strong impact on the small amount of people who use it.
+
+For the child application, depending on the abuse, it could be used intermittently or often. It could also be a threat to the parent, and could accidentally cause more harm to the child if it is found. It provides a safe space to release thoughts and fears, and may teach a child strategies, but it doesn’t actually reduce the amount of abuse a child may face day to day. It has also, little to no clear monetization strategies within the product besides fundraising through donations. It could show advertisements to the children, but there’s further ethical considerations and the possibility of legal issues. Not to mention, providing advertisers with a segment of children who are abused is not a smart idea.
+
+Taking it a step further: a market at first blush is essentially napkin math. It is, in theory, the overall guess of how many people COULD use your product. The real amount of people who will is way lower, even if it does apply to them. The reasons why are numerous: maybe they already have a pre-existing solution, or they don’t feel your solution fits their need for any given number of reasons.
+
+All this to say - your care methodology shapes your market, impact, and how well you are actually solving a problem. Keeping the eventual size of numbers in your head as you move from developing a solution and doing initial research to discussing transitioning into product development will help keep expectations clear and concise.
+
+### Offering a duty of care.
+
+There may be times as you design your system that you come to a fork in the road about how you should handle user behavior, or the circumstances users find themselves in.
+
+I am a firm believer that we cannot truly care for users without coming to know them and have a deep respect for them. Caring for people effectively is about being co-creators of care with them, and providing help in conjunction with their desires and needs. It also means being able to understand their contexts, the situations they may find themselves in, their feelings about controversial topics, and the stakeholders involved in their life.
+
+This is even more complicated when it comes to users who are from vulnerable communities. Questions regarding autonomy are common for users who are suicidal or self harming, developmentally or intellectually disabled, or who are facing other circumstances that call their autonomy into question. Simply, there are too many edge cases here to list all of the ways that you should care for each individual community.
+
+Needless to say, having a statement or some sort of idea about what you will provide to a user and act on their behalf is a tool that you will informally come to build over time. This is called, ‘duty of care’. Every product has one based on their decisions, processes, and priorities.
+
+A duty of care is quite simply answering, “what do we owe our users and the communities around them?”.
+
+This duty of care will help inform some of the ethical challenges that you may come to face. It also in many ways, is where you will begin to weave the tapestry of trust that you come to share with users. I would encourage inventors and operating entities to establish their personal and institutional duties of care to guide your way through these harder decisions more formally. This can be as simple as a bullet pointed list, or as formal as a cultural document everyone on the team touches and comes to embed into their work.
+
+Remember that entering communities and shared experiences and trying to provide care is walking into a web that has been weaving for thousands of years. The problem has existed prior to your solution, and will continue in a different form after it. You should use your duty of care to inform how you will navigate that web, respect the history in it, and to show the community that you’re aiming to care that you are willing to do the work to reach them and be what they need.
+
+Your duty of care should encapsulate your user, what they’re going through, and how you want to treat them moving forward. I want to also take this opportunity to contribute a personal story, which I hope you will take into the duty of care consideration.
+
+I have struggled with suicidal ideation starting from a young age. For a decade plus, I lived in fear about what people thought regarding my actions. Internally, I felt isolated from being able to share the burden of my chronic suicidality, worried it would convince my therapists to force inpatient care on me, that it would hurt the people I love.
+
+It was only when I was able to vocalize with a therapist the stress I experienced from working to manage them and to keep them from hurting others, that she said something that struck me.
+
+“I would understand why you have suicidal thoughts, it seems like you have a lot of stress in your life and it makes sense to want to be away from that”. That acknowledgement of my pain and where I was coming from meant the world and beyond to me.
+
+The disclosure of my decade long struggle didn’t occur when we first started working together. It was a process of 6 months, of me repeatedly understanding her stance about autonomy. She showed she understood what my fears about being labeled as suicidal could do. Her actions then showed me that my worries directly informed her approach. It is through this level of consideration, attention, and care that I was able to make this disclosure to her.
+
+When I expressed worry about being reported to the police, she worked with me to understand what I should do step by step and told me how I should respond to NYPD or the crisis care workers who came with them, if I was reported. She also gently encouraged me to be honest with her: if I told her I was fine, she would trust me. If I told her I needed help, she would get me help.
+
+That changed everything for me, and completely changed how I saw duty of care.
+
+We know from modern research that suppressing suicidal thoughts makes them worse. One study shows that self-reported repression of suicidal thoughts predicts suicidal ideation weeks later [2]. Another shows that suppressing suicidal thoughts increases the risk of a post-suppression rebound, that can be followed by self harm, suicidal ideation, and suicide attempts [3]. Outside of repressing those thoughts, we know that talking about suicidal thoughts doesn’t increase suicidal ideation of the person having them, and may even reduce it.[^1]
+
+After my TED talk where I came out as a suicide attempt survivor at 16, no one close to me in my life talked to me about it. I came to think that I should be ashamed of my desire to take my life, and that my struggle was a burden for me, alone, that others didn’t want to (or didn’t know how to) look at.
+
+This was also reinforced by the actions of software that I used. I used Pinterest to save poems and images to a board about my struggles, which Pinterest disabled discovery features on. To them, their digital duty of care was to prevent further interaction with harmful materials. To me, it was the loss of an outlet to express myself, and to find others like me. I felt more like a legal and emotional liability being barred from my loved ones and digital spaces than I felt like someone who didn’t want their life and was trying to find out how to hold it while moving forward.
+
+Let me be succinct - I wasn’t expecting anyone to be able to manage or discuss something like that without strong emotions, nor am I saying you should let users disclose their suicidality to you while you acknowledge how terrible their life is and agree with them.
+
+The point I’m trying to make is that people’s reactions to your user’s situation carve into their imagination and self esteem, and create scenarios that travel with them on the course of their life. Those reactions add up, and they will show up in how your users interact with you. Your users may be distrusting, ashamed, needy, vulnerable, scared, angry, and any other amount of emotions someone struggling might go through. If you are offering care, you can be entering a vulnerable connection with someone and will not know what they have experienced on the other side.
+
+These intersections, at the edge of trust and safety teams, ethics, cultural ideas about taboos, and more is where your duty of care should be known. If you do not know what it is clearly, you will find it out in the moment. That would be a terrible time to create it.
+
+**If you are trying to intervene in dark moments of a user’s life, you should be honest with them about how you will do it and why.** This enables them to evaluate you and come to decide if they should trust you. If they do not wish to trust you, it will be better for them to walk away and better for the outcomes of your product to cater to users who are in agreement with the care you are willing and able to provide. You shouldn’t provide care to users in a fashion that you do not feel comfortable with, as it will only burn you out and cause further sustainability issues down the line.
+
+Duty of care should be a statement about trust - who is coming to use your software product, why they should trust you, how you plan to maintain the fidelity of their trust, and what happens when you cannot.
+
+Moreover, depending on your software product, duty of care may also be a legal consideration you need to account for. For example, if you are building a tele-therapy application meant for children, you will need to remember that therapists who learn about child, or elder abuse are mandated reporters. This may be something that you will need to have features or processes for ahead of time.
+
+<Figure
+  src="/static/images/book/placeholder.png"
+  alt="Duty of care graphic"
+  width={1600}
+  height={1000}
+  caption="Duty of care graphic"
+/>
+
+A duty of care is transformational. It is a chance to define your relationship with the group you want to serve, and to provide them an olive branch that will enable your care to make the fullest impact it can. This is also where projects often drive off the rails.
+
+Vulnerable communities are used to vultures coming in and trying to build solutions to their pain without truly understanding them, and a duty of care provides an agreement that they are able to judge for themselves.
+
+### Creating a duty of care
+
+A duty of care should be a combination of research, philosophical and ethical stances, but mostly overwhelmingly weighted towards legal obligations and what best practices for care in your domain are. There are many pieces of research that talk about being trauma informed, or informed towards your user and acting from a place of nonjudgmental care.
+
+The challenge is finding the balance between the many forms of tension that inevitably this document will be put under. You will need to not enable your user, but also not let them suffer. You also need to weigh their own personal autonomy with what you feel should be your obligation to them.
+
+A good example for a duty of care can be formulated like this:
+
+- Our users are [situation / market].
+  - They face [circumstances, societal / political circumstance, etc].
+  - They may feel [feeling].
+  - We aim to help our users through [theory of care].
+  - We will continue to be considerate and care for them by [actions and considerations you will take].
+  - We also believe that [any other stances].
+
+A Sample Duty of Care statement for a panic attack app would be something like:
+
+<Callout type="example">
+
+- People who have panic attacks are often coming to the system for comfort and relief. They are trusting us to relieve some of the anxiety that they may experience.
+- To continue to care for them, we should always:
+  - thoroughly test features and roll out slowly, so that new versions are tested.
+  - remember that panic attacks can be related to other circumstances, and should aim to refer users to appropriate resources where possible.
+  - try to always opt for calm, smooth, and even messaging
+  - should provide a free version of the app as long as we can
+- If we aim to connect them with a doctor through a telemedicine portal, we will:
+  - Need to be HIPAA compliant.
+
+</Callout>
+
+There are good reasons also, where it will be in the users’ interest to do things that feel “against” them. I am sure that Pinterest did not like the idea of removing access to a feature that would encourage me to spend more time on the app. Mental illness and the obsessive searching and mania surrounding it’s peaks and valleys can often be profitable from an engagement perspective.
+
+Although I personally wanted to continue engaging with the content, Pinterest’s team thought that choosing to limit finding harmful content would be more beneficial, somewhat overriding my own autonomy, but also doing it in the name of my benefit.
+
+As I mentioned above, every public facing product that serves users has a duty of care they use, whether formally through processes or informally through actions taken by people. Duties of care at larger operating entities are mostly informed by legal liability, as well as building trust and safety policies that work to preserve shareholder value and entity reputation, while balancing user behavior.
+
+Most software companies today choose neutrality and mitigation by providing resources in the face of mental health issues, and choose to engage law enforcement in the event they suspect terrorism, trafficking, mass acts of abuse, or other severe issues. They may also work to limit interaction to or with content they think is otherwise harmful or shouldn't be spread.
+
+A very generic solution towards this is to acknowledge the users suffering and aim to limit further self-harming behavior, and redirect them towards crisis resources that act as ‘last mile’ care. This enables the platform to recognize problems and to detect a crisis, while also referring out users they feel are too mentally unwell to properly engage with the content. Then, the onus remains on the user to interact with the resource provided, or to come to the decision they don’t need to.
+
+For example, Crisis Text Line does not always engage law enforcement on a suicidal user, and they also have data that shows what keywords correlate with negative outcomes. This data is used to evaluate the severity of a crisis in real tim
+
+ChatGPT and Claude chatbots, which are often a disclosure point for people discussing suicidal or homicidal thoughts, do not always engage law enforcement either and chooses to redirect the user towards resources within the context of a chat. However, Meta does often report CSAM (Child Sexual Abuse Material) to law enforcement, and takes active steps to surface resources when people search triggering words. The actual implementation of this and what crosses the line is often not made public, for understandable reasons. We may never know why one sentence doesn’t trip a crisis switch, and another one does.
+
+The concept and ethics of a duty of care could be an entire book in and of itself, and I would strongly encourage people who will be working with vulnerable communities to be following best public health and social work practices as closely as they can. I will say this often: you do not want to DIY crisis care, or build it without great consideration and research, if you are in that realm. Bring experts in to help develop crisis response as early as possible, and make sure to include end users (who may be experiencing crisis) as part of this creation process.
+
+Every relationship is an implicit agreement built over the course of multiple interactions. A duty of care statement helps to standardize and set the ground of your agreement with your users, and is a chance to imbue your own feelings or emotions into the product. You yourself are getting into this field because you have strong feelings: perhaps you want to take care of people, or provide help in a situation you have gone through yourself. This is where you particularly get a chance to say how you want the users to be treated, and what you’re going to give them.
+
+### Prior to commencing development.
+
+Your care methodology can be considered complete as you are able to accept, mitigate, and prototype all assumptions involved. When you start to draft the MVP of your software product, you should have established relationships with experts, stakeholders, and end users.
+
+Ideally, you are a burgeoning expert in this space and have gone through multiple rounds of system design and edited bias and uncertain assumptions out of them. The end system that you end up encoding should be one that has a strong chance of being impactful, adopted, helpful to the user, and is something potential users see and get excited about.
+
+You should do as much research and revision in this stage as you can. However, there are diminishing returns, and you may barrel out on possible iterations and realize this is not a problem that can be truly fit to a software solution. At this point, it would be worth taking a break and using this round of research as a practice run. Give yourself criteria for problems that may be worth solving and try again, potentially in an adjacent or related space. It is incredibly rare that people end up solving the original problem they fell in love with, and it’s common for the problem and desired impact to shift as you continue to develop out your idea and find what impact works for you. The only failure here is going forward with something that you don’t think you can be passionate about, or that you don’t think is a good fit for you.
+
+You may also struggle with multiple different, and equally appealing methodologies to solve a problem. This seems like a problem, but can actually be a form of growth that you can utilize later. A software product is generally not one care methodology, but is composed of a parent methodology with multiple child systems that work to create the goals of the parent system. You can take the strongest and most viable of the systems to market first, and then ship the others as features and new products down the line.
+
+You should aim to uncover major safety issues or problems that will slow down adoption or fundamentally change the product. But, you should not worry about tech stack, interface, or distribution at this point. Only once you know your care methodology through and through and are willing to stake the next phase of it all on it, should you proceed to product development.
+
+[^1]: https://gwern.net/doc/sociology/1987-rossi.pdf
